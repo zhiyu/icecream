@@ -1,0 +1,297 @@
+html,body,h1,h2,h3,h4,h5,h6,hr,p,dl,dt,dd,ul,ol,li,pre,button,input,textarea,th,td{ margin:0; padding:0; }
+html,body { height:100%; font-size: 12px;font-family:arial,helvetica,sanserif;background:#fff;}
+h1,h2,h3,h4,h5,h6{font-size:100%;}
+h2{padding-bottom:10px;}
+ul,ol,li{list-style-type:none; overflow: hidden;_zoom:1;}
+img{ border: 0; vertical-align: top;}
+em{ font-style: normal; color: #f00; }
+table {border-collapse:collapse;border-spacing:0;}
+a:link {color: #333; text-decoration:none;}
+a:visited {color: #333;text-decoration:none;}
+a:hover {color: #333; text-decoration: underline; }
+a:active {color: #333;text-decoration:none;}
+a{outline:none;}
+img,a img{ border: 0; vertical-align: middle; }
+input,select{ vertical-align: middle; margin: 0;}
+input:focus{outline:0px solid #6FA1D9;}
+textarea:focus{outline:0px solid #6FA1D9;}
+em{ font-style: normal;  color: #07c; }
+select{height:25px;line-height:25px;}
+textarea{border:1px solid #dddddd;}
+.clr{clear:both;}
+.txt{height:30px;line-height:30px;background:#fff;border:1px solid #dddddd;width:200px;text-indent:5px;}
+a.btn{ 
+   color:#fff;
+   display: inline-block;
+   padding:0px 5px;
+   height:25px;
+   line-height:25px;
+   margin-right: 5px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0px 1px rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0px 1px rgba(0,0,0,0.4);
+  box-shadow: 0 0px 1px rgba(0,0,0,0.4);
+  background: #8a240d;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+}
+a.btn:hover{
+  background: #8a240d; 
+  text-decoration:none;
+}
+
+table { margin: 3px 0 10px; width: 100%; }
+table  td,.t1 th{ border: 1px solid #ffffff; padding: 5px 5px;text-align:left}
+table  th{ color:#26ADE5;font-weight:normal;background:#eeeeee}
+
+.header{background:#f5f5f5;position:relative;height:60px;}
+.top{position:relative;width:840px;margin-left:-420px;left:50%;}
+.top h1{ font-size: 14px; height：50px;line-height: 50px;float: left;text-indent:15px;}
+.top p{ float: right; padding-right: 10px;height：50px;line-height: 50px;}
+.logo{position:absolute;top:7px;left:0px;background:url(../img/logo.gif) no-repeat;height:80px;width:200px;}
+.top .nav{position:absolute;top:12px;height:30px;left:264px;}
+.top .nav a{display:block;height:30px;line-height:30px;float:left;padding:0px 8px;}
+.top .nav a:hover{color:#000;}
+.top .nav a.selected{background:#8A240D;color:#fff;}
+.footer{background:#f5f5f5;position:relative;height:60px;}
+.bottom{position:relative;width:840px;margin-left:-420px;left:50%;}
+.main{ position:relative;}
+.center{ position:relative; height:100%;width:840px;left:50%;margin-left:-420px;}
+
+/*
+  app styles
+*/
+
+.comment{margin-top:10px;background:#fff;padding:10px;}
+.comment p{position:relative;font-weight:bold;}
+.comment span{position:absolute;right:0px;top:0px;font-size:10px;}
+.comment pre{padding:10px;line-height:20px;}
+
+.page{margin:10px 0px;line-height:20px;height:30px;font-size:12px;}
+.page a{margin-left:0px;display:block;float:left;padding:2px 6px;}
+.page a.selected{background:#8a240d;color:#fff;}
+.page span{display:block;float:left;padding:3px 10px 3px 0px;}
+
+/* error message */
+.error{border:1px solid #D4EB88;}
+label.error{margin-left:10px;height:30px;line-height:30px;background:#fff;border:none;}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * DataTables sorting
+ */
+
+.sorting_asc {
+	background:#000000 url('asc.gif') no-repeat  center bottom;
+}
+
+.sorting_desc {
+	background:#000000 url('desc.gif') no-repeat  center bottom;
+}
+
+.sorting {
+}
+
+.sorting_asc_disabled {
+}
+
+.sorting_desc_disabled {
+}
+
+
+.apple_overlay {
+	position:relative;
+	display:none;
+	z-index:10000;
+	background-color:#fff;
+	width:400px;	
+	min-height:200px;
+	border:1px solid #999;
+	-moz-box-shadow:0 0 1px 1px #bbb;
+	-webkit-box-shadow: 0 0 1px #bbb;	
+}
+
+.apple_overlay .close {
+	background: url(../img/close.png) no-repeat;
+	position: absolute;
+	right: -13px;
+	top: -14px;
+	cursor: pointer;
+	height: 24px;
+	width: 24px;
+}
+
+/* autoComplete */
+.ac_results {
+	padding: 0px;
+	border: 1px solid #B87436;
+	background-color: #000000;
+	overflow: hidden;
+	z-index: 9999;
+	display:none;
+}
+
+.ac_results ul {
+	width: 100%;
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.ac_results li {
+	margin: 0px;
+	padding: 2px 5px;
+	cursor: default;
+	display: block;
+	/* 
+	if width will be 100% horizontal scrollbar will apear 
+	when scroll mode will be used
+	*/
+	/*width: 100%;*/
+	font: menu;
+	font-size: 12px;
+	/* 
+	it is very important, if line-height not setted or setted 
+	in relative units scroll will be broken in firefox
+	*/
+	line-height: 16px;
+	overflow: hidden;
+}
+
+.ac_loading {
+	background: white url('/res/img/default/indicator.gif') right center no-repeat;
+}
+
+.ac_odd {
+	background-color: #222222;
+}
+
+.ac_over {
+	background-color: #FFB600;
+	color:#ffffff;
+}
+
+/* jquery tools dateinput */
+.date {
+	width: 70px;
+}
+
+#calroot {
+	z-index: 9999;
+	margin-top: -1px;
+	width: 198px;
+	padding: 0px;
+	background-color: #333;
+	font-size: 12px;
+	border: 1px solid #444;
+}
+
+#calhead {
+	padding: 0px;
+	height:30px;
+}
+
+#caltitle {
+	font-size: 12px;
+	color: #0150D1;
+	float: left;
+	text-align: center;
+	width: 155px;
+	text-shadow: 0 1px 0 #ddd;
+}
+
+#calnext,#calprev {
+	display: block;
+	width: 16px;
+	height: 16px;
+	background: url(prev.gif) left top no-repeat;
+	float: left;
+	cursor: pointer;
+	position:relative;
+	top:5px;
+}
+
+#calnext {
+	background-image: url(next.gif);
+	float: right;
+}
+
+#calprev.caldisabled,#calnext.caldisabled {
+	visibility: hidden;
+}
+
+#caltitle select {
+	font-size: 12px;
+}
+
+#caldays {
+	height: 14px;
+	border-bottom: 1px solid #444;
+	padding-bottom: 3px;
+	color:#FFB402;
+}
+
+#caldays span {
+	display: block;
+	float: left;
+	width: 28px;
+	text-align: center;
+}
+
+#calweeks {
+	background-color: #333;
+	margin-top: 0px;
+}
+
+.calweek {
+	clear: left;
+	height: 22px;
+}
+
+.calweek a {
+	display: block;
+	float: left;
+	width: 27px;
+	height: 20px;
+	text-decoration: none;
+	font-size: 12px;
+	margin-left: 1px;
+	text-align: center;
+	line-height: 20px;
+	color: #666;
+}
+
+.calweek a:hover,.calfocus {
+	background-color: #555;
+	color:#FFB402;
+}
+
+a.calsun {
+	color: red;
+}
+
+a.caloff {
+	color: #ccc;
+}
+
+a.caloff:hover {
+	background-color: #555;
+	color:#FFB402;
+}
+
+a.caldisabled {
+	background-color: #efefef !important;
+	color: #ccc !important;
+	cursor: default;
+}
+
+#calcurrent {
+	background-color: #555;
+	color: #FFB402;
+}
+
+#caltoday {
+	background-color: #315599;
+	color: #fff;
+}

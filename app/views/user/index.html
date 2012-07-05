@@ -1,0 +1,28 @@
+MySQL Users:<br/>
+<table>
+<tr>
+	<th>Host</th>
+	<th>User</th>
+	<th>Password</th>
+	<th>Select_priv</th>
+	<th>Insert_priv</th>
+	<th>Update_priv</th>
+	<th>Delete_priv</th>
+	<th>Create_priv</th>
+	<th>Drop_priv</th>
+</tr>
+						
+<%for(var i in result){%>
+<tr>
+	<td><%=result[i].Host%></td>
+	<td><%=result[i].User%></td>
+	<td><%=result[i].Password%></td>
+	<td><%=result[i].Select_priv%></td>
+	<td><%=result[i].Insert_priv%></td>
+	<td><%=result[i].Update_priv%></td>
+	<td><%=result[i].Delete_priv%></td>
+	<td><%=result[i].Create_priv%></td>
+	<td><%=result[i].Drop_priv%></td>
+</tr>
+<%}%>
+<table>
