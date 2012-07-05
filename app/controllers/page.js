@@ -1,8 +1,8 @@
 module.exports = {
     index : function(req,res){
         console.log("dd:"+req.session.user);
-
-        res.render('page/index',this.data);
+        res.send("hello");
+        //res.render('page/index',this.data);
     },
 
     upload: function(req,res){
@@ -16,7 +16,6 @@ module.exports = {
 				fs.renameSync(files[i].path,"/tmp/"+files[i].name);
 			}
 		});
-
     	res.send('success');
     },
 

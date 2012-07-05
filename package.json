@@ -1,0 +1,28 @@
+{
+  "name": "icecream",
+  "version": "0.0.1",
+  "description": "rapid web framework base on nodejs",
+  "homepage": "http://github.com/zhiyu/icecream",
+  "keywords": [
+    "web",
+    "framework",
+    "mvc",
+    "icecream"
+  ],
+  "author": "Zhiyu Zheng. <zhengzhiyu@yeah.net>",
+  "contributors": [
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zhiyu/icecream.git"
+  },
+  "dependencies": {
+    "jade": "0.13",
+    "oauth": "0.9.3",
+  },
+  "devDependencies": {},
+  "main": "index",
+  "engines": {
+    "node": ">= 0.8.0"
+  }
+}
