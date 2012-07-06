@@ -17,8 +17,10 @@
     "url": "git://github.com/zhiyu/icecream.git"
   },
   "dependencies": {
-    "jade": "0.13",
-    "oauth": "0.9.3",
+    "connect":"2.3.6",
+    "mysql":"0.9.6",
+    "jade": "0.26.3",
+    "ejs": "0.7.2"
   },
   "devDependencies": {},
   "main": "index",
