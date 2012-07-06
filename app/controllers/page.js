@@ -1,25 +1,14 @@
-module.exports = {
-    index : function(req,res){
+var c = module.exports;
+
+c.index = function(req,res){
         console.log("dd:"+req.session.user);
-        res.send("hello");
-        //res.render('page/index',this.data);
-    },
+        res.render('page/index',this.data);
+}
 
-    upload: function(req,res){
-    	var fs = require('fs');
+c.test = function(req,res){
+    res.send("test1");
+}
 
-        formidable = require('formidable');
-    	var form = new formidable.IncomingForm();
-		form.parse(req, function(err, fields, files) {
-			for(var i in files){
-				console.log(files[i].path);
-				fs.renameSync(files[i].path,"/tmp/"+files[i].name);
-			}
-		});
-    	res.send('success');
-    },
-
-    file: function(req,res){
-    	res.render('page/file',this.data);
-    }
+c.welcome2 = function(req,res){
+    res.send("test2dd22");
 }

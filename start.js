@@ -1,7 +1,11 @@
+var connect    = require('connect')
 var icecream   = require('./lib/icecream');
 
-var app = icecream.createServer();
-app.listen(3000);
-// app.engine('.html', require('ejs').__express);
-// app.set('views', __dirname + '/app/views');
-// app.set('view engine', 'html');
+icecream.createServer();
+icecream.use(connect.cookieParser());
+icecream.use(connect.session({ secret:'my secret here'}));
+icecream.listen(3000);
+
+icecream.set('defaultEngine', 'jade');
+icecream.set('viewRoot', __dirname +'/app/views');
+icecream.set('debug', false);
