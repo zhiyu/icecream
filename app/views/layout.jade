@@ -1,8 +1,12 @@
 !!! 5
 html
     head
+        link(rel='stylesheet', type="text/css",href='/css/default.css')
         - var title = 'icecream'
         title=title
-    body
-        !{body}           
         script(src='/js/jquery.min.js')
+    body
+        include ./header.jade
+        div(class="main")
+            !{body}           
+        include ./footer.jade
