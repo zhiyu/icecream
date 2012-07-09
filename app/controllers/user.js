@@ -20,6 +20,14 @@ module.exports = {
     },
 
     login : function(req,res){
-        res.send("{'dd':''}");
+        var obj = {
+            "status": "1",
+            "errorMessage": "",
+            "data": {
+                "name": "zhengzhiyu",
+                "photo": "http://m.baidu.com/zhengzhiyu.jpg"
+            }
+        }
+        res.send(JSON.stringify(obj,null,4));
     }
 }
