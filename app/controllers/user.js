@@ -28,6 +28,6 @@ module.exports = {
                 "photo": "http://m.baidu.com/zhengzhiyu.jpg"
             }
         }
-        res.send(JSON.stringify(obj,null,4));
+        this.send(JSON.stringify(obj,null,4));
     }
 }
