@@ -14,6 +14,7 @@ html
         script(src='/js/jquery.tablesorter.js')
         script(src='/js/jquery.noty.js')
         script(src='/js/fancybox/jquery.fancybox.pack.js')
+        script(src='/js/md5.js')
         script(src='/js/common.js')
     body
         include ./header.jade
@@ -21,11 +22,11 @@ html
             !{body}           
         include ./footer.jade
 
-    div(id="sheetBoxLeft",style="position:fixed;left:-400px;bottom:0px;background:#f4f4f4;height:100%;width:300px;border-right:5px solid #666;")
+    div(id="sheetBoxLeft",style="position:fixed;left:-400px;bottom:0px;background:#fff;height:100%;width:300px;border-right:3px solid #666;")
 
-    div(id="sheetBoxRight",style="position:fixed;right:-400px;bottom:0px;background:#f4f4f4;height:100%;width:300px;border-left:5px solid #666;")
+    div(id="sheetBoxRight",style="position:fixed;right:-400px;bottom:0px;background:#fff;height:100%;width:300px;border-left:3px solid #666;")
 
-    div(id="sheetBoxTop",style="position:fixed;display:none;left:0;top:0px;background:#f4f4f4;width:100%;height:300px;border-right:5px solid #666;")
+    div(id="sheetBoxTop",style="position:fixed;display:none;left:0;top:0px;background:#fff;width:100%;height:300px;border-right:3px solid #666;")
 
-    div(id="sheetBoxBottom",style="position:fixed;display:none;left:0px;bottom:0px;background:#f4f4f4;width:100%;height:300px;border-right:5px solid #666;")
+    div(id="sheetBoxBottom",style="position:fixed;display:none;left:0px;bottom:0px;background:#fff;width:100%;height:300px;border-right:3px solid #666;")
     

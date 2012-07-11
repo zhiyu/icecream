@@ -20,6 +20,7 @@ select{height:25px;line-height:25px;}
 textarea{border:1px solid #dddddd;}
 .clr{clear:both;}
 .txt{height:30px;line-height:30px;background:#fff;border:1px solid #dddddd;width:200px;text-indent:5px;}
+.readonly{height:30px;line-height:30px;background:none;border:none;width:200px;text-indent:5px;}
 a.btn{ 
    color:#fff;
    display: inline-block;
@@ -72,7 +73,6 @@ a.btn:hover{
 .left ul li a {
 	display: block;background: #ffffff;
 	text-decoration: none;text-indent: 10px;
-	border-bottom: 1px solid #33b5e5;
   margin-bottom: 1px;
 }
 .left ul li a:hover{background: #33b5e5;color:#fff;}
@@ -92,11 +92,9 @@ th{border-bottom: 2px solid #eee;}
 table .oddrow td{background:#ffffff;}
 table .evenrow td{background:#f4f4f4;}
 table .header{height: 28px;line-height: 28px;border-bottom: 2px solid #eee;}
-
 table.tablesorter thead tr .header {
   background: url(../images/sortbg.gif) right center no-repeat;
 }
-
 table.tablesorter thead tr .headerSortUp {
   background: url(../images/asc.gif) right center no-repeat;
 }
@@ -104,3 +102,12 @@ table.tablesorter thead tr .headerSortDown {
   background: url(../images/desc.gif) right center no-repeat;
 }
 
+.table{border-collapse:collapse; width: 100%;}
+.table th{white-space:nowrap;cursor:pointer; background: #fff; border: 1px solid #fff;font-weight:normal; color: #33b5e5; text-align: left;}
+.table td{border: 1px solid #fff; background: #fff;}
+.table th,.table td{line-height:30px;padding: 2px 5px;}
+.table .oddrow td{background:#ffffff;}
+.table .evenrow td{background:#f4f4f4;}
+.table .header{height: 28px;line-height: 28px;border-bottom: 2px solid #eee;}
+
+.bread{background:#f4f4f4;line-height: 30px;text-indent: 10px;margin-bottom: 10px;}
