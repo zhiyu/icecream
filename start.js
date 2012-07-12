@@ -9,5 +9,5 @@ icecream.use(connect.session({ secret:'DFJLK8DFGJ933JKLFGJ2'}));
 icecream.listen(3000);
 
 icecream.set('defaultEngine', 'jade');
-icecream.set('viewRoot', __dirname +'/app/views');
+icecream.set('appRoot',  __dirname +'/app');
 icecream.set('debug', true);

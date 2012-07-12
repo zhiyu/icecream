@@ -1,33 +1,49 @@
-module.exports = {
-    index : function(req,res){
-        var db = this.getModel('test');
-        var data = this.data;
+var model = require('../model/mysql')
+var c = module.exports;
 
-        req.session.user = "zzy";
-        console.log("dd:"+req.session.user);
+c.beforeAction = function(){
+	if(this.uri!='/user/login'){
+	    if(!this.session('user'))
+            this.redirect('/user/login?redirect='+this.url);
+	}
+}
 
-		db.query('select *from user',function selectCb(err, results, fields) {
-			    if (err) {
-			      throw err;
-			    }
-                //res.cookie('uname', 1, { maxAge: 60000 });
-                //req.session.name = 'zzy';
-                data.result = results;
-    	        res.render('user/index', data);
-            }
-        );
+c.login = function(){
+	this.layout = 'login';
+	var self = this;
 
-    },
+	if(this.post("smt")){
+      var email      = this.post("email");
+      var password   = this.post("password");
 
-    login : function(req,res){
-        var obj = {
-            "status": "1",
-            "errorMessage": "",
-            "data": {
-                "name": "zhengzhiyu",
-                "photo": "http://m.baidu.com/zhengzhiyu.jpg"
-            }
-        }
-        this.send(JSON.stringify(obj,null,4));
-    }
+      var crypto     = require('crypto');
+      var md5        = crypto.createHash('md5');
+      md5.update(password,'utf8');
+      password    = md5.digest('hex');
+      
+      var cc = console;
+      var connection = model.getConnection();
+      connection.query ("SET NAMES utf8");
+      connection.query("select *from user where email='"+email+"' and password='"+password+"'",function(err, rows, fields) {
+	    connection.end();
+	    if (err) {
+	    	throw err;
+	    	self.send('failed');
+	    }else{
+	    	if(rows.length > 0){
+	    		self.session('user',rows[0]);
+	    	    self.send('success');
+	    	}else{
+	    		self.send('failed');
+	    	}
+	    }
+	  });
+	}else{
+		self.render('user/login');
+	}	    
+}
+
+c.logout = function(){
+	this.session('user',null);
+	this.redirect('/user/login');
 }

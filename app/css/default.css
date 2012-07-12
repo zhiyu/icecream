@@ -19,7 +19,7 @@ em{ font-style: normal;  color: #07c; }
 select{height:25px;line-height:25px;}
 textarea{border:1px solid #dddddd;}
 .clr{clear:both;}
-.txt{height:30px;line-height:30px;background:#fff;border:1px solid #dddddd;width:200px;text-indent:5px;}
+.txt{padding:10px 5px;background:#fff;border:1px solid #dddddd;width:200px;}
 .readonly{height:30px;line-height:30px;background:none;border:none;width:200px;text-indent:5px;}
 a.btn{ 
    color:#fff;
@@ -45,6 +45,8 @@ a.btn:hover{
 .head{z-index:5;position:fixed;top:0px;left:0px;width:100%;background:#fff;height:40px;border-bottom: 2px solid #33B5E5;}
 .top{position:relative;width:960px;margin-left:-480px;left:50%;height: 40px;line-height: 40px;}
 .logo{font-weight: bold;position:absolute;height:40px;text-indent:30px;line-height:40px;top:0px;left:0px;background:url(../images/logo.png) left center no-repeat;width:300px;}
+.top .user{position:absolute;;left: 170px;top:0px;background: #f4f4f4;color:#666;height: 20px;line-height: 20px;padding: 0px 5px;}
+.top .user a{margin-left: 20px;color:#666;}
 .top .nav{position:absolute;bottom:0px;right:0px;}
 .top .nav a{
 	display:block;text-decoration:none;
@@ -56,7 +58,8 @@ a.btn:hover{
 }
 .top .nav a:hover{color:#000;border-bottom: 4px solid #33B5E5;}
 .top .nav a.selected{border-bottom: 4px solid #33B5E5;color:#33b5e5;}
-.foot{position:relative;height:60px;line-height: 60px;}
+.foot{position:relative;height:60px;line-height: 20px;padding-top: 40px;color:#999;}
+.foot a{color:#999;}
 .bottom{position:relative;width:960px;margin-left:-480px;left:50%;}
 .main{ margin-top:40px;position:relative;left: 50%;width:960px;margin-left: -480px;}
 .content{ 
