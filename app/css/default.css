@@ -96,10 +96,11 @@ a.btn:hover{
 table{border-collapse:collapse; width: 100%;}
 th,td{border-bottom: 1px solid #f4f4f4; line-height:35px;padding: 0px 8px;}
 th{
-  white-space:nowrap;cursor:pointer;text-align: left;border-bottom: 1px solid #eee;text-indent: 15px;
+  white-space:nowrap;cursor:pointer;text-align: left;border-bottom: 1px solid #eee;
   background: #f4f4f4;
 }
 table.tablesorter thead .header {
+  text-indent: 15px;
   background: #f4f4f4 url(../images/sortbg.gif) left center no-repeat;
 }
 table.tablesorter thead .headerSortUp {

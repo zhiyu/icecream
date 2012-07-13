@@ -21,6 +21,7 @@ c.login = function(){
       md5.update(password,'utf8');
       password    = md5.digest('hex');
       
+      console.log(password);
       var cc = console;
       var connection = model.getConnection();
       connection.query ("SET NAMES utf8");
