@@ -1,0 +1,12 @@
+div(class="head")
+ div(class="top") 
+   div(class="logo") 移动应用统计分析平台 
+   - if(session('user'))
+    div(class='user') 欢迎回来, #{session('user').user_name}
+      a(href='/user/logout') 退出
+
+   div(class="nav") 
+     a(href='javascript:;',onclick="javascript:noty({timeout: 1000,text: '正在开发，即将上线...', type: 'information'});") 主面板
+     a(href='javascript:;',onclick="javascript:noty({timeout: 1000,text: '正在开发，即将上线...', type: 'information'});") 统计分析
+     a(href='/applications/') 应用中心
+     a(href='/management/') 后台管理

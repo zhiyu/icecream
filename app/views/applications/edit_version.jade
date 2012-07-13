@@ -1,0 +1,61 @@
+div(class='bread') 发布新版本
+table(class='table',id='edit_version_form')
+  tr
+    td 应用
+    td 
+      input(id='id',type='hidden',value=app_versions[0].id)
+      select(id='app_key')
+        - for(var i=0;i<apps.length;i++)
+          option(value=apps[i].app_key,selected=(app_versions[0].app_key == apps[i].app_key?true:false)) #{apps[i].app_name}
+  tr
+    td 版本号
+    td 
+      input(id='version',type='text',class='txt',value='#{app_versions[0].version}')
+  tr
+    td 下载地址
+    td 
+      input(id='url',type='text',class='txt',style="width:450px",value='#{app_versions[0].url}')    
+  tr
+    td 更新说明
+    td 
+      textarea(id='release_note',style='height:300px;') #{app_versions[0].release_note}    
+  tr
+    td
+    td
+      button(class='btn',onclick='edit_version();') 保存更改
+      &nbsp;&nbsp;&nbsp;
+      button(class='btn',onclick='hide_edit();') 取消     
+
+script(type='text/javascript')    
+    $(function(){
+      $('#release_note').redactor({ 
+        fixed: true ,buttons: ['html', '|', 'formatting', '|', 'bold', 'italic', 'deleted', '|','unorderedlist', 'orderedlist', 'outdent', 'indent', '|','link', '|','fontcolor', 'backcolor', '|', 'alignleft', 'aligncenter', 'alignright', 'justify', '|','horizontalrule', 'fullscreen']
+      });
+    });
+    
+    function edit_version(){
+      var id = $('#id','#edit_version_form').val();
+      var app_key = $('#app_key','#edit_version_form').val();
+      var version = $('#version','#edit_version_form').val();
+      var url = $('#url','#edit_version_form').val();
+      var release_note = $('#release_note','#edit_version_form').val();
+
+      loading();
+      $.post('/applications/edit_version','smt=true&id='+id+'&app_key='+app_key+'&version='+version+'&url='+url+'&release_note='+release_note,function(data){
+          hideLoading();
+          if(data.indexOf("success")!=-1){
+            noty({
+              timeout: 1000,force: true, text: '操作成功!', type: 'success',
+              onClose:function(){
+                location.reload();
+              }
+            });
+          }else{
+            noty({timeout: 1000,force: true, text: '操作失败!', type: 'error'});
+          }
+      },"html");
+    } 
+
+    function hide_edit(){
+      $.sheetbox.close('right');
+    } 

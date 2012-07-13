@@ -1,0 +1,92 @@
+div(class="content")
+  include ./left.jade  
+          
+  div(class="right")
+    div(class="toolbar")
+      button(onclick="user_add();",class="btn") 添加用户
+    table(id='dataTable',class="tablesorter")
+      thead
+        tr
+          th 用户名
+          th 角色
+          th Email
+          th 手机号码
+          th(width='88')
+      tbody
+        -if(users && users.length > 0)
+          -for (var i=0;i< users.length ;i++)
+           tr
+            td #{users[i].user_name}
+            td #{users[i].role_name} 
+            td #{users[i].email}
+            td #{users[i].mobile}
+            td 
+              button(class="btn",onclick='user_edit(#{users[i].id});') 设置   
+              &nbsp;
+              button(class="btn",onclick='del_user(#{users[i].id});') 删除 
+        else
+          tr
+            td(colspan=5) 暂无数据
+
+  div(class="clr")        
+
+script(type='text/javascript')
+   $(function(){
+     $($("a",".nav")[3]).addClass('selected');
+     $($("a",".left")[0]).addClass('selected'); 
+   });
+   $("#dataTable").tablesorter({exclude:[4]});
+
+   function del_user(id){
+      noty({
+        layout:'top',
+        modal:true,
+        text: "确定要执行删除操作?", 
+        buttons: [
+          {type: 'btn', text: '删除', click: function($noty) {
+                loading();
+                $.post("/management/del_user","id="+id,function(data){
+                    hideLoading();
+                    $noty.close();
+                    if(data.indexOf("success")!=-1){
+                      noty({
+                        timeout: 1000,force: true, text: '操作成功!', type: 'success',
+                        onClose:function(){
+                          location.reload();
+                        }
+                      });
+                    }else{
+                      noty({timeout: 1000,force: true, text: '操作失败!', type: 'error'});
+                    }
+                });
+            }
+          },
+          {type: 'btn', text: '取消', click: function($noty) {
+              $noty.close();
+            }
+          }
+          ],
+        closable: false,
+        timeout: false,
+        type:'error'
+      });
+   }
+   
+   function user_edit(id){
+      loading();
+      $.sheetbox('/management/edit_user','id='+id,{layout:'right',
+        onShow:function(){
+          hideLoading();
+        }
+      });
+   } 
+
+   function user_add(){
+      loading();
+      $.sheetbox('/management/add_user','',{layout:'right',
+        onShow:function(){
+          hideLoading();
+        }
+      });
+   } 
+

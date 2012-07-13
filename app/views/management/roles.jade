@@ -1,0 +1,88 @@
+div(class="content")
+  include ./left.jade  
+          
+  div(class="right")
+    div(class="toolbar")
+      button(onclick="role_add();",class="btn") 添加角色
+    table(id='dataTable',class="tablesorter")
+      thead
+        tr
+          th 角色名称
+          th(width='88')
+      tbody
+        -if(roles && roles.length > 0)
+          -for (var i=0;i< roles.length ;i++)
+           tr
+            td #{roles[i].role_name}
+            td 
+              button(class="btn",onclick='role_edit(#{roles[i].id});') 设置   
+              &nbsp;
+              button(class="btn",onclick='del_role(#{roles[i].id});') 删除 
+        else
+          tr
+            td(colspan=2) 暂无数据
+
+  div(class="clr")        
+
+script(type='text/javascript')
+   $(function(){
+     $($("a",".nav")[3]).addClass('selected');
+     $($("a",".left")[1]).addClass('selected'); 
+   });
+   $("#dataTable").tablesorter({exclude:[1]});
+
+   function del_role(id){
+      noty({
+        layout:'top',
+        modal:true,
+        text: "确定要执行删除操作?", 
+        buttons: [
+          {type: 'btn', text: '删除', click: function($noty) {
+                //
+                loading();
+                $.post("/management/del_role","id="+id,function(data){
+                    hideLoading();
+                    $noty.close();
+                    if(data.indexOf("success")!=-1){
+                      noty({
+                        timeout: 1000,force: true, text: '操作成功!', type: 'success',
+                        onClose:function(){
+                          location.reload();
+                        }
+                      });
+                    }else{
+                      noty({timeout: 1000,force: true, text: '操作失败!', type: 'error'});
+                    }
+                });
+            }
+          },
+          {type: 'btn', text: '取消', click: function($noty) {
+              $noty.close();
+            }
+          }
+          ],
+        closable: false,
+        timeout: false,
+        type:'error'
+      });
+   }
+   
+   function role_edit(id){
+      loading();
+      $.sheetbox('/management/edit_role','id='+id,{layout:'right',
+        onShow:function(){
+          hideLoading();
+        }
+      });
+   } 
+
+   function role_add(){
+      loading();
+
+      $.sheetbox('/management/add_role','',{layout:'right',
+        onShow:function(){
+          hideLoading();
+        }
+      });
+   } 
+

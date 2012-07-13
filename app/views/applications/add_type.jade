@@ -1,0 +1,40 @@
+div(class='bread') 添加类型
+table(class='table',id='add_type_form')
+  tr
+    td 类型名称
+    td 
+      input(id='type_name',type='text',class='txt')
+  tr
+    td
+    td
+      button(class='btn',onclick='add_type();') 添加
+      &nbsp;&nbsp;&nbsp;
+      button(class='btn',onclick='hide_edit();') 取消     
+
+script(type='text/javascript')    
+    $(function(){
+      $("#type_name").focus();
+    });
+    
+    function add_type(){
+      var type_name = $('#type_name','#add_type_form').val();
+
+      loading();
+      $.post('/applications/add_type','smt=true&type_name='+type_name,function(data){
+          hideLoading();
+          if(data.indexOf("success")!=-1){
+            noty({
+              timeout: 1000,force: true, text: '操作成功!', type: 'success',
+              onClose:function(){
+                location.reload();
+              }
+            });
+          }else{
+            noty({timeout: 1000,force: true, text: '操作失败!', type: 'error'});
+          }
+      },"html");
+    } 
+
+    function hide_edit(){
+         $.sheetbox.close('right');
+    } 

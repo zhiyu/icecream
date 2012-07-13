@@ -1,0 +1,73 @@
+div(class='bread') 用户设置
+table(class='table',id='edit_user_form')
+  tr
+    td 用户名
+    td 
+      input(id='id',type='hidden',value=users[0].id)
+      input(id='user_name',type='text',class='txt',value='#{users[0].user_name}')
+  tr
+    td 密码
+    td 
+      input(id='password',type='text',class='txt')    
+  tr
+    td 角色
+    td 
+      select(id='role')
+        - for(var i=0;i<roles.length;i++)
+          option(value=roles[i].id,selected=(users[0].role == roles[i].id?true:false)) #{roles[i].role_name}
+  tr
+    td Email
+    td 
+      input(id='email',type='text',class='txt',value='#{users[0].email}')
+  tr
+    td 手机号码
+    td 
+      input(id='mobile',type='text',class='txt',value='#{users[0].mobile}')     
+  tr
+    td
+    td
+      button(class='btn',onclick='edit_user();') 保存变更 
+      &nbsp;&nbsp;&nbsp;
+      button(class='btn',onclick='hide_edit();') 取消     
+
+script(type='text/javascript')    
+    function edit_user(){
+      var id = $('#id','#edit_user_form').val();
+      var user_name = $('#user_name','#edit_user_form').val();
+      var password = $('#password','#edit_user_form').val();
+      var role = $('#role','#edit_user_form').val();
+      var email = $('#email','#edit_user_form').val();
+      var mobile = $('#mobile','#edit_user_form').val();
+
+      var data = {
+        id:id,
+        smt:true,
+        user_name:user_name,
+        role:role,
+        email:email,
+        mobile:mobile
+      };
+      
+      if(password!=''){
+          data.password = password;
+      }
+
+      loading();
+      $.post('/management/edit_user',data,function(data){
+          hideLoading();
+          if(data.indexOf("success")!=-1){
+            noty({
+              timeout: 1000,force: true, text: '操作成功!', type: 'success',
+              onClose:function(){
+                location.reload();
+              }
+            });
+          }else{
+            noty({timeout: 1000,force: true, text: '操作失败!', type: 'error'});
+          }
+      },"html");
+    } 
+
+    function hide_edit(){
+          $.sheetbox.close('right');
+    } 

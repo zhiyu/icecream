@@ -1,0 +1,47 @@
+div(class='bread') 添加应用
+table(class='table',id='add_app_form')
+  tr
+    td 应用名称
+    td 
+      input(id='app_name',type='text',class='txt')
+  tr
+    td 应用类型
+    td 
+      select(id='app_type')
+        - for(var i=0;i<app_types.length;i++)
+          option(value=app_types[i].id) #{app_types[i].type_name}
+  tr
+    td
+    td
+      button(class='btn',onclick='add_app();') 添加
+      &nbsp;&nbsp;&nbsp;
+      button(class='btn',onclick='hide_edit();') 取消     
+
+script(type='text/javascript')    
+    $(function(){
+      $("#app_name").focus();
+    });
+    
+    function add_app(){
+      var app_name = $('#app_name','#add_app_form').val();
+      var app_type = $('#app_type','#add_app_form').val();
+
+      loading();
+      $.post('/applications/add','smt=true&app_name='+app_name+'&app_type='+app_type,function(data){
+          hideLoading();
+          if(data.indexOf("success")!=-1){
+            noty({
+              timeout: 1000,force: true, text: '操作成功!', type: 'success',
+              onClose:function(){
+                location.reload();
+              }
+            });
+          }else{
+            noty({timeout: 1000,force: true, text: '操作失败!', type: 'error'});
+          }
+      },"html");
+    } 
+
+    function hide_edit(){
+      $.sheetbox.close('right');
+    } 

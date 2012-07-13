@@ -1,0 +1,59 @@
+div(class='bread') 发布新版本
+table(class='table',id='add_version_form')
+  tr
+    td 应用
+    td 
+      select(id='app_key')
+        - for(var i=0;i<apps.length;i++)
+          option(value=apps[i].app_key) #{apps[i].app_name}
+  tr
+    td 版本号
+    td 
+      input(id='version',type='text',class='txt')
+  tr
+    td 下载地址
+    td 
+      input(id='url',type='text',class='txt',style="width:450px")    
+  tr
+    td 更新说明
+    td 
+      textarea(id='release_note',style='height:300px;')    
+  tr
+    td
+    td
+      button(class='btn',onclick='add_version();') 添加
+      &nbsp;&nbsp;&nbsp;
+      button(class='btn',onclick='hide_edit();') 取消     
+
+script(type='text/javascript')    
+    $(function(){
+      $('#release_note').redactor({ 
+        fixed: true ,buttons: ['html', '|', 'formatting', '|', 'bold', 'italic', 'deleted', '|','unorderedlist', 'orderedlist', 'outdent', 'indent', '|','link', '|','fontcolor', 'backcolor', '|', 'alignleft', 'aligncenter', 'alignright', 'justify', '|','horizontalrule', 'fullscreen']
+      });
+    });
+    
+    function add_version(){
+      var app_key = $('#app_key','#add_version_form').val();
+      var version = $('#version','#add_version_form').val();
+      var url = $('#url','#add_version_form').val();
+      var release_note = $('#release_note','#add_version_form').val();
+
+      loading();
+      $.post('/applications/add_version','smt=true&app_key='+app_key+'&version='+version+'&url='+url+'&release_note='+release_note,function(data){
+          hideLoading();
+          if(data.indexOf("success")!=-1){
+            noty({
+              timeout: 1000,force: true, text: '操作成功!', type: 'success',
+              onClose:function(){
+                location.reload();
+              }
+            });
+          }else{
+            noty({timeout: 1000,force: true, text: '操作失败!', type: 'error'});
+          }
+      },"html");
+    } 
+
+    function hide_edit(){
+      $.sheetbox.close('right');
+    } 

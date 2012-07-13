@@ -1,0 +1,71 @@
+div(class='bread') 添加用户
+table(class='table',id='add_user_form')
+  tr
+    td 用户名
+    td 
+      input(id='user_name',type='text',class='txt')
+  tr
+    td 密码
+    td 
+      input(id='password',type='text',class='txt')    
+  tr
+    td 角色
+    td 
+      select(id='role')
+        - for(var i=0;i<roles.length;i++)
+          option(value=roles[i].id) #{roles[i].role_name}
+  tr
+    td Email
+    td 
+      input(id='email',type='text',class='txt')
+  tr
+    td 手机号码
+    td 
+      input(id='mobile',type='text',class='txt')            
+  tr
+    td
+    td
+      button(class='btn',onclick='add_user();') 添加
+      &nbsp;&nbsp;&nbsp;
+      button(class='btn',onclick='hide_edit();') 取消     
+
+script(type='text/javascript')    
+    $(function(){
+      $("#user_name").focus();
+    });
+    
+    function add_user(){
+      var user_name = $('#user_name','#add_user_form').val();
+      var password = $('#password','#add_user_form').val();
+      var role = $('#role','#add_user_form').val();
+      var email = $('#email','#add_user_form').val();
+      var mobile = $('#mobile','#add_user_form').val();
+
+      var data = {
+        smt:true,
+        user_name:user_name,
+        password:password,
+        role:role,
+        email:email,
+        mobile:mobile
+      };
+
+      loading();
+      $.post('/management/add_user',data,function(data){
+          hideLoading();
+          if(data.indexOf("success")!=-1){
+            noty({
+              timeout: 1000,force: true, text: '操作成功!', type: 'success',
+              onClose:function(){
+                location.reload();
+              }
+            });
+          }else{
+            noty({timeout: 1000,force: true, text: '操作失败!', type: 'error'});
+          }
+      },"html");
+    } 
+
+    function hide_edit(){
+      $.sheetbox.close('right');
+    } 

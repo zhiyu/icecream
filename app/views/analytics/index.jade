@@ -1,0 +1,18 @@
+div(class="content")
+  div(class="left")
+    ul
+      li 
+        a(href="/") 用户
+      li 
+        a(href="/") 移动设备
+      li 
+        a(href="/") 分析报告
+          
+  div(class="right")
+  div(class="clr")        
+
+script(type='text/javascript')
+   $(function(){
+     $($("a",".nav")[1]).addClass('selected');
+     $($("a",".left")[0]).addClass('selected'); 
+   });

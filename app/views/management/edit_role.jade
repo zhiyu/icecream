@@ -1,0 +1,38 @@
+div(class='bread') 角色设置
+table(class='table',id='edit_role_form')
+  tr
+    td 角色名称
+    td 
+      input(id='id',type='hidden',value=roles[0].id)
+      input(id='role_name',type='text',class='txt',value=roles[0].role_name)
+  tr
+    td
+    td
+      button(class='btn',onclick='edit_role();') 保存变更 
+      &nbsp;&nbsp;&nbsp;
+      button(class='btn',onclick='hide_edit();') 取消     
+
+script(type='text/javascript')    
+    function edit_role(){
+      var id = $('#id','#edit_role_form').val();
+      var role_name = $('#role_name','#edit_role_form').val();
+
+      loading();
+      $.post('/management/edit_role','smt=true&id='+id+"&role_name="+role_name,function(data){
+          hideLoading();
+          if(data.indexOf("success")!=-1){
+            noty({
+              timeout: 1000,force: true, text: '操作成功!', type: 'success',
+              onClose:function(){
+                location.reload();
+              }
+            });
+          }else{
+            noty({timeout: 1000,force: true, text: '操作失败!', type: 'error'});
+          }
+      },"html");
+    } 
+
+    function hide_edit(){
+          $.sheetbox.close('right');
+    } 
