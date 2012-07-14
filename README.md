@@ -1,12 +1,11 @@
-### How to use
-*   download source 
-*   install npm
-*   enter icecream
+### Setup
+*   install nodejs and npm
+*   go to icecream  
 *   npm install
-*   edit start.js
-    
+### Run
+*   edit start.js    
         var connect    = require('connect')
-		var icecream   = require('./lib/icecream');
+        var icecream   = require('./lib/icecream');
 
 		icecream.createServer();
 		icecream.use(connect.query());
