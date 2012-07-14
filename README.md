@@ -2,5 +2,5 @@
 *   install nodejs and npm
 *   go to icecream  
 *   npm install
-*   
-               node start.js		
+   
+                node start.js		
