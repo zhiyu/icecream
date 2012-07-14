@@ -1,6 +1,6 @@
 {
   "name": "icecream",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "rapid web framework base on nodejs",
   "homepage": "http://github.com/zhiyu/icecream",
   "keywords": [
