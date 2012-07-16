@@ -3,7 +3,6 @@ var urlHelper  = require("url");
 var fs         = require('fs');
 var connect    = require('connect');
 var http       = require('http');
-var config     = require('./config');
 var Controller = require('./controller');
 var utils      = require('./utils');
 
@@ -41,7 +40,7 @@ var dispatcher = module.exports = {
         var url        = req.url;
         var ext        = path.extname(url);
 
-        if(ext == config.suffix){
+        if(ext == dispatcher.context.get('suffix')){
             dispatcher.doAction(req,res);
         }else{
             dispatcher.doResource(req,res);
@@ -113,12 +112,12 @@ var dispatcher = module.exports = {
         var controllerRoot = this.context.get('appRoot')+'/controllers';
 
         if(url == '/'){
-            controller   = controllerRoot+ '/' + config.defaultController;
+            controller   = controllerRoot+ '/' + this.context.get('defaultController');
         }else if(url.lastIndexOf("/") == (url.length-1)){
             controller   = controllerRoot + url.substr(0,url.length-1);
         }else{
             if(path.dirname(url) == '/')
-                controller = controllerRoot+'/' + config.defaultController;
+                controller = controllerRoot+'/' + this.context.get('defaultController');
             else
                 controller = controllerRoot + path.dirname(url);
         }
@@ -133,10 +132,8 @@ var dispatcher = module.exports = {
         return controllerObj;
     },
     getAction : function(url){
-        var action = config.defaultAction;
-        if(url == '/'){
-            action = config.defaultAction;
-        }else if(url.lastIndexOf("/") != (url.length-1)){
+        var action = this.context.get('defaultAction');
+        if(url.lastIndexOf("/") != (url.length-1)){
             action = path.basename(url);
         }
         return action;

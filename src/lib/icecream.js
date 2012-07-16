@@ -3,7 +3,6 @@ var urlHelper  = require("url");
 var fs         = require('fs');
 var connect    = require('connect')
 var http       = require('http');
-var config     = require("./config");
 var dispatcher = require('./dispatcher');
 
 var icecream = module.exports = {
