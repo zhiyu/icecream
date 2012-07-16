@@ -28,6 +28,10 @@ var icecream = module.exports = {
 
         this.set('defaultEngine', 'jade');
         this.set('appRoot',  __dirname +'/../app');
+        this.set('defaultController', 'page');
+        this.set('defaultAction',  'index');
+        this.set('suffix',  '');
+
     },
     use : function(func){
         this.server.use(func);
