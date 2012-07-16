@@ -1,8 +1,8 @@
 {
   "name": "icecream",
   "version": "0.1.0",
-  "description": "rapid web framework base on nodejs",
-  "homepage": "http://github.com/zhiyu/icecream",
+  "description": "rapid web framework for nodejs",
+  "homepage": "http://github.com/nodengine/icecream",
   "keywords": [
     "web",
     "framework",
@@ -14,7 +14,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/zhiyu/icecream.git"
+    "url": "git://github.com/nodengine/icecream.git"
   },
   "dependencies": {
     "connect":"2.3.6",
