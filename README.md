@@ -1,13 +1,6 @@
 ### Installation
 
-        npm install -g icecream
+    npm install -g icecream
 
 ### How to use
-
-        var icecream   = require('icecream');
-
-        icecream.createServer();
-        icecream.set('appRoot',  __dirname +'/app');
-        icecream.set('debug', true);
-
-        icecream.listen(3000);
+*   checkout examples
