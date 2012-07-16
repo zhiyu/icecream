@@ -1,9 +1,13 @@
-### Setup and Run
-*   Install nodejs and npm
-*   Download Icecream source code and extract it into somewhere 
-*   Install dependencies
+### Installation
 
-        npm install
-*   Run   
+        npm install -g icecream
 
-        node start.js		
+### How to use
+
+        var icecream   = require('icecream');
+
+        icecream.createServer();
+        icecream.set('appRoot',  __dirname +'/app');
+        icecream.set('debug', true);
+
+        icecream.listen(3000);
