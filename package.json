@@ -18,7 +18,6 @@
   },
   "dependencies": {
     "connect":"2.3.6",
-    "mysql":"2.0.0-alpha3",
     "jade": "0.26.3",
     "ejs": "0.7.2"
   },
