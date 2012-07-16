@@ -1,0 +1,31 @@
+{
+  "name": "icecream",
+  "version": "0.1.0",
+  "description": "rapid web framework for nodejs",
+  "homepage": "http://github.com/nodengine/icecream",
+  "keywords": [
+    "web",
+    "framework",
+    "mvc",
+    "icecream"
+  ],
+  "author": {
+    "name": "zhiyu zheng",
+    "email": "zhengzhiyu@yeah.net",
+    "url": "http://www.nodengine.com"
+  },
+  "contributors": [
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nodengine/icecream.git"
+  },
+  "dependencies": {
+    "icecream":"0.1.0"
+  },
+  "devDependencies": {},
+  "main": "index",
+  "engines": {
+    "node": ">= 0.8.0"
+  }
+}
