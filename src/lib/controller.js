@@ -46,10 +46,10 @@ exports.render = function(file,options,callback){
 
 //set 'redirect' method for controller
 exports.redirect = function(url){
-    res.statusCode = 302;
-    res.setHeader('Location', url);
-    res.setHeader('Content-Length', 0);
-    res.end();
+    this.res.statusCode = 302;
+    this.res.setHeader('Location', url);
+    this.res.setHeader('Content-Length', 0);
+    this.res.end();
 }
 
 //set 'send' method for controller
