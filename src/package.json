@@ -9,7 +9,11 @@
     "mvc",
     "icecream"
   ],
-  "author": "Zhiyu Zheng. <zhengzhiyu@yeah.net>",
+  "author": {
+    "name": "zhiyu zheng",
+    "email": "zhengzhiyu@yeah.net",
+    "url": "http://www.nodengine.com"
+  },
   "contributors": [
   ],
   "repository": {
