@@ -4,6 +4,7 @@ var fs         = require('fs');
 var connect    = require('connect')
 var http       = require('http');
 var dispatcher = require('./dispatcher');
+var cluster = require('cluster');
 
 var icecream = module.exports = {
     createServer : function(){
@@ -39,7 +40,19 @@ var icecream = module.exports = {
     },
     listen : function(port){
         this.server.use(dispatcher.run);
-        this.server.listen(port);
+        var cpus = require('os').cpus().length;
+
+        if (cluster.isMaster) {
+          for (var i = 0; i < cpus; i++) {
+            cluster.fork();
+          }
+          cluster.on('exit', function(worker, code, signal) {
+            console.log('worker ' + worker.process.pid + ' died');
+          });
+        } else {
+          this.server.listen(port);
+        }
+
         return this;
     },
     get : function(key){
