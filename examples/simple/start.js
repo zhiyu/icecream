@@ -1,4 +1,4 @@
-var connect    = require('connect');
+var connect    = require('../../src/node_modules/connect');
 var icecream   = require('../../src/lib/icecream');
 
 icecream.createServer();
