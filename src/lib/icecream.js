@@ -17,7 +17,6 @@ var icecream = module.exports = {
         this.server.use(connect.query());
         this.server.use(connect.bodyParser());
         this.server.use(connect.cookieParser());
-        icecream.use(connect.session({ secret:'DFJLK8DFGJ933JKLFGJ2'}));
 
         this.engines    = {};
         this.config     = {};
