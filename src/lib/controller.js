@@ -52,6 +52,11 @@ exports.redirect = function(url){
     this.res.end();
 }
 
+//set 'write' method for controller
+exports.write = function(body){
+    this.res.write(body,"utf-8");
+}
+
 //set 'send' method for controller
 exports.send = function(body){
     this.res.write(body,"utf-8");
