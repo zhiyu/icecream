@@ -27,6 +27,9 @@
   },
   "devDependencies": {},
   "main": "index",
+  "bin"        : {
+    "ic": "./bin/icecream"
+  },
   "engines": {
     "node": ">= 0.5.0"
   }

@@ -64,3 +64,5 @@ var icecream = module.exports = {
         this.engines[ext] = engine;
     }
 }
+
+icecream.version = JSON.parse( fs.readFileSync( __dirname + '/../package.json', 'utf8' )).version;
