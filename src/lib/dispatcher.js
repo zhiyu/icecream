@@ -40,7 +40,7 @@ var dispatcher = module.exports = {
         var url        = req.url;
         var ext        = path.extname(url);
 
-        if(ext == dispatcher.context.get('suffix')){
+        if(ext.indexOf("&")!=-1 || ext == dispatcher.context.get('suffix')){
             dispatcher.doAction(req,res);
         }else{
             dispatcher.doResource(req,res);
