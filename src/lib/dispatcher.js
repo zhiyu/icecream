@@ -4,7 +4,6 @@ var fs         = require('fs');
 var connect    = require('connect');
 var http       = require('http');
 var Controller = require('./controller');
-var utils      = require('./utils');
 
 //mimes
 var mime       = {
@@ -33,11 +32,20 @@ function log(message){
     console.log(message);
 }
 
+function merge(a,b){
+    if (a && b) {
+        for (var key in b) {
+          a[key] = b[key];
+        }
+    }
+    return a;
+}
+
 //icecream exports
 var dispatcher = module.exports = {
     context:null,
     run : function(req,res){
-        var url        = req.url;
+        var url = req.url.indexOf('?')!=-1?req.url.split('?')[0]:req.url;
         var ext        = path.extname(url);
 
         if(ext.indexOf("&")!=-1 || ext == dispatcher.context.get('suffix')){
@@ -49,7 +57,7 @@ var dispatcher = module.exports = {
     doAction : function(req,res){
         var url        = req._parsedUrl.pathname;
         var controller = this.getController(url);
-        utils.merge(controller,Controller);
+        merge(controller,Controller);
         var action     = this.getAction(url);
 
         if(controller != null){
