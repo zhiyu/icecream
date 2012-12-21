@@ -1,1 +1,1 @@
-module.exports = require('./lib/icecream');
+module.exports = require('./icecream/icecream');

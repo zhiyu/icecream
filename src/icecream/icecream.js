@@ -13,10 +13,6 @@ var icecream = module.exports = {
         this.caches  = {};    
         this.server  = connect();
 
-        this.server.use(connect.query());
-        this.server.use(connect.bodyParser());
-        this.server.use(connect.cookieParser());
-
         this.engine('jade', require('jade').renderFile);
         this.engine('ejs', require('ejs').renderFile);
 
@@ -34,14 +30,18 @@ var icecream = module.exports = {
         this.server.use(func);
         return this;
     },
-    listen : function(port){
-        this.server.use(dispatcher.run);
+    listen : function(port){     
+        this.server.use(connect.query());
+        this.server.use(connect.bodyParser());
+        this.server.use(function(req, res){
+            dispatcher.dispatch(req, res);
+        });
+
         if (this.get("cluster")==true && cluster.isMaster) {
             console.log("cluster enabled...");
             cluster.on('exit', function(worker, code, signal) {
                 cluster.fork();
-            });
-            
+            }); 
             var cpus = require('os').cpus().length;
             for (var i = 0; i < cpus; i++) {
                cluster.fork();

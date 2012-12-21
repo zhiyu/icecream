@@ -34,15 +34,16 @@ function log(message){
 //icecream exports
 var dispatcher = module.exports = {
     context:null,
-    run : function(req,res){
+    dispatch : function(req, res){
         var url = req.url.indexOf('?')!=-1?req.url.split('?')[0]:req.url;
         var ext        = path.extname(url);
 
         if(ext.indexOf("&")!=-1 || ext == dispatcher.context.get('suffix')){
-            dispatcher.doAction(req,res);
+            this.doAction(req,res);
         }else{
-            dispatcher.doResource(req,res);
+            this.doResource(req,res);
         }
+
     },
     doAction : function(req,res){
         var url        = req._parsedUrl.pathname;
@@ -62,7 +63,6 @@ var dispatcher = module.exports = {
             try{
                 if(controller['beforeFilter'])
                     controller['beforeFilter']();
-
                 if(controller[action] != null){
                     controller[action].call(controller);
                 }else{

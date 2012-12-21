@@ -1,6 +1,6 @@
 var View       = require('./view');
 module.exports = {
-    render : function(file,options,callback){    
+    render : function(file, options, callback){    
         var self = this;
         var body;
 
