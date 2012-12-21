@@ -1,5 +1,5 @@
 beforeFilter(function(){
-   write("beforeFilter...");
+   //write("beforeFilter...");
 });
 
 action("index", function(){

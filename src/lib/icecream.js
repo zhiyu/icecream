@@ -26,7 +26,7 @@ var icecream = module.exports = {
         this.engine('jade', require('jade').renderFile);
         this.engine('ejs', require('ejs').renderFile);
 
-        this.set('defaultEngine', 'jade');
+        this.set('defaultEngine', 'ejs');
         this.set('appRoot',  __dirname +'/../app');
         this.set('defaultController', 'page');
         this.set('defaultAction',  'index');

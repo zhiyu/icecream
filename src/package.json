@@ -23,7 +23,7 @@
   "dependencies": {
     "connect":"2.3.6",
     "jade": "0.26.3",
-    "ejs": "0.7.2"
+    "ejs": "0.8.3"
   },
   "devDependencies": {},
   "main": "index",

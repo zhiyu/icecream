@@ -1,0 +1,109 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/opt/local/bin/npm', 'publish', 'src/' ]
+2 info using npm@1.1.35
+3 info using node@v0.8.5
+4 verbose config file /Users/zhengzhiyu/.npmrc
+5 verbose config file /opt/local/etc/npmrc
+6 verbose config file /opt/local/lib/node_modules/npm/npmrc
+7 verbose publish [ 'src/' ]
+8 verbose read json /Users/zhengzhiyu/apps/icecream/src/package.json
+9 verbose cache add [ 'src/', null ]
+10 silly cache add name=undefined spec="src/" args=["src/",null]
+11 verbose parsed url { pathname: 'src/', path: 'src/', href: 'src/' }
+12 verbose lock src/ /Users/zhengzhiyu/.npm/984e76fdaf6369837b90b9ff944d8e0ffa4a3e95-src-.lock
+13 verbose read json src/package.json
+14 verbose tar pack [ '/var/folders/vh/7hbpr87159v8yz9tn48ystbr0000gn/T/npm-26029/1356080358339-0.26385609805583954/tmp.tgz',
+14 verbose tar pack   'src/' ]
+15 verbose tarball /var/folders/vh/7hbpr87159v8yz9tn48ystbr0000gn/T/npm-26029/1356080358339-0.26385609805583954/tmp.tgz
+16 verbose folder src/
+17 info prepublish icecream@0.1.6
+18 verbose lock /var/folders/vh/7hbpr87159v8yz9tn48ystbr0000gn/T/npm-26029/1356080358339-0.26385609805583954/tmp.tgz /Users/zhengzhiyu/.npm/0ac9bbf1dc870be7ab811e4420bdafa004de6cb6--var-folders-vh-7hbpr87159v8yz9tn48ystbr0000gn-T-npm-26029-1356080358339-0-26385609805583954-tmp-tgz.lock
+19 verbose tar unpack /var/folders/vh/7hbpr87159v8yz9tn48ystbr0000gn/T/npm-26029/1356080358339-0.26385609805583954/tmp.tgz
+20 verbose lock /var/folders/vh/7hbpr87159v8yz9tn48ystbr0000gn/T/npm-26029/1356080358339-0.26385609805583954/package /Users/zhengzhiyu/.npm/2bd76aeb771170512fdc3946b0c721913cb3dc31--var-folders-vh-7hbpr87159v8yz9tn48ystbr0000gn-T-npm-26029-1356080358339-0-26385609805583954-package.lock
+21 silly gunzTarPerm modes [ '755', '644' ]
+22 silly gunzTarPerm extractEntry package.json
+23 silly gunzTarPerm extractEntry index.js
+24 silly gunzTarPerm extractEntry bin/icecream
+25 silly gunzTarPerm extractEntry lib/controller.js
+26 silly gunzTarPerm extractEntry lib/dispatcher.js
+27 silly gunzTarPerm extractEntry lib/icecream.js
+28 silly gunzTarPerm extractEntry lib/view.js
+29 silly gunzTarPerm extractEntry test/start.js
+30 silly gunzTarPerm extractEntry test/app/controllers/page.js
+31 silly gunzTarPerm extractEntry test/app/views/layout/footer.jade
+32 silly gunzTarPerm extractEntry test/app/views/layout/header.jade
+33 silly gunzTarPerm extractEntry test/app/views/layout/layout.jade
+34 silly gunzTarPerm extractEntry test/app/views/page/index.jade
+35 verbose read json /var/folders/vh/7hbpr87159v8yz9tn48ystbr0000gn/T/npm-26029/1356080358339-0.26385609805583954/package/package.json
+36 verbose from cache /var/folders/vh/7hbpr87159v8yz9tn48ystbr0000gn/T/npm-26029/1356080358339-0.26385609805583954/package/package.json
+37 verbose tar pack [ '/Users/zhengzhiyu/.npm/icecream/0.1.6/package.tgz',
+37 verbose tar pack   '/var/folders/vh/7hbpr87159v8yz9tn48ystbr0000gn/T/npm-26029/1356080358339-0.26385609805583954/package' ]
+38 verbose tarball /Users/zhengzhiyu/.npm/icecream/0.1.6/package.tgz
+39 verbose folder /var/folders/vh/7hbpr87159v8yz9tn48ystbr0000gn/T/npm-26029/1356080358339-0.26385609805583954/package
+40 verbose lock /Users/zhengzhiyu/.npm/icecream/0.1.6/package.tgz /Users/zhengzhiyu/.npm/3b0b8e494c847cb83ed486a01eb5417d5c2ca64a--Users-zhengzhiyu-npm-icecream-0-1-6-package-tgz.lock
+41 verbose lock /Users/zhengzhiyu/.npm/icecream/0.1.6/package /Users/zhengzhiyu/.npm/f6939edbfc5bfb2664c175f76f72706ec7fb34aa--Users-zhengzhiyu-npm-icecream-0-1-6-package.lock
+42 verbose tar unpack /Users/zhengzhiyu/.npm/icecream/0.1.6/package.tgz
+43 verbose lock /Users/zhengzhiyu/.npm/icecream/0.1.6/package /Users/zhengzhiyu/.npm/f6939edbfc5bfb2664c175f76f72706ec7fb34aa--Users-zhengzhiyu-npm-icecream-0-1-6-package.lock
+44 silly gunzTarPerm modes [ '755', '644' ]
+45 silly gunzTarPerm extractEntry package.json
+46 silly gunzTarPerm extractEntry index.js
+47 silly gunzTarPerm extractEntry bin/icecream
+48 silly gunzTarPerm extractEntry lib/controller.js
+49 silly gunzTarPerm extractEntry lib/dispatcher.js
+50 silly gunzTarPerm extractEntry lib/icecream.js
+51 silly gunzTarPerm extractEntry lib/view.js
+52 silly gunzTarPerm extractEntry test/start.js
+53 silly gunzTarPerm extractEntry test/app/controllers/page.js
+54 silly gunzTarPerm extractEntry test/app/views/layout/footer.jade
+55 silly gunzTarPerm extractEntry test/app/views/layout/header.jade
+56 silly gunzTarPerm extractEntry test/app/views/layout/layout.jade
+57 silly gunzTarPerm extractEntry test/app/views/page/index.jade
+58 verbose read json /Users/zhengzhiyu/.npm/icecream/0.1.6/package/package.json
+59 silly shasum updated bytes 3706
+60 info shasum 34e1a51136d75b026c1eea7c979c4c4cdc5b9f82
+60 info shasum /Users/zhengzhiyu/.npm/icecream/0.1.6/package.tgz
+61 verbose from cache /Users/zhengzhiyu/.npm/icecream/0.1.6/package/package.json
+62 verbose chmod /Users/zhengzhiyu/.npm/icecream/0.1.6/package.tgz 644
+63 verbose chown /Users/zhengzhiyu/.npm/icecream/0.1.6/package.tgz [ 501, 20 ]
+64 silly publish { name: 'icecream',
+64 silly publish   version: '0.1.6',
+64 silly publish   description: 'rapid web framework for nodejs',
+64 silly publish   homepage: 'http://github.com/nodengine/icecream',
+64 silly publish   keywords: [ 'web', 'framework', 'mvc', 'icecream' ],
+64 silly publish   author:
+64 silly publish    { name: 'zhiyu zheng',
+64 silly publish      email: 'zhengzhiyu@yeah.net',
+64 silly publish      url: 'http://www.nodengine.com' },
+64 silly publish   contributors: [],
+64 silly publish   repository: { type: 'git', url: 'git://github.com/nodengine/icecream.git' },
+64 silly publish   dependencies: { connect: '2.3.6', jade: '0.26.3', ejs: '0.7.2' },
+64 silly publish   devDependencies: {},
+64 silly publish   main: 'index',
+64 silly publish   bin: { ic: './bin/icecream' },
+64 silly publish   engines: { node: '>= 0.5.0' },
+64 silly publish   _id: 'icecream@0.1.6',
+64 silly publish   dist: { shasum: '34e1a51136d75b026c1eea7c979c4c4cdc5b9f82' } }
+65 verbose url raw icecream
+66 verbose url resolving [ 'https://registry.npmjs.org/', './icecream' ]
+67 verbose url resolved https://registry.npmjs.org/icecream
+68 info retry registry request attempt 1 at 16:59:18
+69 http PUT https://registry.npmjs.org/icecream
+70 http 409 https://registry.npmjs.org/icecream
+71 verbose url raw icecream
+72 verbose url resolving [ 'https://registry.npmjs.org/', './icecream' ]
+73 verbose url resolved https://registry.npmjs.org/icecream
+74 info retry registry request attempt 1 at 16:59:23
+75 http GET https://registry.npmjs.org/icecream
+76 http 200 https://registry.npmjs.org/icecream
+77 error publish fail Cannot publish over existing version.
+77 error publish fail Bump the 'version' field, set the --force flag, or
+77 error publish fail     npm unpublish 'icecream@0.1.6'
+77 error publish fail and try again
+78 error System Darwin 11.4.2
+79 error command "node" "/opt/local/bin/npm" "publish" "src/"
+80 error cwd /Users/zhengzhiyu/apps/icecream
+81 error node -v v0.8.5
+82 error npm -v 1.1.35
+83 error code EPUBLISHCONFLICT
+84 error message publish fail
+85 verbose exit [ 1, true ]
