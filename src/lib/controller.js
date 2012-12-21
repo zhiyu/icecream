@@ -7,7 +7,6 @@ module.exports = {
         //set defaults
         if(!options)
             options = {};
-
         options.req = this.req;
         options.session  = this.session;
 
@@ -22,7 +21,7 @@ module.exports = {
         }
         
         //render body
-        var view = this.context.viewCaches[file];
+        var view = this.context.getObject("views", file);
         if(!view){
             view = new View(file,this.context);
         }
@@ -36,7 +35,7 @@ module.exports = {
             else
                 self.send(content);
         }
-        var view = this.context.viewCaches['layout/'+this.layout];
+        var view = this.context.getObject("view", 'layout/'+this.layout);
         if(!view){
             view = new View('layout/'+this.layout,this.context);
         }

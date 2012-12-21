@@ -8,21 +8,15 @@ var cluster = require('cluster');
 
 var icecream = module.exports = {
     createServer : function(){
-        dispatcher.context = this;
-        this.server = connect();
-        this.init();
-        return this;
-    },
-    init : function(){
+        this.engines = {};
+        this.config  = {};
+        this.caches  = {};    
+        this.server  = connect();
+
         this.server.use(connect.query());
         this.server.use(connect.bodyParser());
         this.server.use(connect.cookieParser());
 
-        this.engines    = {};
-        this.config     = {};
-        this.viewCaches = {};
-        
-        //add view engines
         this.engine('jade', require('jade').renderFile);
         this.engine('ejs', require('ejs').renderFile);
 
@@ -32,6 +26,9 @@ var icecream = module.exports = {
         this.set('defaultAction',  'index');
         this.set('suffix',  '');
 
+        this.version = JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version;
+        dispatcher.context = this;
+        return this;
     },
     use : function(func){
         this.server.use(func);
@@ -39,19 +36,19 @@ var icecream = module.exports = {
     },
     listen : function(port){
         this.server.use(dispatcher.run);
-        var cpus = require('os').cpus().length;
-
-        if (cluster.isMaster) {
-          for (var i = 0; i < cpus; i++) {
-            cluster.fork();
-          }
-          cluster.on('exit', function(worker, code, signal) {
-            cluster.fork();
-          });
+        if (this.get("cluster")==true && cluster.isMaster) {
+            console.log("cluster enabled...");
+            cluster.on('exit', function(worker, code, signal) {
+                cluster.fork();
+            });
+            
+            var cpus = require('os').cpus().length;
+            for (var i = 0; i < cpus; i++) {
+               cluster.fork();
+            }
         } else {
-          this.server.listen(port);
+            this.server.listen(port);
         }
-
         return this;
     },
     get : function(key){
@@ -65,7 +62,15 @@ var icecream = module.exports = {
     },
     share : function(shareObject){
         this.shareObject = shareObject;
+    },
+    getObject : function(cache, key){
+        if(!this.caches[cache])
+            return null;
+        return this.caches[cache][key];
+    },
+    setObject : function(cache, key, object){
+        if(!this.caches[cache])
+            this.caches[cache] = {};
+        this.caches[cache][key] = object;
     }
 }
-
-icecream.version = JSON.parse( fs.readFileSync( __dirname + '/../package.json', 'utf8' )).version;

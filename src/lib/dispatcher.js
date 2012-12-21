@@ -34,7 +34,6 @@ function log(message){
 //icecream exports
 var dispatcher = module.exports = {
     context:null,
-    controllers:{},
     run : function(req,res){
         var url = req.url.indexOf('?')!=-1?req.url.split('?')[0]:req.url;
         var ext        = path.extname(url);
@@ -121,7 +120,7 @@ var dispatcher = module.exports = {
         }
 
         if(path.existsSync(controllerFile + '.js')){
-            if(this.context.get('debug')==true || this.controllers[controllerFile]==undefined){
+            if(this.context.get('debug')==true || this.context.getObject("controllers", controllerFile)==undefined){
                 this.merge(controller,Controller);
                 content = this.read(controllerFile + '.js');
                 var fun = new Function('context', 'require','with(context){'+ content + '}');
@@ -131,9 +130,9 @@ var dispatcher = module.exports = {
                         controller[i] = this.context.shareObject[i];
                     }
                 }
-                this.controllers[controllerFile] = controller;
+                this.context.setObject("controllers", controllerFile, controller);
             }else{
-                controller = this.controllers[controllerFile];
+                controller = this.context.getObject("controllers", controllerFile);
             }
         }else{
             log('controller "' + controllerFile + '" not exist!');
