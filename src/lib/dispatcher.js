@@ -134,6 +134,11 @@ var dispatcher = module.exports = {
             if(this.context.get('debug')==true)
                 delete require.cache[require.resolve(controller)];
             controllerObj = require(controller);
+            if(this.context.shareObject){
+                for(var i in this.context.shareObject){
+                    controllerObj[i] = this.context.shareObject[i];
+                }
+            }
         }else{
             log('controller "' + controller + '" not exist!');
         }

@@ -62,6 +62,9 @@ var icecream = module.exports = {
     },
     engine : function(ext,engine){
         this.engines[ext] = engine;
+    },
+    share : function(shareObject){
+        this.shareObject = shareObject;
     }
 }
 
