@@ -1,5 +1,11 @@
-var c = module.exports;
+beforeFilter(function(){
+   write("beforeFilter...");
+});
 
-c.index = function(){
-    this.render('page/index');
-}
+action("index", function(){
+	render('page/index');
+}); 
+
+action("test", function(){
+	send("test");
+}); 

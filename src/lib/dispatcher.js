@@ -31,19 +31,10 @@ var mime       = {
 function log(message){
     console.log(message);
 }
-
-function merge(a,b){
-    if (a && b) {
-        for (var key in b) {
-          a[key] = b[key];
-        }
-    }
-    return a;
-}
-
 //icecream exports
 var dispatcher = module.exports = {
     context:null,
+    controllers:{},
     run : function(req,res){
         var url = req.url.indexOf('?')!=-1?req.url.split('?')[0]:req.url;
         var ext        = path.extname(url);
@@ -57,7 +48,6 @@ var dispatcher = module.exports = {
     doAction : function(req,res){
         var url        = req._parsedUrl.pathname;
         var controller = this.getController(url);
-        merge(controller,Controller);
         var action     = this.getAction(url);
 
         if(controller != null){
@@ -71,8 +61,8 @@ var dispatcher = module.exports = {
             controller.url    = req.url;
                       
             try{
-                if(controller['beforeAction'])
-                    controller['beforeAction']();
+                if(controller['beforeFilter'])
+                    controller['beforeFilter']();
 
                 if(controller[action] != null){
                     controller[action].call(controller);
@@ -114,35 +104,41 @@ var dispatcher = module.exports = {
         }
     },
     getController : function(url){
-        var controllerObj = null;
-        var controller = '';
-        
+        var content = null;
+        var controller = {};
+        var controllerFile = '';
         var controllerRoot = this.context.get('appRoot')+'/controllers';
 
         if(url == '/'){
-            controller   = controllerRoot+ '/' + this.context.get('defaultController');
+            controllerFile   = controllerRoot+ '/' + this.context.get('defaultController');
         }else if(url.lastIndexOf("/") == (url.length-1)){
-            controller   = controllerRoot + url.substr(0,url.length-1);
+            controllerFile   = controllerRoot + url.substr(0,url.length-1);
         }else{
             if(path.dirname(url) == '/')
-                controller = controllerRoot+'/' + this.context.get('defaultController');
+                controllerFile = controllerRoot+'/' + this.context.get('defaultController');
             else
-                controller = controllerRoot + path.dirname(url);
+                controllerFile = controllerRoot + path.dirname(url);
         }
 
-        if(path.existsSync(controller + '.js')){
-            if(this.context.get('debug')==true)
-                delete require.cache[require.resolve(controller)];
-            controllerObj = require(controller);
-            if(this.context.shareObject){
-                for(var i in this.context.shareObject){
-                    controllerObj[i] = this.context.shareObject[i];
+        if(path.existsSync(controllerFile + '.js')){
+            if(this.context.get('debug')==true || this.controllers[controllerFile]==undefined){
+                this.merge(controller,Controller);
+                content = this.read(controllerFile + '.js');
+                var fun = new Function('context', 'require','with(context){'+ content + '}');
+                fun(controller);
+                if(this.context.shareObject){
+                    for(var i in this.context.shareObject){
+                        controller[i] = this.context.shareObject[i];
+                    }
                 }
+                this.controllers[controllerFile] = controller;
+            }else{
+                controller = this.controllers[controllerFile];
             }
         }else{
-            log('controller "' + controller + '" not exist!');
+            log('controller "' + controllerFile + '" not exist!');
         }
-        return controllerObj;
+        return controller;
     },
     getAction : function(url){
         var action = this.context.get('defaultAction');
@@ -150,5 +146,16 @@ var dispatcher = module.exports = {
             action = path.basename(url);
         }
         return action;
+    },
+    merge : function(a,b){
+        if (a && b) {
+            for (var key in b) {
+              a[key] = b[key];
+            }
+        }
+        return a;
+    },
+    read : function(file){
+        return fs.readFileSync(file).toString();
     }
 }
