@@ -3,6 +3,7 @@ beforeFilter(function(){
 });
 
 action("index", function(){
+	console.log('This process is pid ' + process.pid);
 	render('page/index');
 }); 
 
