@@ -1,7 +1,16 @@
-var View       = require('./view');
-var Controller = module.exports;
+var utils = require('./utils');
+var View = require('./view');
 
-Controller.render = function(file, options){    
+var Controller = module.exports = function(controller){
+    this.context = icecream;
+    if(this.context.shareObject){
+        utils.merge(this, this.context.shareObject);
+    }
+};
+
+var prototype = Controller.prototype;
+
+prototype.render = function(file, options){    
     var self = this;
     var body;
     var debug = this.context.get("debug");
@@ -48,31 +57,31 @@ Controller.render = function(file, options){
     layoutView.render(options,callbackForLayout);
 }
 
-Controller.redirect = function(url){
+prototype.redirect = function(url){
     this.res.statusCode = 302;
     this.res.setHeader('Location', url);
     this.res.setHeader('Content-Length', 0);
     this.res.end();
 }
 
-Controller.write = function(body){
+prototype.write = function(body){
     this.res.write(body, "utf-8");
 }
 
-Controller.send = function(body){
+prototype.send = function(body){
     this.res.write(body, "utf-8");
     this.res.end();
 }
 
-Controller.get = function(key){
+prototype.get = function(key){
     return this.req.query[key];
 }
 
-Controller.post = function(key){
+prototype.post = function(key){
     return this.req.body[key];
 }
 
-Controller.session = function(key,val){
+prototype.session = function(key,val){
     if(val!==undefined){
         this.req.session[key] = val;
     }else{
@@ -80,14 +89,14 @@ Controller.session = function(key,val){
     }
 }
 
-Controller.action = function(name, func){
+prototype.action = function(name, func){
     this[name] = func;
 }
 
-Controller.beforeFilter = function(func){
+prototype.beforeFilter = function(func){
     this.beforeFilter = func;
 }
 
-Controller.afterFilter = function(func){
+prototype.afterFilter = function(func){
     this.afterFilter = func;
 }

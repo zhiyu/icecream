@@ -5,8 +5,8 @@ var Controller = require('./controller');
 var mime       = require('./mimes');
 var utils      = require('./utils');
 
-var Dispatcher = module.exports = function Dispatcher(context){
-    this.context = context;
+var Dispatcher = module.exports = function Dispatcher(){
+    this.context = icecream;
 }
 
 var prototype = Dispatcher.prototype;
@@ -97,7 +97,7 @@ prototype.doResource = function(req,res){
 }
 
 prototype.getController = function(url){
-    var controller  = {};
+    var controller  = null;
     var file        = this.getControllerFile(url);
 
     if(!path.existsSync(file)){
@@ -105,19 +105,14 @@ prototype.getController = function(url){
     }
 
     if(this.shouldReloadController(file)){
-        utils.merge(controller,Controller);
+        controller = new Controller();
         var content = fs.readFileSync(file).toString();
         new Function('context', 'require','with(context){'+ content + '}')(controller);
-        if(this.context.shareObject){
-            for(var i in this.context.shareObject){
-                controller[i] = this.context.shareObject[i];
-            }
-        }
         this.context.setObject("controllers", file, controller);
     }else{
         controller = this.context.getObject("controllers", file);
     }
-    
+
     return controller;
 }
 

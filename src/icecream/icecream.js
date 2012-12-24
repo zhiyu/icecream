@@ -12,11 +12,12 @@ var icecream = module.exports = {}
 icecream.createServer = function(){
     this.init();
     this.server  = connect();
-    global.icecream = this;
     return this;
 }
 
 icecream.init = function(){
+    global.icecream = this;
+    
     this.engines = {};
     this.config  = {};
     this.caches  = {};  
@@ -28,7 +29,7 @@ icecream.init = function(){
     this.set('defaultAction',  'index');
     this.set('suffix',  '');
     this.version = JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version;
-    this.dispatcher = new Dispatcher(this);
+    this.dispatcher = new Dispatcher();
     this.loadHelpers();
 }
 

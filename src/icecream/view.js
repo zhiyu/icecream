@@ -1,8 +1,8 @@
 var path     = require('path');
 var extname  = path.extname;
 
-var View = module.exports = function(file, context) {
-    this.context  = context || {};
+var View = module.exports = function(file) {
+    this.context  = icecream;
     this.ext  = extname(file);
 
     if (!this.ext){
