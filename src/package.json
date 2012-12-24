@@ -21,8 +21,8 @@
     "url": "git://github.com/nodengine/icecream.git"
   },
   "dependencies": {
-    "connect":"2.3.6",
-    "jade": "0.26.3",
+    "connect":"2.7.1",
+    "jade": "0.27.7",
     "ejs": "0.8.3"
   },
   "devDependencies": {},
