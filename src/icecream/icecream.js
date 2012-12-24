@@ -88,7 +88,7 @@ icecream.setObject = function(cache, key, object){
 }
 
 icecream.loadHelpers = function(){
-
+    
 }
 
 icecream.loadLibraries = function(){

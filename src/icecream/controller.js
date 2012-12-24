@@ -1,24 +1,30 @@
 var View       = require('./view');
 var Controller = module.exports;
 
-Controller.render = function(file, options, callback){    
+Controller.render = function(file, options){    
     var self = this;
     var body;
 
     //set defaults
     if(!options)
         options = {};
+
     options.req = this.req;
     options.session  = this.session;
-
-    if(!callback){
-        callback = function(arg,content){
+ 
+    var callbackForPage = function(arg,content){
+        body = content;
+        if(arg)
+            body = arg.toString();
+        else
             body = content;
-            if(arg)
-                body = arg.toString();
-            else
-                body = content;
-        }
+    }
+
+    var callbackForLayout = function(arg,content){
+        if(arg)
+            self.send(arg.toString());
+        else
+            self.send(content);
     }
     
     //render body
@@ -26,21 +32,16 @@ Controller.render = function(file, options, callback){
     if(!view){
         view = new View(file,this.context);
     }
-    view.render(options,callback);
+    view.render(options,callbackForPage);
 
     //render layout
     options.body = body;
-    callback = function(arg,content){
-        if(arg)
-            self.send(arg.toString());
-        else
-            self.send(content);
-    }
+    
     var view = this.context.getObject("view", 'layout/'+this.layout);
     if(!view){
         view = new View('layout/'+this.layout,this.context);
     }
-    view.render(options,callback);
+    view.render(options,callbackForLayout);
 }
 
 Controller.redirect = function(url){

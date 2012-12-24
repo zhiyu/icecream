@@ -50,13 +50,17 @@ prototype.doAction = function(req,res){
     controller.search  = req._parsedUrl.search;
     controller.url     = req.url;
 
-    //call beforeFileter
-    if(controller['beforeFilter'])
-        controller['beforeFilter']();
-
-    //call action
     if(controller[action]){
+        //beforeFileter
+        if(controller['beforeFilter'])
+            controller['beforeFilter']();
+
+        //action
         controller[action].call(controller);
+
+        //afterFileter
+        if(controller['afterFilter'])
+            controller['afterFilter']();
     }else{
         errMessage = 'action "'+ action + '" not exist!';
         res.write(errMessage);
