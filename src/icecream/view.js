@@ -9,7 +9,7 @@ var View = module.exports = function(file, context) {
     	  this.ext = this.context.get('defaultEngine');
         file += '.' + this.context.get('defaultEngine');
     }
-    this.viewRoot = this.context.get('appRoot')+'/views';
+    this.viewRoot = this.context.get('appDir')+'/views';
     this.path = this.viewRoot+'/'+file;
 }
 

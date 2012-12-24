@@ -2,7 +2,7 @@ var connect    = require('../src/node_modules/connect');
 var icecream   = require('../src/');
 
 icecream.createServer();
-icecream.set('appRoot',  __dirname +'/app');
+icecream.set('appDir',  __dirname +'/app');
 icecream.set('debug', true);
 icecream.set('cluster', true);
 icecream.use(connect.cookieParser());

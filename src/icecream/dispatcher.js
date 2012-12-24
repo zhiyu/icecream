@@ -71,7 +71,7 @@ prototype.doAction = function(req,res){
 prototype.doResource = function(req,res){
     var url      = req.url;
     var ext      = path.extname(url);
-    var pathname = this.context.get('appRoot') + urlHelper.parse(url).pathname;
+    var pathname = this.context.get('appDir') + urlHelper.parse(url).pathname;
     var status   = 200;
     var content  = "";
     var contentType = "text/plain";
@@ -123,7 +123,7 @@ prototype.getController = function(url){
 
 prototype.getControllerFile = function(url){
     var file;
-    var controllerRoot = this.context.get('appRoot')+'/controllers';
+    var controllerRoot = this.context.get('appDir')+'/controllers';
     if(this.isDefaultController(url)){
         file = controllerRoot+ '/' + this.context.get('defaultController');
     }else if(url.lastIndexOf("/") == (url.length-1)){

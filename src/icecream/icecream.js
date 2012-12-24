@@ -5,12 +5,14 @@ var connect    = require('connect')
 var http       = require('http');
 var Dispatcher = require('./dispatcher');
 var cluster    = require('cluster');
+var util       = require('util');
 
 var icecream = module.exports = {}
 
 icecream.createServer = function(){
     this.init();
     this.server  = connect();
+    global.icecream = this;
     return this;
 }
 
@@ -21,14 +23,13 @@ icecream.init = function(){
     this.engine('jade', require('jade').renderFile);
     this.engine('ejs', require('ejs').renderFile);
     this.set('defaultEngine', 'ejs');
-    this.set('appRoot',  __dirname +'/../app');
+    this.set('sysDir',  __dirname);
     this.set('defaultController', 'page');
     this.set('defaultAction',  'index');
     this.set('suffix',  '');
     this.version = JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version;
     this.dispatcher = new Dispatcher(this);
     this.loadHelpers();
-    this.loadLibraries();
 }
 
 icecream.use = function(func){
@@ -88,9 +89,14 @@ icecream.setObject = function(cache, key, object){
 }
 
 icecream.loadHelpers = function(){
-    
-}
-
-icecream.loadLibraries = function(){
-
+    var sysDir = this.get("sysDir")+"/helpers/";
+    if (fs.existsSync(sysDir)) {
+        fs.readdirSync(sysDir).forEach(function(file) {
+            var helpers = require(sysDir+file);
+            for(var i in helpers){
+                global[i] = helpers[i];
+            }
+            console.log("load helpers:" + file);
+        });
+    }
 }
