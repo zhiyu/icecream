@@ -3,38 +3,41 @@ var urlHelper  = require("url");
 var fs         = require('fs');
 var connect    = require('connect')
 var http       = require('http');
-var dispatcher = require('./dispatcher');
+var Dispatcher = require('./dispatcher');
 var cluster = require('cluster');
 
 var icecream = module.exports = {
     createServer : function(){
+        this.init();
+        this.server  = connect();
+        return this;
+    },
+    init:function(){
         this.engines = {};
         this.config  = {};
-        this.caches  = {};    
-        this.server  = connect();
-
+        this.caches  = {};  
         this.engine('jade', require('jade').renderFile);
         this.engine('ejs', require('ejs').renderFile);
-
         this.set('defaultEngine', 'ejs');
         this.set('appRoot',  __dirname +'/../app');
         this.set('defaultController', 'page');
         this.set('defaultAction',  'index');
         this.set('suffix',  '');
-
         this.version = JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version;
-        dispatcher.context = this;
-        return this;
+        this.dispatcher = new Dispatcher(this);
+        this.loadHelpers();
+        this.loadLibraries();
     },
     use : function(func){
         this.server.use(func);
         return this;
     },
     listen : function(port){     
+        var self = this;
         this.server.use(connect.query());
         this.server.use(connect.bodyParser());
         this.server.use(function(req, res){
-            dispatcher.dispatch(req, res);
+            self.dispatcher.dispatch(req, res);
         });
 
         if (this.get("cluster")==true && cluster.isMaster) {
@@ -72,5 +75,11 @@ var icecream = module.exports = {
         if(!this.caches[cache])
             this.caches[cache] = {};
         this.caches[cache][key] = object;
+    },
+    loadHelpers : function(){
+
+    },
+    loadLibraries : function(){
+
     }
 }

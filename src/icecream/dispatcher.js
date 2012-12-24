@@ -1,44 +1,20 @@
 var path       = require('path');
 var urlHelper  = require("url");
 var fs         = require('fs');
-var connect    = require('connect');
-var http       = require('http');
 var Controller = require('./controller');
+var mime       = require('./mimes');
 
-//mimes
-var mime       = {
-    ".css" : "text/css",
-    ".gif" : "image/gif",
-    ".html": "text/html",
-    ".ico" : "image/x-icon",
-    ".jpeg": "image/jpeg",
-    ".jpg" : "image/jpeg",
-    ".js"  : "text/javascript",
-    ".json": "application/json",
-    ".pdf" : "application/pdf",
-    ".png" : "image/png",
-    ".svg" : "image/svg+xml",
-    ".swf" : "application/x-shockwave-flash",
-    ".tiff": "image/tiff",
-    ".txt" : "text/plain",
-    ".wav" : "audio/x-wav",
-    ".wma" : "audio/x-ms-wma",
-    ".wmv" : "video/x-ms-wmv",
-    ".xml" : "text/xml"
-};
-
-//log helper function
-function log(message){
-    console.log(message);
+function Dispatcher(context){
+    this.context = context;
 }
-//icecream exports
-var dispatcher = module.exports = {
+
+Dispatcher.prototype = {
     context:null,
     dispatch : function(req, res){
         var url = req.url.indexOf('?')!=-1?req.url.split('?')[0]:req.url;
         var ext        = path.extname(url);
 
-        if(ext.indexOf("&")!=-1 || ext == dispatcher.context.get('suffix')){
+        if(ext.indexOf("&")!=-1 || ext == this.context.get('suffix')){
             this.doAction(req,res);
         }else{
             this.doResource(req,res);
@@ -66,7 +42,7 @@ var dispatcher = module.exports = {
                 if(controller[action] != null){
                     controller[action].call(controller);
                 }else{
-                    log('method "'+ action + '" not exist!');
+                    console.log('method "'+ action + '" not exist!');
                     res.write('method "'+ action + '" not exist!');
                     res.end();
                 }
@@ -135,7 +111,7 @@ var dispatcher = module.exports = {
                 controller = this.context.getObject("controllers", controllerFile);
             }
         }else{
-            log('controller "' + controllerFile + '" not exist!');
+            console.log('controller "' + controllerFile + '" not exist!');
         }
         return controller;
     },
@@ -158,3 +134,5 @@ var dispatcher = module.exports = {
         return fs.readFileSync(file).toString();
     }
 }
+
+module.exports = Dispatcher;
