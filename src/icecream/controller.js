@@ -83,3 +83,7 @@ Controller.action = function(name, func){
 Controller.beforeFilter = function(func){
     this.beforeFilter = func;
 }
+
+Controller.afterFilter = function(func){
+    this.afterFilter = func;
+}
