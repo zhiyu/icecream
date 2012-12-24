@@ -92,11 +92,13 @@ icecream.loadHelpers = function(){
     var sysDir = this.get("sysDir")+"/helpers/";
     if (fs.existsSync(sysDir)) {
         fs.readdirSync(sysDir).forEach(function(file) {
-            var helpers = require(sysDir+file);
-            for(var i in helpers){
-                global[i] = helpers[i];
-            }
-            console.log("load helpers:" + file);
+            if(path.extname(file) == '.js'){
+                var helpers = require(sysDir+file);
+                for(var i in helpers){
+                    global[i] = helpers[i];
+                }
+                console.log("load helpers : " + file);
+            }            
         });
     }
 }

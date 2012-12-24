@@ -4,6 +4,7 @@ var Controller = module.exports;
 Controller.render = function(file, options){    
     var self = this;
     var body;
+    var debug = this.context.get("debug");
 
     //set defaults
     if(!options)
@@ -28,20 +29,23 @@ Controller.render = function(file, options){
     }
     
     //render body
-    var view = this.context.getObject("views", file);
-    if(!view){
+    var view = this.context.getObject("views", file)
+    if(debug || !view){
+        log("load view : "+file);
         view = new View(file,this.context);
+        this.context.setObject("views", file, view);
     }
     view.render(options,callbackForPage);
 
     //render layout
     options.body = body;
-    
-    var view = this.context.getObject("view", 'layout/'+this.layout);
-    if(!view){
-        view = new View('layout/'+this.layout,this.context);
+    var layoutView = this.context.getObject("views", 'layout/'+this.layout);
+    if(debug || !layoutView){
+        log("load view : "+'layout/'+this.layout);
+        layoutView = new View('layout/'+this.layout,this.context);
+        this.context.setObject("views", 'layout/'+this.layout, layoutView);
     }
-    view.render(options,callbackForLayout);
+    layoutView.render(options,callbackForLayout);
 }
 
 Controller.redirect = function(url){
@@ -52,11 +56,11 @@ Controller.redirect = function(url){
 }
 
 Controller.write = function(body){
-    this.res.write(body,"utf-8");
+    this.res.write(body, "utf-8");
 }
 
 Controller.send = function(body){
-    this.res.write(body,"utf-8");
+    this.res.write(body, "utf-8");
     this.res.end();
 }
 

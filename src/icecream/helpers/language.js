@@ -1,5 +1,5 @@
-var language = module.exports = {}
+var Language = module.exports = {}
 
-language.lang = function(key){
+Language.lang = function(key){
     return "Welcome";
 }
