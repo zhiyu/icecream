@@ -5,7 +5,7 @@ var connect    = require('connect')
 var http       = require('http');
 var Dispatcher = require('./dispatcher');
 var cluster    = require('cluster');
-var utils       = require('./utils');
+var utils      = require('./utils');
 
 var icecream = module.exports = {}
 
@@ -48,7 +48,7 @@ icecream.use = function(func){
 
 icecream.listen = function(port){   
     var self = this;  
-    
+
     self.loadHelpers();
     self.loadLanguages();
 
