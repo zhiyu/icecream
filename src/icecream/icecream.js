@@ -10,19 +10,20 @@ var utils       = require('./utils');
 var icecream = module.exports = {}
 
 icecream.createServer = function(options){
-    this.init(options);
+    this.options = options;
+    this.init();
     this.server  = connect();
     return this;
 }
 
-icecream.init = function(options){
+icecream.init = function(){
     global.icecream = this;
     this.engines = {};
     this.config  = {};
     this.caches  = {}; 
 
-    for(var i in options){
-        this.set(i, options[i]);
+    for(var i in this.options){
+        this.set(i, this.options[i]);
     }
 
     this.set('defaultEngine', 'ejs');
@@ -38,8 +39,6 @@ icecream.init = function(options){
     
     this.version = JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version;
     this.dispatcher = new Dispatcher();
-    this.loadHelpers();
-    this.loadLanguages();
 }
 
 icecream.use = function(func){
@@ -47,8 +46,12 @@ icecream.use = function(func){
     return this;
 }
 
-icecream.listen = function(port){     
-    var self = this;
+icecream.listen = function(port){   
+    var self = this;  
+    
+    self.loadHelpers();
+    self.loadLanguages();
+
     this.server.use(connect.query());
     this.server.use(connect.bodyParser());
     this.server.use(function(req, res){
