@@ -65,11 +65,11 @@ prototype.redirect = function(url){
 }
 
 prototype.write = function(body){
-    this.res.write(body, "utf-8");
+    this.res.write(body, this.context.get("encoding"));
 }
 
 prototype.send = function(body){
-    this.res.write(body, "utf-8");
+    this.res.write(body, this.context.get("encoding"));
     this.res.end();
 }
 

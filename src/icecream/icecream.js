@@ -30,8 +30,8 @@ icecream.init = function(options){
     this.set('defaultController', 'page');
     this.set('defaultAction',  'index');
     this.set('defaultLanguage', 'en_US');
+    this.set('encoding', 'utf8');
     this.set('suffix',  '');
-
      
     this.engine('jade', require('jade').renderFile);
     this.engine('ejs', require('ejs').renderFile);
@@ -52,6 +52,7 @@ icecream.listen = function(port){
     this.server.use(connect.query());
     this.server.use(connect.bodyParser());
     this.server.use(function(req, res){
+        res.setHeader("Content-Type", "text/html; charset=" + self.get("encoding"));
         self.dispatcher.dispatch(req, res);
     });
 
