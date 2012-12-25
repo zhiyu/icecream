@@ -9,9 +9,17 @@ icecream.createServer({
 
 icecream.use(connect.cookieParser());
 icecream.use(connect.session({ secret:'DFJLK8DFGJ933JKLFGJ2'}));
+
 icecream.share({
 	hello:function(){
 		this.send("hello");
 	}
+})
+
+icecream.global({
+	test_global:function(){
+		console.log("test global");
+	}
 });
+
 icecream.listen(3000);

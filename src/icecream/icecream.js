@@ -85,6 +85,15 @@ icecream.engine = function(ext,engine){
 
 icecream.share = function(shareObject){
     this.shareObject = shareObject;
+    return this;
+}
+
+icecream.global = function(globalObject){
+    for(var i in globalObject){
+        global[i] = globalObject[i];
+    }
+
+    return this;
 }
 
 icecream.getObject = function(cache, key){

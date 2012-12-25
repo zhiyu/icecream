@@ -3,6 +3,7 @@ beforeFilter(function(){
 });
 
 action("index", function(){
+	test_global();
 	render('page/index');
 }); 
 
