@@ -5,32 +5,41 @@ var connect    = require('connect')
 var http       = require('http');
 var Dispatcher = require('./dispatcher');
 var cluster    = require('cluster');
-var util       = require('util');
+var utils       = require('./utils');
 
 var icecream = module.exports = {}
 
-icecream.createServer = function(){
-    this.init();
+icecream.createServer = function(options){
+    this.init(options);
     this.server  = connect();
     return this;
 }
 
-icecream.init = function(){
+icecream.init = function(options){
     global.icecream = this;
-    
     this.engines = {};
     this.config  = {};
-    this.caches  = {};  
-    this.engine('jade', require('jade').renderFile);
-    this.engine('ejs', require('ejs').renderFile);
+    this.caches  = {}; 
+
+    for(var i in options){
+        this.set(i, options[i]);
+    }
+
     this.set('defaultEngine', 'ejs');
     this.set('sysDir',  __dirname);
     this.set('defaultController', 'page');
     this.set('defaultAction',  'index');
+    this.set('defaultLanguage', 'en_US');
     this.set('suffix',  '');
+
+     
+    this.engine('jade', require('jade').renderFile);
+    this.engine('ejs', require('ejs').renderFile);
+    
     this.version = JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version;
     this.dispatcher = new Dispatcher();
     this.loadHelpers();
+    this.loadLanguages();
 }
 
 icecream.use = function(func){
@@ -99,6 +108,38 @@ icecream.loadHelpers = function(){
                     global[i] = helpers[i];
                 }
                 console.log("load helpers : " + file);
+            }            
+        });
+    }
+}
+
+icecream.loadLanguages = function(){
+    var self = this;
+    var sysDir = this.get("sysDir")+"/languages/";
+    if (fs.existsSync(sysDir)) {
+        fs.readdirSync(sysDir).forEach(function(file) {
+            if(path.extname(file) == '.js'){
+                var sysLanguages = require(sysDir+file);
+                var file = path.basename(file, ".js");
+                self.setObject("languages", file, sysLanguages);
+                console.log("load sys languages : " + file);
+            }            
+        });
+    }
+
+    var appDir = this.get("appDir")+"/languages/";
+    if (fs.existsSync(appDir)) {
+        fs.readdirSync(appDir).forEach(function(file) {
+            if(path.extname(file) == '.js'){
+                var appLanguages = require(appDir+file);
+                var file = path.basename(file, ".js");
+                var languages = self.getObject("languages", file);
+                console.log(languages);
+                utils.merge(languages, appLanguages);
+
+                console.log(languages);
+                self.setObject("languages", file, languages);
+                console.log("load app languages : " + file);
             }            
         });
     }
