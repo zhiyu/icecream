@@ -120,7 +120,7 @@ prototype.getControllerFile = function(url){
     var file;
     var controllerRoot = this.context.get('appDir')+'/controllers';
     if(this.isDefaultController(url)){
-        file = controllerRoot+ '/' + this.context.get('defaultController');
+        file = controllerRoot + '/' + this.context.get('defaultController');
     }else if(url.lastIndexOf("/") == (url.length-1)){
         file = controllerRoot + url.substr(0,url.length-1);
     }else{
