@@ -56,12 +56,13 @@ icecream.listen = function(port){
     this.server.use(connect.bodyParser());
     this.server.use(function(req, res){
         res.setHeader("Content-Type", "text/html; charset=" + self.get("encoding"));
-        self.dispatcher.dispatch(req, res);
+        self.dispatcher.dispatch(req, res); 
     });
 
     if (this.get("cluster")==true && cluster.isMaster) {
         console.log("cluster enabled...");
         cluster.on('exit', function(worker, code, signal) {
+            console.log("helo:"+signal);
             cluster.fork();
         }); 
         var cpus = require('os').cpus().length;
@@ -71,6 +72,7 @@ icecream.listen = function(port){
     } else {
         this.server.listen(port);
     }
+    
     return this;
 }
 

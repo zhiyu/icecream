@@ -4,7 +4,7 @@ var icecream   = require('../src/');
 icecream.createServer();
 icecream.set("appDir", __dirname +'/app');
 icecream.set("debug", true);
-icecream.set("cluster", true);
+icecream.set("cluster", false);
 icecream.use(connect.cookieParser());
 icecream.use(connect.session({ secret:'DFJLK8DFGJ933JKLFGJ2'}));
 
