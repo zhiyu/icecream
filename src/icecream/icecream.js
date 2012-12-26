@@ -66,13 +66,13 @@ icecream.listen = function(port){
             cluster.fork();
         }); 
         var cpus = require('os').cpus().length;
-        for (var i = 0; i < cpus; i++) {
+        for (var i = 0; i < cpus-1; i++) {
            cluster.fork();
         }
     } else {
         this.server.listen(port);
     }
-    
+
     return this;
 }
 
