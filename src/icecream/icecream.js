@@ -48,7 +48,7 @@ icecream.use = function(func){
 
 icecream.listen = function(port){   
     var self = this;  
-
+    self.loadLibraries();
     self.loadHelpers();
     self.loadLanguages();
 
@@ -113,6 +113,33 @@ icecream.setObject = function(cache, key, object){
     this.caches[cache][key] = object;
 }
 
+icecream.loadLibraries = function(){
+    var self = this;
+    var sysDir = this.get("sysDir")+"/libraries/";
+    if (fs.existsSync(sysDir)) {
+        fs.readdirSync(sysDir).forEach(function(file) {
+            if(path.extname(file) == '.js'){
+                var sysLibrary = require(sysDir+file);
+                var file = path.basename(file, ".js");
+                self.setObject("libraries", file, sysLibrary);
+                console.log("load sys library : " + file);
+            }            
+        });
+    }
+
+    var appDir = this.get("appDir")+"/libraries/";
+    if (fs.existsSync(appDir)) {
+        fs.readdirSync(appDir).forEach(function(file) {
+            if(path.extname(file) == '.js'){
+                var appLibrary = require(appDir+file);
+                var file = path.basename(file, ".js");
+                self.setObject("libraries", file, appLibrary);
+                console.log("load app library : " + file);
+            }            
+        });
+    }
+}
+
 icecream.loadHelpers = function(){
     var sysDir = this.get("sysDir")+"/helpers/";
     if (fs.existsSync(sysDir)) {
@@ -122,7 +149,20 @@ icecream.loadHelpers = function(){
                 for(var i in helpers){
                     global[i] = helpers[i];
                 }
-                console.log("load helpers : " + file);
+                console.log("load sys helpers : " + file);
+            }            
+        });
+    }
+
+    var appDir = this.get("appDir")+"/helpers/";
+    if (fs.existsSync(appDir)) {
+        fs.readdirSync(appDir).forEach(function(file) {
+            if(path.extname(file) == '.js'){
+                var helpers = require(appDir+file);
+                for(var i in helpers){
+                    global[i] = helpers[i];
+                }
+                console.log("load app helpers : " + file);
             }            
         });
     }

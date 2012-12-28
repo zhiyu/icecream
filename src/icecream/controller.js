@@ -1,5 +1,6 @@
 var utils = require('./utils');
 var View = require('./view');
+var fs = require('fs');
 
 var Controller = module.exports = function(controller){
     this.context = icecream;
@@ -99,4 +100,12 @@ prototype.beforeFilter = function(func){
 
 prototype.afterFilter = function(func){
     this.afterFilter = func;
+}
+
+
+prototype.load = function(file, options){
+    var Library = this.context.getObject("libraries", file);
+    if(Library){
+        return new Library(options);
+    }
 }

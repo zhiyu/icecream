@@ -1,8 +1,9 @@
 beforeFilter(function(){
-  
+    this.validator = load('validator');
 });
 
 action("index", function(){
+    validator.select("12345").length(6);
 	test_global();
 	render('page/index');
 }); 
