@@ -1,6 +1,4 @@
-var Validator = module.exports = function(options){
-    
-}
+var Validator = module.exports = function(){}
 
 var prototype = Validator.prototype;
 
@@ -119,7 +117,7 @@ prototype.length = function(min, max){
         if(max){
             return object.length >= min && object.length <= max;
         }
-        
+
         return object.length >= min;
     });
 }
