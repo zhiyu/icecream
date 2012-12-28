@@ -20,9 +20,8 @@ prototype.render = function(file, options){
     if(!options)
         options = {};
 
-    options.req = this.req;
-    options.session  = this.session;
- 
+    utils.merge(options, this);
+
     var callbackForPage = function(arg,content){
         body = content;
         if(arg)
