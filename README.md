@@ -8,9 +8,11 @@ any question about [icecream](http://github.com/nodengine/icecream), please feel
 
 ##How to use##
 
+####install nodejs####
+  * download and install nodejs for your platform from http://nodejs.org/download/. 
+  
 
 ####create your application####
-
   
   * open a shell prompt and type the following command
   
