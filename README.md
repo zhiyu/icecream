@@ -1,21 +1,92 @@
-About
--------------------------
-[icecream](http://github.com/nodengine/icecream) is a rapid web framework based on [NodeJS](http://www.nodejs.org). It was designed with a very small footprint for those who need a simple, elegant and pragmatic toolkit to build high-performing, full-featured web applications.
+##About Icecream##
+---
+[Icecream](http://github.com/nodengine/icecream) is a rapid web framework based on [NodeJS](http://nodejs.org). It was designed with a very small footprint for those who need a simple, elegant and pragmatic toolkit to build high-performing, full-featured web applications.
 
-Contact
--------------------------
+the source code is hosted on [github.com](http://github.com/nodengine/icecream) and licensed under the [MIT license](http://opensource.org/licenses/mit-license.php).
+
 any question about [icecream](http://github.com/nodengine/icecream), please feel free to contact zhengzhiyu@yeah.net
 
+##How to use##
+---
 
-License
--------------------------
-Copyright ©2012  zhiyu zheng    all rights reserved.
+####create your application####
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+  
+  * open a shell prompt and type the following command
+  
+         mkdir myApp
+         cd myApp
+         
+  * create application folders
+         
+         mkdir app
+         mkdir app/controllers
+         mkdir app/views
+         mkdir app/views/layout
+         mkdir app/views/page
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. 
-Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+####add icecream to the application####
+  
+  
+  * you can register icecream as a global module 
+    
+         npm install -g icecream
+  
+  * an alternative way of using icecream is to make the module available only in the current working directory
+    
+         cd myApp/app
+         npm install icecream
 
+
+####add files to the application####
+  
+  * create the main file _**start.js**_ in directory 'myApp/' 
+  
+         var icecream = require('icecream');
+         icecream.createServer();
+         icecream.set("appDir", __dirname +'/app');        
+         icecream.listen(3000);
+                
+  * create controller file _**page.js**_ in directory 'myApp/app/controllers/'.
+    
+    
+         action('index', function(){
+             var data = {
+                 name: 'icecream',
+                 introduction: 'Icecream is a rapid web framework based on NodeJS. It was designed with a very small footprint for those who need a simple, elegant and pragmatic toolkit to build high-performing, full-featured web applications.'
+             }
+             render('page/index', data);
+         })
+ 
+  * create layout file _**layout.ejs**_ in directory 'myApp/app/views/layout/'.
+    
+         <html>
+            <head>
+                <meta http-equiv="Content-Type",content="text/html; charset=utf-8">
+                <title>welcome to icecream!</title>
+            </head>    
+            <body>
+                <div class="main">
+                    <%-body%>   
+                </div>
+            </body>
+         </html>
+         
+ > Note: icecream uses [ejs](https://github.com/visionmedia/ejs) as the default template engine, so 'ejs' is the default file name extention for views.
+
+  * create view file _**index.ejs**_ in directory 'myApp/app/views/page/'.
+  
+         
+         <h2><%=name%></h2>
+         <div><%=introduction%></div>
+  
+####run the application####
+
+  * open a shell prompt and change directory to your applicaton
+
+         cd /path to your application (myApp)
+         node start.js 
+
+  * open [http://localhost:3000](http://localhost:3000) in browser
 
