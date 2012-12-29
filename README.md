@@ -33,7 +33,7 @@ any question about [icecream](http://github.com/nodengine/icecream), please feel
   
   * you can register icecream as a global module 
     
-         npm install -g icecream
+         sudo npm install -g icecream
   
   * an alternative way of using icecream is to make the module available only in the current working directory
     
