@@ -2,7 +2,7 @@ var utils = require('./utils');
 var View = require('./view');
 var fs = require('fs');
 
-var Controller = module.exports = function(controller){
+var Controller = module.exports = function(){
     this.context = icecream;
     if(this.context.shareObject){
         utils.merge(this, this.context.shareObject);
@@ -39,9 +39,13 @@ prototype.render = function(file, options){
 
     var ext = this.context.get('defaultEngine');
     var engine = this.context.engines[ext];
+    
     file += '.' + ext;
-    file = this.context.get('appDir')+'/views/'+file;
-
+    if(file.indexOf('/')==0)
+        file = this.context.get('appDir')+'/views'+file;
+    else
+        file = this.context.get('appDir')+'/views'+this.viewDir+'/'+file;
+    
     //render body
     var view = this.context.getObject("views", file)
     if(debug || !view){

@@ -5,7 +5,7 @@ beforeFilter(function(){
 action("index", function(){
     validator.select("12345").length(6);
 	test_global();
-	render('page/index');
+	render('index');
 }); 
 
 action("test", function(){
@@ -14,10 +14,10 @@ action("test", function(){
 
 action("set_lang", function(){
 	session("lang", "zh_CN");
-	render('page/index');
+	render('index');
 }); 
 
 action("del_lang", function(){
 	session("lang", "");
-	render('page/index');
+	render('index');
 }); 

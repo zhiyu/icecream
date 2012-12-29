@@ -58,7 +58,7 @@ any question about [icecream](http://github.com/nodengine/icecream), please feel
                  name: 'icecream',
                  introduction: 'Icecream is a rapid web framework based on NodeJS. It was designed with a very small footprint for those who need a simple, elegant and pragmatic toolkit to build high-performing, full-featured web applications.'
              }
-             render('page/index', data);
+             render('index', data);
          })
  
   * create layout file _**layout.ejs**_ in directory 'myApp/app/views/layout/'.

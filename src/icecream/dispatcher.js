@@ -98,33 +98,48 @@ prototype.doResource = function(req,res){
 
 prototype.getController = function(url){
     var controller  = null;
-    var file        = this.getControllerFile(url);
-
-    if(!path.existsSync(file)){
+    var controllerName  = this.getControllerName(url);
+    var relName     = this.getControllerFile(url);
+    var absName     = this.context.get('appDir')+'/controllers' + relName;
+    
+    if(!path.existsSync(absName)){
         return null;
     }
 
-    if(this.shouldReloadController(file)){
+    if(this.shouldReloadController(absName)){
         controller = new Controller();
-        var content = fs.readFileSync(file).toString();
+        controller.controllerName = controllerName;
+        controller.viewDir = path.dirname(relName) + controllerName;
+        var content = fs.readFileSync(absName).toString();
         new Function('context', 'require','with(context){'+ content + '}')(controller);
-        this.context.setObject("controllers", file, controller);
+        this.context.setObject("controllers", absName, controller);
     }else{
-        controller = this.context.getObject("controllers", file);
+        controller = this.context.getObject("controllers", absName);
     }
 
     return controller;
 }
 
+prototype.getControllerName = function(url){
+    var name;
+    if(this.isDefaultController(url)){
+        name = this.context.get('defaultController');
+    }else if(url.lastIndexOf("/") == (url.length-1)){
+        name = url.substr(0,url.length-1).substr(url.lastIndexOf("/"));
+    }else{
+        name = url.substr(url.lastIndexOf("/"));
+    }
+    return path.basename(name);
+}
+
 prototype.getControllerFile = function(url){
     var file;
-    var controllerRoot = this.context.get('appDir')+'/controllers';
     if(this.isDefaultController(url)){
-        file = controllerRoot + '/' + this.context.get('defaultController');
+        file = '/' + this.context.get('defaultController');
     }else if(url.lastIndexOf("/") == (url.length-1)){
-        file = controllerRoot + url.substr(0,url.length-1);
+        file = url.substr(0,url.length-1);
     }else{
-        file = controllerRoot + path.dirname(url);
+        file = path.dirname(url);
     }
     return file + '.js';
 }
