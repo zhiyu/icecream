@@ -5,7 +5,7 @@ beforeFilter(function(){
 action("index", function(){
     validator.select("12345").length(6);
 	test_global();
-	render('index');
+	render();
 }); 
 
 action("test", function(){

@@ -11,14 +11,25 @@ var Controller = module.exports = function(){
 
 var prototype = Controller.prototype;
 
-prototype.render = function(file, options){    
+prototype.render = function(){    
     var self = this;
     var body;
     var debug = this.context.get("debug");
+    var file, options;
 
-    //set defaults
-    if(!options)
+    if(arguments.length > 1 || (arguments.length == 1 && typeof arguments[0] == 'string')){
+        file = arguments[0];
+    }else{
+        file = this.action;
+    }
+
+    if(arguments.length > 1){
+        options = arguments[1];
+    }else if(arguments.length == 0 || (arguments.length == 1 && typeof arguments[0] == 'string')){
         options = {};
+    }else{
+        options = arguments[0];
+    }
 
     utils.merge(options, this);
 
@@ -39,7 +50,7 @@ prototype.render = function(file, options){
 
     var ext = this.context.get('defaultEngine');
     var engine = this.context.engines[ext];
-    
+
     file += '.' + ext;
     if(file.indexOf('/')==0)
         file = this.context.get('appDir')+'/views'+file;

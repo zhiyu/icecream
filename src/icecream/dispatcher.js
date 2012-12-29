@@ -49,6 +49,7 @@ prototype.doAction = function(req,res){
     controller.query   = req._parsedUrl.query;
     controller.search  = req._parsedUrl.search;
     controller.url     = req.url;
+    controller.action  = action;
 
     if(controller[action]){
         //beforeFileter
