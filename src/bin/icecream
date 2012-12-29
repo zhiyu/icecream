@@ -1,21 +1,25 @@
 #!/usr/bin/env node
-var icecream    = require( '../index' );
-var args    = process.argv.slice(2);
-var command = args.shift();
+var icecream  = require('../');
+var args      = process.argv.slice(2);
+var command   = args.shift();
 
-switch( command ){
+switch(command){
+  case 'version':
   case '-v':
   case '--version':
-    console.log( icecream.version );
-    break;
+      console.log(icecream.version);
+      break;
   
-  case 'h':
-  case 'help':
+  case 'init':
+  case '-i':
+  case '--init':
+      icecream.template('app', args);
+      break;
+  
   case '-h':
   case '--help':
   default:
-    //help
     break;
 }
 
-process.exit( 0 );
+process.exit(0);

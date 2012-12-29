@@ -6,8 +6,11 @@ var http       = require('http');
 var Dispatcher = require('./dispatcher');
 var cluster    = require('cluster');
 var utils      = require('./utils');
+var wrench     = require('wrench');
 
-var icecream = module.exports = {}
+var icecream = module.exports = {
+    version : JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version
+}
 
 icecream.createServer = function(options){
     this.options = options;
@@ -36,8 +39,7 @@ icecream.init = function(){
      
     this.engine('jade', require('jade').renderFile);
     this.engine('ejs', require('ejs').renderFile);
-    
-    this.version = JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version;
+
     this.dispatcher = new Dispatcher();
 }
 
@@ -111,6 +113,14 @@ icecream.setObject = function(cache, key, object){
     if(!this.caches[cache])
         this.caches[cache] = {};
     this.caches[cache][key] = object;
+}
+
+icecream.template = function(type, args){
+    if(type === 'app'){
+        var parent = process.cwd();
+        var name = args.shift();
+        wrench.copyDirSyncRecursive(__dirname+"/templates", parent+"/"+name); 
+    }
 }
 
 icecream.loadLibraries = function(){

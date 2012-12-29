@@ -23,7 +23,8 @@
   "dependencies": {
     "connect":"2.7.0",
     "jade": "0.27.7",
-    "ejs": "0.8.3"
+    "ejs": "0.8.3",
+    "wrench": "1.4.4"
   },
   "devDependencies": {},
   "main": "index",
