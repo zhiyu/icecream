@@ -64,7 +64,6 @@ icecream.listen = function(port){
     if (this.get("cluster")==true && cluster.isMaster) {
         console.log("cluster enabled...");
         cluster.on('exit', function(worker, code, signal) {
-            console.log("helo:"+signal);
             cluster.fork();
         }); 
         var cpus = require('os').cpus().length;
@@ -199,10 +198,7 @@ icecream.loadLanguages = function(){
                 var appLanguages = require(appDir+file);
                 var file = path.basename(file, ".js");
                 var languages = self.getObject("languages", file);
-                console.log(languages);
                 utils.merge(languages, appLanguages);
-
-                console.log(languages);
                 self.setObject("languages", file, languages);
                 console.log("load app languages : " + file);
             }            

@@ -36,25 +36,31 @@ prototype.render = function(file, options){
         else
             self.send(content);
     }
-    
+
+    var ext = this.context.get('defaultEngine');
+    var engine = this.context.engines[ext];
+    file += '.' + ext;
+    file = this.context.get('appDir')+'/views/'+file;
+
     //render body
     var view = this.context.getObject("views", file)
     if(debug || !view){
         log("load view : "+file);
-        view = new View(file,this.context);
+        view = new View();
         this.context.setObject("views", file, view);
     }
-    view.render(options,callbackForPage);
+    view.render(file, engine, options, callbackForPage);
 
     //render layout
     options.body = body;
-    var layoutView = this.context.getObject("views", 'layout/'+this.layout);
+    var layoutFile = this.context.get('appDir')+'/views/layout/'+this.layout+'.'+ext;
+    var layoutView = this.context.getObject("views", layoutFile);
     if(debug || !layoutView){
         log("load view : "+'layout/'+this.layout);
-        layoutView = new View('layout/'+this.layout,this.context);
-        this.context.setObject("views", 'layout/'+this.layout, layoutView);
+        layoutView = new View();
+        this.context.setObject("views", layoutFile, layoutView);
     }
-    layoutView.render(options,callbackForLayout);
+    layoutView.render(layoutFile, engine, options,callbackForLayout);
 }
 
 prototype.redirect = function(url){

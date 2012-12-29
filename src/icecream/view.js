@@ -1,18 +1,4 @@
-var path     = require('path');
-var extname  = path.extname;
-
-var View = module.exports = function(file) {
-    this.context  = icecream;
-    this.ext  = extname(file);
-
-    if (!this.ext){
-    	  this.ext = this.context.get('defaultEngine');
-        file += '.' + this.context.get('defaultEngine');
-    }
-    this.viewRoot = this.context.get('appDir')+'/views';
-    this.path = this.viewRoot+'/'+file;
-}
-
-View.prototype.render = function(options, callback){
-    this.context.engines[this.ext](this.path, options, callback);
+var View = module.exports = function(){}
+View.prototype.render = function(path, engine, options, callback){
+    engine(path, options, callback);
 }
