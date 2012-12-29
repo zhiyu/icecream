@@ -1,4 +1,4 @@
-##About Icecream##
+##About##
 
 [Icecream](http://github.com/nodengine/icecream) is a rapid web framework based on [NodeJS](http://nodejs.org). It was designed with a very small footprint for those who need a simple, elegant and pragmatic toolkit to build high-performing, full-featured web applications.
 
