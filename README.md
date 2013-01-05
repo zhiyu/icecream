@@ -31,14 +31,11 @@ any question about [icecream](http://github.com/nodengine/icecream), please feel
 ####add icecream to the application####
   
   
-  * you can register icecream as a global module 
-    
-         sudo npm install -g icecream
-  
-  * an alternative way of using icecream is to make the module available only in the current working directory
+  * add icecream module to your working directory
     
          cd myApp/app
          npm install icecream
+
 
 
 ####add files to the application####
