@@ -11,6 +11,9 @@ var Pool = module.exports = function(options){
 var prototype = Pool.prototype;
 
 prototype.init = function(){
+    if(this.maxSize < this.minSize){
+        this.maxSize = this.minSize;
+    }
     for(var i=0;i< this.minSize;i++){
         this.createResource();
     }
@@ -24,12 +27,12 @@ prototype.createResource = function(){
     });
 }
 
-prototype.create = function(callback){}
-prototype.destroy  = function(resource){}
+prototype.create = function(){}
+prototype.destroy  = function(){}
 
 prototype.retain = function(callback){
     if(this.availableResources.length > 0){
-    	var resource = this.availableResources.shift();
+        var resource = this.availableResources.shift();
         callback(null, resource);
         return;
     }
@@ -43,7 +46,8 @@ prototype.retain = function(callback){
 }
 
 prototype.release = function(resource){
-    this.availableResources.push(resource);
+    if(resource)
+        this.availableResources.push(resource);
 }
 
 prototype.merge = function(a,b){

@@ -1,5 +1,5 @@
 var connect    = require('../node_modules/connect');
-var icecream   = require('../');
+var icecream   = require('icecream');
 
 icecream.createServer();
 icecream.set("appDir", __dirname +'/app');
