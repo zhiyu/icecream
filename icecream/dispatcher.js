@@ -110,7 +110,7 @@ prototype.getController = function(url){
     if(this.shouldReloadController(absName)){
         controller = new Controller();
         controller.controllerName = controllerName;
-        controller.viewDir = path.dirname(relName) + controllerName;
+        controller.viewDir = path.dirname(relName) + "/" + controllerName;
         var content = fs.readFileSync(absName).toString();
         new Function('context', 'require','with(context){'+ content + '}')(controller,require);
         this.context.setObject("controllers", absName, controller);
@@ -126,9 +126,9 @@ prototype.getControllerName = function(url){
     if(this.isDefaultController(url)){
         name = this.context.get('defaultController');
     }else if(url.lastIndexOf("/") == (url.length-1)){
-        name = url.substr(0,url.length-1).substr(url.lastIndexOf("/"));
+        name = url.substr(0,url.length-1);
     }else{
-        name = url.substr(url.lastIndexOf("/"));
+        name = url.substr(0,url.lastIndexOf("/"));
     }
     return path.basename(name);
 }
@@ -159,7 +159,7 @@ prototype.isAction = function(req){
 }
 
 prototype.isDefaultController = function(url){
-    return url == '/' || path.dirname(url) == '/';
+    return url.lastIndexOf('/')==0;
 }
 
 prototype.shouldReloadController = function(file){
