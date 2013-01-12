@@ -7,18 +7,18 @@ prototype.select = function(objects){
     return this;
 }
 
-prototype.match = function(valid){
+prototype.match = function(validate){
     var object; 
     if(this.type() === Array){
         for(var i in this.objects){
             object = this.objects[i];
-            if(!valid(object)){
+            if(!validate(object+"")){
                 return false;
             }
         }
     }else if(this.type() === String){
         object = this.objects
-        if(!valid(object))
+        if(!validate(object+""))
             return false;
     }
     return true;
@@ -26,19 +26,19 @@ prototype.match = function(valid){
 
 prototype.isNumeric = function(){
     return this.match(function(object){
-        return object.match(/^-?[0-9]+$/);
+        return object.search(/^-?[0-9]+$/)==-1?false:true;
     });
 }
 
 prototype.isInt = function(){
     return this.match(function(object){
-        return object.match(/^(?:-?(?:0|[1-9][0-9]*))$/);
+        return object.search(/^(?:-?(?:0|[1-9][0-9]*))$/)==-1?false:true;
     });
 }
 
 prototype.isDecimal = function(){
     return this.match(function(object){
-        return object.match(/^(?:-?(?:0|[1-9][0-9]*))?(?:\.[0-9]*)?$/);
+        return object.search(/^(?:-?(?:0|[1-9][0-9]*))?(?:\.[0-9]*)?$/)==-1?false:true;
     });
 }
 
@@ -48,49 +48,49 @@ prototype.isArray = function(){
 
 prototype.isEmail = function(){
     return this.match(function(object){
-        return object.match(/^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/);
+        return object.search(/^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/)==-1?false:true;
     });
 }
 
 prototype.isUrl = function(){
     return this.match(function(object){
-        return object.match(/^(?!mailto:)(?:(?:https?|ftp):\/\/)?(?:\S+(?::\S*)?@)?(?:(?:(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))|localhost)(?::\d{2,5})?(?:\/[^\s]*)?$/i);
+        return object.search(/^(?!mailto:)(?:(?:https?|ftp):\/\/)?(?:\S+(?::\S*)?@)?(?:(?:(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))|localhost)(?::\d{2,5})?(?:\/[^\s]*)?$/i)==-1?false:true;
     });
 }
 
 prototype.isIP = function(){
     return this.match(function(object){
-        return object.match(/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/);
+        return object.search(/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/)==-1?false:true;
     });
 }
 
 prototype.isAlpha = function(){
     return this.match(function(object){
-        return object.match(/^[a-zA-Z]+$/);
+        return object.search(/^[a-zA-Z]+$/)==-1?false:true;
     });
 }
 
 prototype.isAlphaAndNumber = function(){
     return this.match(function(object){
-        return object.match(/^[a-zA-Z0-9]+$/);
+        return object.search(/^[a-zA-Z0-9]+$/)==-1?false:true;
     });
 }
 
 prototype.isLowercase = function(){
     return this.match(function(object){
-        return object.match(/^[a-z0-9]+$/);
+        return object.search(/^[a-z0-9]+$/)==-1?false:true;
     });
 }
 
 prototype.isUppercase = function(){
     return this.match(function(object){
-        return object.match(/^[A-Z0-9]+$/);
+        return object.search(/^[A-Z0-9]+$/)==-1?false:true;
     });
 }
 
 prototype.notEmpty = function(){
     return this.match(function(object){
-        return object.match(/^[\s\t\r\n]*$/);
+        return object.search(/^[\s\t\r\n]*$/)==-1?true:false;
     });
 }
 

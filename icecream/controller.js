@@ -121,30 +121,3 @@ prototype.beforeFilter = function(func){
 prototype.afterFilter = function(func){
     this.afterFilter = func;
 }
-
-prototype.string = function(file, key){
-    if(!this.context.getObject("strings", file)){
-        var stringsDir = this.context.get("appDir")+"/strings/"+file;
-        var data = fs.readFileSync(stringsDir);
-        if(data){
-           var object = {}; 
-           var strings = data.toString().split('\n');
-           for(var i in strings){
-               var string = strings[i];
-               var key = string.split('=')[0];
-               var val = string.split('=')[1];
-               object[key] = val;
-           }
-           this.context.setObject("strings", file, object);
-        }
-    }
-    var strings = this.context.getObject("strings", file);
-    return strings[key];
-}
-
-prototype.load = function(file, options){
-    var Library = this.context.getObject("libraries", file);
-    if(Library){
-        return new Library(options);
-    }
-}
