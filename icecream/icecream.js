@@ -7,6 +7,9 @@ var Dispatcher = require('./dispatcher');
 var cluster    = require('cluster');
 var utils      = require('./utils');
 var wrench     = require('wrench');
+var log4js = require('log4js'); 
+var logger = log4js.getLogger();
+
 
 var icecream = module.exports = {
     version : JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version
@@ -64,7 +67,7 @@ icecream.listen = function(port){
     });
 
     if (this.get("cluster")==true && cluster.isMaster) {
-        console.log("cluster enabled...");
+        logger.info("cluster enabled...");
         cluster.on('exit', function(worker, code, signal) {
             cluster.fork();
         }); 
@@ -133,7 +136,7 @@ icecream.loadLibraries = function(){
                 var sysLibrary = require(sysDir+file);
                 var file = path.basename(file, ".js");
                 self.setObject("libraries", file, sysLibrary);
-                console.log("load sys library : " + file);
+                logger.info("load sys library : " + file);
             }            
         });
     }
@@ -145,7 +148,7 @@ icecream.loadLibraries = function(){
                 var appLibrary = require(appDir+file);
                 var file = path.basename(file, ".js");
                 self.setObject("libraries", file, appLibrary);
-                console.log("load app library : " + file);
+                logger.info("load app library : " + file);
             }            
         });
     }
@@ -160,7 +163,7 @@ icecream.loadHelpers = function(){
                 for(var i in helpers){
                     global[i] = helpers[i];
                 }
-                console.log("load sys helpers : " + file);
+                logger.info("load sys helpers : " + file);
             }            
         });
     }
@@ -173,7 +176,7 @@ icecream.loadHelpers = function(){
                 for(var i in helpers){
                     global[i] = helpers[i];
                 }
-                console.log("load app helpers : " + file);
+                logger.info("load app helpers : " + file);
             }            
         });
     }
@@ -188,7 +191,7 @@ icecream.loadLanguages = function(){
                 var sysLanguages = require(sysDir+file);
                 var file = path.basename(file, ".js");
                 self.setObject("languages", file, sysLanguages);
-                console.log("load sys languages : " + file);
+                logger.info("load sys languages : " + file);
             }            
         });
     }
@@ -202,7 +205,7 @@ icecream.loadLanguages = function(){
                 var languages = self.getObject("languages", file);
                 utils.merge(languages, appLanguages);
                 self.setObject("languages", file, languages);
-                console.log("load app languages : " + file);
+                logger.info("load app languages : " + file);
             }            
         });
     }
