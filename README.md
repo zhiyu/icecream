@@ -43,8 +43,9 @@ any question about [icecream](http://github.com/nodengine/icecream), please feel
   * create the main file _**start.js**_ in directory 'myApp/' 
   
          var icecream = require('icecream');
-         icecream.createServer();
-         icecream.set("appDir", __dirname +'/app');        
+         icecream.createServer({
+            appDir:__dirname +'/app'
+         });     
          icecream.listen(3000);
                 
   * create controller file _**page.js**_ in directory 'myApp/app/controllers/'.
