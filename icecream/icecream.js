@@ -25,10 +25,6 @@ icecream.init = function(){
     this.config  = {};
     this.caches  = {}; 
 
-    for(var i in this.options){
-        this.set(i, this.options[i]);
-    }
-
     this.set('defaultEngine', 'ejs');
     this.set('sysDir',  __dirname);
     this.set('defaultController', 'page');
@@ -40,7 +36,16 @@ icecream.init = function(){
     this.engine('jade', require('jade').renderFile);
     this.engine('ejs', require('ejs').renderFile);
 
+    for(var i in this.options){
+        this.set(i, this.options[i]);
+    }
+
     this.dispatcher = new Dispatcher();
+
+    this.loadLibraries();
+    this.loadHelpers();
+    this.loadLanguages();
+
 }
 
 icecream.use = function(func){
@@ -50,10 +55,7 @@ icecream.use = function(func){
 
 icecream.listen = function(port){   
     var self = this;  
-    self.loadLibraries();
-    self.loadHelpers();
-    self.loadLanguages();
-
+    
     this.server.use(connect.query());
     this.server.use(connect.bodyParser());
     this.server.use(function(req, res){
