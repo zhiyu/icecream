@@ -1,6 +1,7 @@
 var utils = require('./utils');
 var View = require('./view');
 var fs = require('fs');
+var sanitizer = require('sanitizer');
 
 var Controller = module.exports = function(){
     this.context = icecream;
@@ -94,12 +95,14 @@ prototype.send = function(body){
     this.res.end();
 }
 
-prototype.get = function(key){
-    return this.req.query[key];
+prototype.get = function(key, flag){
+    var val = this.req.query[key];
+    return flag?sanitizer.escape(val):val;
 }
 
-prototype.post = function(key){
-    return this.req.body[key];
+prototype.post = function(key, flag){
+    var val = this.req.body[key];
+    return flag?sanitizer.escape(val):val;
 }
 
 prototype.session = function(key,val){

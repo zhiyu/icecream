@@ -10,7 +10,6 @@ var wrench     = require('wrench');
 var log4js = require('log4js'); 
 var logger = log4js.getLogger();
 
-
 var icecream = module.exports = {
     version : JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version
 }
