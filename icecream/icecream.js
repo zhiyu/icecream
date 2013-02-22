@@ -29,6 +29,8 @@ icecream.init = function(){
 
     this.set('defaultEngine', 'ejs');
     this.set('sysDir',  __dirname);
+    this.set('appDir',  path.dirname(process.argv[1])+"/app/");
+    this.set('appRoot',  path.dirname(process.argv[1])+"/");
     this.set('defaultController', 'page');
     this.set('defaultAction',  'index');
     this.set('defaultLanguage', 'en_US');
