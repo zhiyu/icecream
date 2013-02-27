@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2012, Zhiyu Zheng. All rights reserved.
+ * Licensed under the MIT License
+ *
+ * Hosted On Github :
+ * http://github.com/zhiyu/icecream
+ *   
+ */
+
+
 var path       = require('path');
 var urlHelper  = require("url");
 var fs         = require('fs');
@@ -5,13 +15,11 @@ var Controller = require('./controller');
 var mime       = require('./mimes');
 var utils      = require('./utils');
 
-var Dispatcher = module.exports = function Dispatcher(){
-    this.context = icecream;
+var dispatcher = module.exports = {
+    context : icecream
 }
 
-var prototype = Dispatcher.prototype;
-
-prototype.dispatch = function(req, res){
+dispatcher.dispatch = function(req, res){
     if(this.isAction(req)){
         this.doAction(req,res);
     }else{
@@ -19,12 +27,13 @@ prototype.dispatch = function(req, res){
     }
 }
 
-prototype.getExt = function(req){
+dispatcher.getExt = function(req){
     var url = req.url.indexOf('?')!=-1?req.url.split('?')[0]:req.url;
     return path.extname(url);
 }
 
-prototype.doAction = function(req,res){
+dispatcher.doAction = function(req,res){
+    res.setHeader("Content-Type", "text/html; charset=" + this.context.get("encoding"));
     var errMessage = null;
 
     //get controller and action name
@@ -69,7 +78,7 @@ prototype.doAction = function(req,res){
     }
 }
 
-prototype.doResource = function(req,res){
+dispatcher.doResource = function(req,res){
     var url      = req.url;
     var ext      = path.extname(url);
     var pathname = this.context.get('appRoot')+"public" + urlHelper.parse(url).pathname;
@@ -97,7 +106,7 @@ prototype.doResource = function(req,res){
     }
 }
 
-prototype.getController = function(url){
+dispatcher.getController = function(url){
     var controller  = null;
     var controllerName  = this.getControllerName(url);
     var relName     = this.getControllerFile(url);
@@ -121,7 +130,7 @@ prototype.getController = function(url){
     return controller;
 }
 
-prototype.getControllerName = function(url){
+dispatcher.getControllerName = function(url){
     var name;
     if(this.isDefaultController(url)){
         name = this.context.get('defaultController');
@@ -133,7 +142,7 @@ prototype.getControllerName = function(url){
     return path.basename(name);
 }
 
-prototype.getControllerFile = function(url){
+dispatcher.getControllerFile = function(url){
     var file;
     if(this.isDefaultController(url)){
         file = '/' + this.context.get('defaultController');
@@ -145,7 +154,7 @@ prototype.getControllerFile = function(url){
     return file + '.js';
 }
 
-prototype.getAction = function(url){
+dispatcher.getAction = function(url){
     var action = this.context.get('defaultAction');
     if(url.lastIndexOf("/") != (url.length-1)){
         action = path.basename(url);
@@ -153,15 +162,15 @@ prototype.getAction = function(url){
     return action;
 }
 
-prototype.isAction = function(req){
+dispatcher.isAction = function(req){
     var ext = this.getExt(req);
     return ext == this.context.get('suffix');
 }
 
-prototype.isDefaultController = function(url){
+dispatcher.isDefaultController = function(url){
     return url.lastIndexOf('/')==0;
 }
 
-prototype.shouldReloadController = function(file){
+dispatcher.shouldReloadController = function(file){
     return this.context.get('debug')==true || this.context.getObject("controllers", file) == undefined;
 }

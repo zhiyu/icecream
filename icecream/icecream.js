@@ -1,55 +1,86 @@
-var path       = require('path');
-var urlHelper  = require("url");
-var fs         = require('fs');
-var connect    = require('connect')
-var http       = require('http');
-var Dispatcher = require('./dispatcher');
-var cluster    = require('cluster');
-var utils      = require('./utils');
-var wrench     = require('wrench');
-var log4js = require('log4js'); 
-var logger = log4js.getLogger();
+/**
+ * Copyright (c) 2012, Zhiyu Zheng. All rights reserved.
+ * Licensed under the MIT License
+ *
+ * Hosted On Github :
+ * http://github.com/zhiyu/icecream
+ *   
+ */
+
+
+var       path = require('path'),
+     urlHelper = require("url"),
+            fs = require('fs'),
+       connect = require('connect'),
+          http = require('http'),
+       cluster = require('cluster'),
+         utils = require('./utils'),
+        wrench = require('wrench'),
+        logger = require('log4js').getLogger();
 
 var icecream = module.exports = {
     version : JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version
 }
 
+/**
+ * Create Server
+ *
+ * @method  createServer
+ * @params  {Object}  options  options for icecream
+ * @return  {Object}  connect server object 
+ */
 icecream.createServer = function(options){
-    this.options = options;
-    this.init();
-    this.server  = connect();
+    //set global object
+    global.icecream = this;
+    
+    //init icecream
+    this.init(options);
+    
+    //create server
+    this.server = connect();
+    this.server.use(connect.query());
+    this.server.use(connect.bodyParser());
+
     return this;
 }
 
-icecream.init = function(){
-    global.icecream = this;
+/**
+ * Init default settings
+ *
+ * @method  init
+ * @param   {Object} options options for icecream
+ * @return  {void}
+ */
+icecream.init = function(options){
+    //init global variables
     this.engines = {};
     this.config  = {};
     this.caches  = {}; 
 
+    //default settings for icecream
     this.set('defaultEngine', 'ejs');
-    this.set('sysDir',  __dirname);
-    this.set('appDir',  path.dirname(process.argv[1])+"/app/");
-    this.set('appRoot',  path.dirname(process.argv[1])+"/");
+    this.set('sysDir', __dirname);
+    this.set('appDir', path.dirname(process.argv[1])+"/app/");
+    this.set('appRoot', path.dirname(process.argv[1])+"/");
     this.set('defaultController', 'page');
     this.set('defaultAction',  'index');
     this.set('defaultLanguage', 'en_US');
     this.set('encoding', 'utf8');
     this.set('suffix',  '');
-     
+    
+    //user settings for icecream
+    for(var i in options){
+        this.set(i, options[i]);
+    }
+
+    //set template engines
     this.engine('jade', require('jade').renderFile);
     this.engine('ejs', require('ejs').renderFile);
 
-    for(var i in this.options){
-        this.set(i, this.options[i]);
-    }
-
-    this.dispatcher = new Dispatcher();
-
+    //load components
     this.loadLibraries();
     this.loadHelpers();
     this.loadLanguages();
-
 }
 
 icecream.use = function(func){
@@ -59,14 +90,13 @@ icecream.use = function(func){
 
 icecream.listen = function(port){   
     var self = this;  
-    
-    this.server.use(connect.query());
-    this.server.use(connect.bodyParser());
+
+    var dispatcher = require('./dispatcher');
     this.server.use(function(req, res){
-        res.setHeader("Content-Type", "text/html; charset=" + self.get("encoding"));
-        self.dispatcher.dispatch(req, res); 
+        dispatcher.dispatch(req, res); 
     });
 
+    //set cluser
     if (this.get("cluster")==true && cluster.isMaster) {
         logger.info("cluster enabled...");
         cluster.on('exit', function(worker, code, signal) {
@@ -108,6 +138,15 @@ icecream.global = function(globalObject){
     return this;
 }
 
+/**
+ * Get Object From Cache
+ *
+ * @method getObject
+ * 
+ * @param  {String}   cache 
+ * @param  {String}   key
+ * @return {Object}
+ */
 icecream.getObject = function(cache, key){
     if(!this.caches[cache])
         return null;
@@ -183,6 +222,13 @@ icecream.loadHelpers = function(){
     }
 }
 
+/**
+ * Load Language Files
+ *
+ * @method loadLanguages
+ *
+ * @return {void}
+ */
 icecream.loadLanguages = function(){
     var self = this;
     var sysDir = this.get("sysDir")+"/languages/";

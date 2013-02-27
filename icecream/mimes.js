@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2012, Zhiyu Zheng. All rights reserved.
+ * Licensed under the MIT License
+ *
+ * Hosted On Github :
+ * http://github.com/zhiyu/icecream
+ *   
+ */
+
+
 module.exports = {
     ".css" : "text/css",
     ".gif" : "image/gif",

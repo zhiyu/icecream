@@ -1,13 +1,31 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type",content="text/html; charset=utf-8">
-        <title><%=lang("AppName", req.session)%></title>
-    </head>    
-    <body>
-        <% include header %>
-        <div class="main">
-            <%-body%>   
-        </div>     
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      <%=lang("AppName", session)%>
+    </title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta http-equiv="content-style-type" content="text/css" />
+    <meta http-equiv="content-scripte-type" content="text/javascript" />
+    <meta name="author" content="netease" />
+    <meta name="version" content="1.0" />
+    <meta name="keywords" content="pomelo" />
+    <link type="text/css" rel="stylesheet" href="/css/base.css" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.css" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap-responsive.css" />
+    <link type="text/css" rel="stylesheet" href="/css/highlight.css" />
+    <script src="/js/jquery.min.js" ></script>
+    <script src="/js/jquery.noty.js" ></script>
+    <script src="/js/bootstrap.js" ></script>
+    <script src="/js/highlight.pack.js" ></script>
+  </head>
+  <body>
+    <div class="g-doc">
+        <% include header %> 
+        <%-body%>
         <% include footer %> 
-    </body>
+    </div>    
+  </body>
 </html>
+
