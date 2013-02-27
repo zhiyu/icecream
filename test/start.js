@@ -1,18 +1,18 @@
 var connect    = require('../node_modules/connect');
-var icecream   = require('../icecream/icecream');
+var app = require('../icecream/');
 
-icecream.createServer();
+app.createServer();
 
-icecream.share({
+app.share({
 	hello:function(){
 		this.send("hello");
 	}
 })
 
-icecream.global({
+app.global({
 	test_global:function(){
 		console.log("test global");
 	}
 });
 
-icecream.listen(3000);
+app.listen(3000);

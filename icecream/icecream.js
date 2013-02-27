@@ -159,14 +159,6 @@ icecream.setObject = function(cache, key, object){
     this.caches[cache][key] = object;
 }
 
-icecream.template = function(type, args){
-    if(type === 'app'){
-        var parent = process.cwd();
-        var name = args.shift();
-        wrench.copyDirSyncRecursive(__dirname+"/templates", parent+"/"+name); 
-    }
-}
-
 icecream.loadLibraries = function(){
     var self = this;
     var sysDir = this.get("sysDir")+"/libraries/";

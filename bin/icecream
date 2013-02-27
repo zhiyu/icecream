@@ -1,24 +1,46 @@
 #!/usr/bin/env node
 var icecream  = require('../');
+var generator = require('../icecream/generators/');
 var args      = process.argv.slice(2);
-var command   = args.shift();
+var command   = args[0];
+
+var helps = [
+    "Usage: icecream command [arguments]",
+    "",
+    "Commands:",
+    "  -v, --version,  version    Print Version",
+    "  -h, --help,     help       Print Help Information",
+    "  -s, --start,    start      Start Server",
+    "  -c, --create,   create     Create New App",
+    "  -g, --generate, generate   Generate Controller With CRUD",
+    "",
+    "",
+    ""
+];
 
 switch(command){
-  case 'version':
   case '-v':
   case '--version':
+  case 'version':
       console.log(icecream.version);
       break;
-  
-  case 'init':
-  case '-i':
-  case '--init':
-      icecream.template('app', args);
-      break;
-  
+
+  case '-g':
+  case '--generate':
+  case 'generate':
+  case '-c':
+  case '--create':
+  case 'create':
+      generator.generate(args);
+      break;    
+
   case '-h':
   case '--help':
+  case 'help':
   default:
+      helps.forEach(function(line){
+          console.log(line);
+      });
       break;
 }
 

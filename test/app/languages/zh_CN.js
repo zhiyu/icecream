@@ -1,3 +1,3 @@
 module.exports = {
-	"AppName":"冰激凌"
+	"AppName":"Pomelo Ext"
 }
