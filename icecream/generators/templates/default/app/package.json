@@ -1,0 +1,12 @@
+{
+  "name": "YourApp",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "",
+  "dependencies": {
+    "icecream":"*"
+  },
+  "engines": {
+    "node": ">= 0.5.0"
+  }
+}
