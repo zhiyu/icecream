@@ -67,6 +67,7 @@ icecream.init = function(options){
     this.set('defaultLanguage', 'en_US');
     this.set('encoding', 'utf8');
     this.set('suffix',  '');
+    this.set('debug',  true);
     
     //user settings for icecream
     for(var i in options){
