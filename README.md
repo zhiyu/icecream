@@ -19,11 +19,12 @@ any question about [icecream](http://github.com/zhiyu/icecream), please feel fre
   
   * create the application
   
-         icecream create helloword
+         icecream create helloword         
          
   * run the server
          
          cd helloword
+         npm install         
          node start.js
 
   * visit the application 
