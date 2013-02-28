@@ -33,7 +33,7 @@ var exp = module.exports = {}
  */
 exp.generate = function(args){
 	var info = "\n"+
-	           " *  **  ***  **  ***   ***   *   *   *  \n"+
+	           " *  **  ***  **  ***   ***   *    * *  \n"+
                " *  *   **   *   ***   **   * *  * * *    \n"+
                " *  **  ***  **  *  *  ***  * *  *   *   \n";
               

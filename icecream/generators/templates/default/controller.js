@@ -1,7 +1,7 @@
 <%
 methods.forEach(function(method){
 %>
-<%="action('"+method+"', function(){ \n    render('"+method+"'); \n});"
+<%="action('"+method.name+"', function(){ \n    render('"+method.name+"'); \n});"
 %>
 <%
 });

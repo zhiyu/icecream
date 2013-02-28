@@ -11,7 +11,11 @@ Google Code style (c) Aahan Krish <geekpanth3r@gmail.com>
 
 pre code {
   display: block; padding: 0;
-  
+  background: #f4f4f4; color: black;
+    -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  border: 1px solid #eee;        
 }
 
 pre .comment,
