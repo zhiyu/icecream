@@ -5,7 +5,3 @@ action("index", function(){
 action("get-started", function(){
     render('get-started');
 });
-
-action("api", function(){
-    render('api');
-});

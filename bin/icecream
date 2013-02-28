@@ -10,9 +10,8 @@ var helps = [
     "Commands:",
     "  -v, --version,  version    Print Version",
     "  -h, --help,     help       Print Help Information",
-    "  -s, --start,    start      Start Server",
     "  -c, --create,   create     Create New App",
-    "  -g, --generate, generate   Generate Controller With CRUD",
+    //"  -g, --generate, generate   Generate Controller With CRUD",
     "",
     "",
     ""
