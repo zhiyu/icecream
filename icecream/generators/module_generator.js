@@ -44,9 +44,6 @@ var exp = module.exports = {}
  * @return  {void} 
  */
 exp.generate = function(args){
-	// icecream -g user add[username:text,password:password,des:textarea,gender:text] edit view del
-    console.log(process.argv);
-
 	this.args = args;
 
 	var wrench = require('wrench');

@@ -75,7 +75,6 @@ icecream.init = function(options){
     }
 
     //set template engines
-    this.engine('jade', require('jade').renderFile);
     this.engine('ejs', require('ejs').renderFile);
 
     //load components

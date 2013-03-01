@@ -34,16 +34,16 @@ var exp = module.exports = {}
 exp.generate = function(args){
 	var info = "\n"+
 	           " *  **  ***  **  ***   ***   *    * *  \n"+
-               " *  *   **   *   ***   **   * *  * * *    \n"+
-               " *  **  ***  **  *  *  ***  * *  *   *   \n";
+             " *  *   **   *   ***   **   * *  * * * \n"+
+             " *  **  ***  **  *  *  ***  * *  *   * \n";
               
     console.log(info.silly);
 	           
     var app_generator = require('./app_generator');
     var module_generator = require('./module_generator');
     
-    //args = args.slice(2);
-	var type = args[0];
+    args = args.slice(2);
+	  var type = args[0];
     
     if(type == undefined){
     	console.log("Error: incorrect parameters!");
@@ -60,4 +60,4 @@ exp.generate = function(args){
     console.log("\n");    
 }
 
-//exp.generate(process.argv);
+exp.generate(process.argv);
