@@ -7,7 +7,7 @@ the source code is hosted on [github.com](http://github.com/zhiyu/icecream) and 
 any question about [icecream](http://github.com/zhiyu/icecream), please feel free to contact zhengzhiyu@yeah.net
 
 ####Installation####
-  * Install nodejs and npm. The download page is http://nodejs.org/download/. 
+  * Install nodejs and npm.
   * Install icecream. 
       
          npm install -g icecream 
