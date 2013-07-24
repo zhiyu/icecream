@@ -87,18 +87,32 @@ dispatcher.doResource = function(req,res){
     var contentType = "text/plain";
 
     if(path.existsSync(pathname)){
-        fs.readFile(pathname, "binary", function(err, data) {
-            if (err) {
-                status = 500;
-                content = err;
+
+        fs.stat(pathname, function (err, stat) {
+
+            var lastModified = stat.mtime.toUTCString();
+            
+            if (req.headers['if-modified-since'] && lastModified == req.headers['if-modified-since']) {
+                res.writeHead(304, "Not Modified");
+                res.end();
             } else {
-                content = data;
-                contentType = mime[ext] || contentType;
+                fs.readFile(pathname, "binary", function(err, data) {
+                    if (err) {
+                        status = 500;
+                        content = err;
+                    } else {
+                        content = data;
+                        contentType = mime[ext] || contentType;
+                    }
+                    
+                    res.writeHead(status, {'Last-Modified':lastModified,'Content-Type': contentType });
+                    res.write(content, "binary");
+                    res.end();
+                });
             }
-            res.writeHead(status, {'Content-Type': contentType });
-            res.write(content, "binary");
-            res.end();
+
         });
+
     }else{
         res.writeHead(404, {'Content-Type': "text/plain"});
         res.write("Resource not found!");
