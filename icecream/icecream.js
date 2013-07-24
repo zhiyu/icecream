@@ -7,15 +7,16 @@
  *   
  */
 
-var path = require('path');
-var urlHelper = require("url");
-var fs = require('fs');
-var connect = require('connect');
-var http = require('http');
-var cluster = require('cluster');
-var utils = require('./utils');
-var wrench = require('wrench');
-var logger = require('log4js').getLogger();
+
+var       path = require('path'),
+     urlHelper = require("url"),
+            fs = require('fs'),
+       connect = require('connect'),
+          http = require('http'),
+       cluster = require('cluster'),
+         utils = require('./utils'),
+        wrench = require('wrench'),
+        logger = require('log4js').getLogger();
 
 var icecream = module.exports = {
     version : JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version
@@ -87,7 +88,7 @@ icecream.use = function(func){
     return this;
 }
 
-icecream.listen = function(port){   
+icecream.listen = function(port, host, backlog, callback){   
     var self = this;  
 
     var dispatcher = require('./dispatcher');
@@ -106,7 +107,7 @@ icecream.listen = function(port){
            cluster.fork();
         }
     } else {
-        this.server.listen(port);
+        this.server.listen(port, host, backlog, callback);
     }
 
     return this;
@@ -133,6 +134,7 @@ icecream.global = function(globalObject){
     for(var i in globalObject){
         global[i] = globalObject[i];
     }
+
     return this;
 }
 
@@ -151,81 +153,69 @@ icecream.getObject = function(cache, key){
     return this.caches[cache][key];
 }
 
-/**
- * Set Cache
- *
- * @method getObject
- * 
- * @param  {String}   cache 
- * @param  {String}   key
- * @return {Object}
- */
 icecream.setObject = function(cache, key, object){
     if(!this.caches[cache])
         this.caches[cache] = {};
     this.caches[cache][key] = object;
 }
 
-/**
- * Load libraries 
- *
- * @method loadLibraries
- *
- * @return {void}
- */
 icecream.loadLibraries = function(){
     var self = this;
-    var dirs = [
-      {
-        path : this.get("sysDir")+"/libraries/",
-        info : 'load sys library'
-      },
-      {
-        path : this.get("appDir")+"/libraries/",
-        info : 'load app library'
-      }
-    ];
-
-    dirs.forEach(function(dir){
-        utils.loadFiles(dir.path, function(file, obj){
-            self.setObject("libraries", file, obj);
-            logger.info(dir.info +':'+ file);
+    var sysDir = this.get("sysDir")+"/libraries/";
+    if (fs.existsSync(sysDir)) {
+        fs.readdirSync(sysDir).forEach(function(file) {
+            if(path.extname(file) == '.js'){
+                var sysLibrary = require(sysDir+file);
+                var file = path.basename(file, ".js");
+                self.setObject("libraries", file, sysLibrary);
+                logger.info("load sys library : " + file);
+            }            
         });
-    });
+    }
+
+    var appDir = this.get("appDir")+"/libraries/";
+    if (fs.existsSync(appDir)) {
+        fs.readdirSync(appDir).forEach(function(file) {
+            if(path.extname(file) == '.js'){
+                var appLibrary = require(appDir+file);
+                var file = path.basename(file, ".js");
+                self.setObject("libraries", file, appLibrary);
+                logger.info("load app library : " + file);
+            }            
+        });
+    }
 }
 
-/**
- * Load helpers 
- *
- * @method loadHelpers
- *
- * @return {void}
- */
 icecream.loadHelpers = function(){
-    var self = this;
-    var dirs = [
-      {
-        path : this.get("sysDir")+"/helpers/",
-        info : 'load sys helpers'
-      },
-      {
-        path : this.get("appDir")+"/helpers/",
-        info : 'load app helpers'
-      }
-    ];
-    
-    dirs.forEach(function(dir){
-        utils.loadFiles(dir.path, function(file, obj){
-            for(var i in obj){
-                global[i] = obj[i];
-            }
-            logger.info(dir.info +':'+ file);
+    var sysDir = this.get("sysDir")+"/helpers/";
+    if (fs.existsSync(sysDir)) {
+        fs.readdirSync(sysDir).forEach(function(file) {
+            if(path.extname(file) == '.js'){
+                var helpers = require(sysDir+file);
+                for(var i in helpers){
+                    global[i] = helpers[i];
+                }
+                logger.info("load sys helpers : " + file);
+            }            
         });
-    });
+    }
+
+    var appDir = this.get("appDir")+"/helpers/";
+    if (fs.existsSync(appDir)) {
+        fs.readdirSync(appDir).forEach(function(file) {
+            if(path.extname(file) == '.js'){
+                var helpers = require(appDir+file);
+                for(var i in helpers){
+                    global[i] = helpers[i];
+                }
+                logger.info("load app helpers : " + file);
+            }            
+        });
+    }
 }
 
 /**
- * Load languages
+ * Load Language Files
  *
  * @method loadLanguages
  *
@@ -233,21 +223,29 @@ icecream.loadHelpers = function(){
  */
 icecream.loadLanguages = function(){
     var self = this;
-    var dirs = [
-      {
-        path : this.get("sysDir")+"/languages/",
-        info : 'load sys languages'
-      },
-      {
-        path : this.get("appDir")+"/languages/",
-        info : 'load app languages'
-      }
-    ];
-    
-    dirs.forEach(function(dir){
-        utils.loadFiles(dir.path, function(file, obj){
-            self.setObject("languages", file, obj);
-            logger.info(dir.info +':'+ file);
+    var sysDir = this.get("sysDir")+"/languages/";
+    if (fs.existsSync(sysDir)) {
+        fs.readdirSync(sysDir).forEach(function(file) {
+            if(path.extname(file) == '.js'){
+                var sysLanguages = require(sysDir+file);
+                var file = path.basename(file, ".js");
+                self.setObject("languages", file, sysLanguages);
+                logger.info("load sys languages : " + file);
+            }            
         });
-    });
+    }
+
+    var appDir = this.get("appDir")+"/languages/";
+    if (fs.existsSync(appDir)) {
+        fs.readdirSync(appDir).forEach(function(file) {
+            if(path.extname(file) == '.js'){
+                var appLanguages = require(appDir+file);
+                var file = path.basename(file, ".js");
+                var languages = self.getObject("languages", file);
+                utils.merge(languages, appLanguages);
+                self.setObject("languages", file, languages);
+                logger.info("load app languages : " + file);
+            }            
+        });
+    }
 }
