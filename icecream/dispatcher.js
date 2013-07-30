@@ -54,10 +54,6 @@ dispatcher.doAction = function(req,res){
     controller.req     = req;
     controller.res     = res;
     controller.layout  = 'layout';
-    controller.uri     = req._parsedUrl.pathname;
-    controller.query   = req._parsedUrl.query;
-    controller.search  = req._parsedUrl.search;
-    controller.url     = req.url;
     controller.action  = action;
 
     if(controller[action]){
