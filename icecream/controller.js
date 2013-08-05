@@ -115,6 +115,11 @@ prototype.post = function(key, flag){
     return flag?sanitizer.escape(val):val;
 }
 
+prototype.param = function(key, flag){
+    var val = this.req.body[key]?this.req.body[key]:this.req.query[key];
+    return flag?sanitizer.escape(val):val;
+}
+
 prototype.session = function(key,val){
     if(val!==undefined){
         this.req.session[key] = val;

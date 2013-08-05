@@ -38,6 +38,11 @@ dispatcher.doAction = function(req,res){
 
     //get controller and action name
     var url        = req._parsedUrl.pathname;
+    var route      = this.context.getObject("routes", url); 
+    if(route){
+        url = route;
+    }
+
     var controller = this.getController(url);
     var action     = this.getAction(url);
     

@@ -80,6 +80,7 @@ icecream.init = function(options){
     this.loadLibraries();
     this.loadHelpers();
     this.loadLanguages();
+    this.loadRoutes();
 }
 
 icecream.use = function(func){
@@ -250,4 +251,24 @@ icecream.loadLanguages = function(){
             logger.info(dir.info +':'+ file);
         });
     });
+}
+
+/**
+ * Load Routes
+ *
+ * @method loadRoutes
+ *
+ * @return {void}
+ */
+icecream.loadRoutes = function(){
+    var self   = this;
+    var route  = this.get("appDir")+"/config/route.js";
+    if(fs.existsSync(route)){
+        var routes = require(route);
+        for(var i in routes){
+            self.setObject("routes", i, routes[i]);   
+        }
+
+        logger.info('load app routes:'+ route);
+    }
 }
