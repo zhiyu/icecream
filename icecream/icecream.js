@@ -39,7 +39,12 @@ icecream.createServer = function(options){
     this.server = connect();
     this.server.use(connect.query());
     this.server.use(connect.bodyParser());
-
+    
+    if(options && options.key && options.cert){
+        var https = require('https');
+        this.httpsServer = https.createServer(options, this.server);
+    }
+    
     return this;
 }
 
@@ -95,7 +100,7 @@ icecream.listen = function(port, host, backlog, callback){
     this.server.use(function(req, res){
         dispatcher.dispatch(req, res); 
     });
-
+    
     //set cluser
     if (this.get("cluster")==true && cluster.isMaster) {
         logger.info("cluster enabled...");
@@ -107,9 +112,14 @@ icecream.listen = function(port, host, backlog, callback){
            cluster.fork();
         }
     } else {
-        this.server.listen(port, host, backlog, callback);
-    }
 
+        if(this.httpsServer){
+            this.httpsServer.listen(port, host, backlog, callback);   
+        }else{
+            this.server.listen(port, host, backlog, callback);
+        }
+    }
+    
     return this;
 }
 
