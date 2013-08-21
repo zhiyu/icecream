@@ -9,7 +9,6 @@
 
  
 var utils = require('./utils');
-var View = require('./view');
 var fs = require('fs');
 var sanitizer = require('sanitizer');
 
@@ -69,24 +68,58 @@ prototype.render = function(){
         file = this.context.get('appDir')+'/views'+this.viewDir+'/'+file;
     
     //render body
-    var view = this.context.getObject("views", file)
-    if(debug || !view){
-        log("load view : "+file);
-        view = new View();
-        this.context.setObject("views", file, view);
-    }
-    view.render(file, engine, options, callbackForPage);
+    engine(file, options, callbackForPage);
 
     //render layout
     options.body = body;
     var layoutFile = this.context.get('appDir')+'/views/layout/'+this.layout+'.'+ext;
-    var layoutView = this.context.getObject("views", layoutFile);
-    if(debug || !layoutView){
-        log("load view : "+'layout/'+this.layout);
-        layoutView = new View();
-        this.context.setObject("views", layoutFile, layoutView);
+    engine(layoutFile, options,callbackForLayout);
+
+    //set rendered flag
+    this.rendered = true;
+}
+
+prototype.error = function(errorCode){    
+    var self = this;
+    var body;
+    var debug = this.context.get("debug");
+    var file, options;
+
+    if(arguments.length > 1 || (arguments.length == 1 && typeof arguments[0] == 'string')){
+        file = arguments[0];
+    }else{
+        file = this.action;
     }
-    layoutView.render(layoutFile, engine, options,callbackForLayout);
+
+    if(arguments.length > 1){
+        options = arguments[1];
+    }else if(arguments.length == 0 || (arguments.length == 1 && typeof arguments[0] == 'string')){
+        options = {};
+    }else{
+        options = arguments[0];
+    }
+
+    utils.merge(options, this);
+
+    var callbackForPage = function(arg,content){
+        self.res.statusCode = errorCode;
+        if(arg)
+            self.send(arg.toString());
+        else
+            self.send(content);
+    }
+
+    var ext = this.context.get('defaultEngine');
+    var engine = this.context.engines[ext];
+
+    file += '.' + ext;
+    file = this.context.get('appDir')+'/views/error/'+file;
+
+    //render body
+    engine(file, options, callbackForPage);
+
+    //set rendered flag
+    this.rendered = true;
 }
 
 prototype.redirect = function(url){

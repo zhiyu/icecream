@@ -64,10 +64,12 @@ dispatcher.doAction = function(req,res){
     if(controller[action]){
         //beforeFileter
         if(controller['beforeFilter'])
-            controller['beforeFilter']();
+          controller['beforeFilter']();
 
+        
         //action
-        controller[action].call(controller);
+        if(!controller.rendered)
+          controller[action].call(controller);
 
         //afterFileter
         if(controller['afterFilter'])

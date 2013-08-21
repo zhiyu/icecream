@@ -95,8 +95,8 @@ icecream.use = function(func){
 
 icecream.listen = function(port, host, backlog, callback){   
     var self = this;  
-
     var dispatcher = require('./dispatcher');
+    
     this.server.use(function(req, res){
         dispatcher.dispatch(req, res); 
     });
@@ -112,7 +112,6 @@ icecream.listen = function(port, host, backlog, callback){
            cluster.fork();
         }
     } else {
-
         if(this.httpsServer){
             this.httpsServer.listen(port, host, backlog, callback);   
         }else{
