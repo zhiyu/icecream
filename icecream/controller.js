@@ -129,6 +129,19 @@ prototype.redirect = function(url){
     this.res.end();
 }
 
+prototype.flash = function(url, tourl, data, time){
+    if(data == null || data == undefined){
+        data = {};
+    }
+
+    if(time == null || time == undefined){
+        time = 3;
+    }
+
+    this.res.write("<meta http-equiv='refresh' content='"+time+"; url="+tourl+"'>");
+    this.render(url, data);
+}
+
 prototype.write = function(body){
     this.res.write(body, this.context.get("encoding"));
 }
