@@ -30,6 +30,13 @@ prototype.match = function(validate){
         object = this.objects
         if(!validate(object+""))
             return false;
+    }else if(this.type() === Object){
+        for(var i in this.objects){
+            object = this.objects[i];
+            if(!validate(object+"")){
+                return false;
+            }
+        }
     }
     return true;
 }
@@ -135,6 +142,3 @@ prototype.length = function(min, max){
 prototype.type = function(){
     return this.objects.constructor;
 }
-
-
-
