@@ -22,6 +22,7 @@ var Controller = module.exports = function(){
 var prototype = Controller.prototype;
 
 prototype.render = function(){    
+
     var self = this;
     var body;
     var debug = this.context.get("debug");
@@ -56,11 +57,23 @@ prototype.render = function(){
             self.send(arg.toString());
         else
             self.send(content);
+        
+        if(self.context.get("static")){
+            var stc  = self.context.getObject("statics", self.req.url); 
+            var file = self.context.get('staticDir')+stc;
+              
+            if(stc){
+                fs.writeFile(file, content, function (err) {
+                   console.log(err); 
+                });
+            }
+        }
+        
     }
 
     var ext = this.context.get('defaultEngine');
     var engine = this.context.engines[ext];
-
+    
     file += '.' + ext;
     if(file.indexOf('/')==0)
         file = this.context.get('appDir')+'/views'+file;
@@ -74,9 +87,6 @@ prototype.render = function(){
     options.body = body;
     var layoutFile = this.context.get('appDir')+'/views/layout/'+this.layout+'.'+ext;
     engine(layoutFile, options,callbackForLayout);
-
-    //set rendered flag
-    this.rendered = true;
 }
 
 prototype.error = function(errorCode){    
@@ -117,9 +127,6 @@ prototype.error = function(errorCode){
 
     //render body
     engine(file, options, callbackForPage);
-
-    //set rendered flag
-    this.rendered = true;
 }
 
 prototype.redirect = function(url){

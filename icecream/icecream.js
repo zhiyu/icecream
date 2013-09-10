@@ -66,12 +66,14 @@ icecream.init = function(options){
     this.set('sysDir', __dirname);
     this.set('appDir', path.dirname(process.argv[1])+"/app/");
     this.set('appRoot', path.dirname(process.argv[1])+"/");
+    this.set('staticDir', path.dirname(process.argv[1])+"/static/");
     this.set('defaultController', 'page');
     this.set('defaultAction',  'index');
     this.set('defaultLanguage', 'en_US');
     this.set('encoding', 'utf8');
     this.set('suffix',  '');
     this.set('debug',  true);
+    this.set('static', false);
     
     //user settings for icecream
     for(var i in options){
@@ -86,6 +88,7 @@ icecream.init = function(options){
     this.loadHelpers();
     this.loadLanguages();
     this.loadRoutes();
+    this.loadStatics();
 }
 
 icecream.use = function(func){
@@ -279,5 +282,25 @@ icecream.loadRoutes = function(){
         }
 
         logger.info('load app routes:'+ route);
+    }
+}
+
+/**
+ * Load Statics
+ *
+ * @method loadStatics
+ *
+ * @return {void}
+ */
+icecream.loadStatics = function(){
+    var self   = this;
+    var stc  = this.get("appDir")+"/config/static.js";
+    if(fs.existsSync(stc)){
+        var stcs = require(stc);
+        for(var i in stcs){
+            self.setObject("statics", i, stcs[i]);   
+        }
+
+        logger.info('load app statics:'+ stc);
     }
 }

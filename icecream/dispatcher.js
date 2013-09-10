@@ -20,10 +20,22 @@ var dispatcher = module.exports = {
 }
 
 dispatcher.dispatch = function(req, res){
-    if(this.isAction(req)){
-        this.doAction(req,res);
-    }else{
-        this.doResource(req,res);
+        
+    if(this.context.get("static") && this.context.getObject("statics", req.url) && path.existsSync(this.context.get('staticDir')+this.context.getObject("statics", req.url))){
+        fs.readFile(this.context.get('staticDir')+this.context.getObject("statics", req.url), "binary", function(err, data) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.write(data, "binary");
+            }
+            res.end();
+        });
+    }else{ 
+        if(this.isAction(req)){
+            this.doAction(req,res);
+        }else{
+            this.doResource(req,res);
+        }
     }
 }
 
@@ -66,9 +78,7 @@ dispatcher.doAction = function(req,res){
         if(controller['beforeFilter'])
           controller['beforeFilter']();
 
-        
         //action
-        if(!controller.rendered)
           controller[action].call(controller);
 
         //afterFileter
