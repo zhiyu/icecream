@@ -92,7 +92,7 @@ dispatcher.doAction = function(req,res){
 }
 
 dispatcher.doResource = function(req,res){
-    var url      = req.url;
+    var url      = req._parsedUrl.pathname;
     var ext      = path.extname(url);
     var pathname = this.context.get('appRoot')+"public" + urlHelper.parse(url).pathname;
     var status   = 200;
