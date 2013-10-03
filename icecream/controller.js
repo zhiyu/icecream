@@ -174,8 +174,13 @@ prototype.param = function(key, flag){
 }
 
 prototype.session = function(key,val){
+    if(key==undefined && val==undefined){
+        return this.req.session;
+    }
+
     if(val!==undefined){
         this.req.session[key] = val;
+        this.req.session.save();
     }else{
         return this.req.session[key];
     }
