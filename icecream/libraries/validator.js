@@ -83,7 +83,7 @@ prototype.isIP = function(){
 
 prototype.isMobile = function(){
     return this.match(function(object){
-        return object.search(/^1[3|4|5|8][0-9]\d{4,8}$/)==-1?false:true;
+        return object.search(/^1[3|4|5|8][0-9]\d{8}$/)==-1?false:true;
     });
 }
 
