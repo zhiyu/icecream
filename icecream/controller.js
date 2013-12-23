@@ -178,6 +178,10 @@ prototype.session = function(key,val){
         return this.req.session;
     }
 
+    if(!this.req.session){
+        return null;
+    }
+    
     if(val!==undefined){
         this.req.session[key] = val;
         this.req.session.save();
