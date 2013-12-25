@@ -144,6 +144,8 @@ prototype.flash = function(url, tourl, data, time){
     if(time == null || time == undefined){
         time = 3;
     }
+    
+    data['flash_time'] = time;
 
     this.res.write("<meta http-equiv='refresh' content='"+time+"; url="+tourl+"'>");
     this.render(url, data);
