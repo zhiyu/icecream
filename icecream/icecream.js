@@ -60,13 +60,14 @@ icecream.init = function(options){
     this.engines = {};
     this.config  = {};
     this.caches  = {}; 
-
     //default settings for icecream
+
+    var root = path.dirname(path.dirname(path.dirname(path.dirname(__filename))));
     this.set('defaultEngine', 'ejs');
     this.set('sysDir', __dirname);
-    this.set('appDir', path.dirname(process.argv[1])+"/app/");
-    this.set('appRoot', path.dirname(process.argv[1])+"/");
-    this.set('staticDir', path.dirname(process.argv[1])+"/static/");
+    this.set('appRoot', root + "/");
+    this.set('appDir',  root + "/app/");
+    this.set('staticDir', root + "/static/");
     this.set('defaultController', 'page');
     this.set('defaultAction',  'index');
     this.set('defaultLanguage', 'en_US');
