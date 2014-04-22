@@ -68,6 +68,7 @@ icecream.init = function(options){
     this.set('appRoot', root + "/");
     this.set('appDir',  root + "/app/");
     this.set('staticDir', root + "/static/");
+    this.set('vpath', "");
     this.set('defaultController', 'page');
     this.set('defaultAction',  'index');
     this.set('defaultLanguage', 'en_US');

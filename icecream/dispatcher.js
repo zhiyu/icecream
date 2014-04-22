@@ -50,6 +50,12 @@ dispatcher.doAction = function(req,res){
 
     //get controller and action name
     var url        = req._parsedUrl.pathname;
+
+    var vpath = this.context.get('vpath');
+    if(vpath!='' && url.indexOf(vpath) == 0){
+        url = url.substring(vpath.length);
+    }
+
     var route      = this.context.getObject("routes", url); 
     if(route){
         url = route;
@@ -93,6 +99,12 @@ dispatcher.doAction = function(req,res){
 
 dispatcher.doResource = function(req,res){
     var url      = req._parsedUrl.pathname;
+    
+    var vpath = this.context.get('vpath');
+    if(vpath!='' && url.indexOf(vpath) == 0){
+        url = url.substring(vpath.length);
+    }
+
     var ext      = path.extname(url);
     var pathname = this.context.get('appRoot')+"public" + urlHelper.parse(url).pathname;
     var status   = 200;

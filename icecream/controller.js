@@ -130,6 +130,12 @@ prototype.error = function(errorCode){
 }
 
 prototype.redirect = function(url){
+
+    var vpath = this.context.get('vpath');
+    if(vpath!='' && url.indexOf("/") == 0){
+        url = vpath + url;
+    }
+
     this.res.statusCode = 302;
     this.res.setHeader('Location', url);
     this.res.setHeader('Content-Length', 0);
@@ -137,6 +143,12 @@ prototype.redirect = function(url){
 }
 
 prototype.flash = function(url, tourl, data, time){
+
+    var vpath = this.context.get('vpath');
+    if(vpath!='' && tourl.indexOf("/") == 0){
+        tourl = vpath + tourl;
+    }
+
     if(data == null || data == undefined){
         data = {};
     }
