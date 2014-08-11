@@ -72,7 +72,7 @@ icecream.init = function(options){
     this.set('defaultController', 'page');
     this.set('defaultAction',  'index');
     this.set('defaultLanguage', 'en_US');
-    this.set('encoding', 'utf8');
+    this.set('encoding', 'utf-8');
     this.set('suffix',  '');
     this.set('debug',  true);
     this.set('static', false);
