@@ -1,6 +1,6 @@
 {
   "name": "icecream",
-  "version": "0.7.5",
+  "version": "0.7.6",
   "description": "rapid web framework for nodejs",
   "homepage": "http://github.com/zhiyu/icecream",
   "keywords": [
@@ -23,7 +23,6 @@
   "dependencies": {
     "connect":"2.12.0",
     "raw-body":"1.3.1",
-    "media-typer":"0.3.0",
     "ejs": "0.8.5",
     "wrench": "1.5.4",
     "log4js":"0.6.9",
