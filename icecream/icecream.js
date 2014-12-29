@@ -39,22 +39,12 @@ icecream.createServer = function(options){
     this.server = connect();
     this.server.use(connect.query());
 
-    var getRawBody = require('raw-body');
+    var bodyParser = require('body-parser');
 
-    this.server.use(function (req, res, next) {
-      getRawBody(req, {
-        length: req.headers['content-length'],
-        limit: '2mb'
-      }, function (err, rawBody) {
-        if (err)
-          return next(err);
-        req.rawBody = rawBody;
-      });
-      next();
-    });
-
-    this.server.use(connect.bodyParser());
-    
+    this.server.use(bodyParser.json({ type: 'application/*+json' }));
+    this.server.use(bodyParser.raw({ type: 'text/xml' }));
+    this.server.use(bodyParser.urlencoded());
+   
     if(options && options.key && options.cert){
         var https = require('https');
         this.httpsServer = https.createServer(options, this.server);
