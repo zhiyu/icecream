@@ -1,0 +1,25 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/opt/local/bin/node',
+1 verbose cli   '/opt/local/bin/npm',
+1 verbose cli   'publish',
+1 verbose cli   '--force' ]
+2 info using npm@1.4.6
+3 info using node@v0.10.26
+4 warn using --force I sure hope you know what you are doing.
+5 verbose publish [ '.' ]
+6 error Failed to parse json
+6 error Unexpected token .
+7 error File: /Users/zhengzhiyu/Desktop/source/icecream/package.json
+8 error Failed to parse package.json data.
+8 error package.json must be actual JSON, not just JavaScript.
+8 error
+8 error This is not a bug in npm.
+8 error Tell the package author to fix their package.json file. JSON.parse
+9 error System Darwin 14.0.0
+10 error command "/opt/local/bin/node" "/opt/local/bin/npm" "publish" "--force"
+11 error cwd /Users/zhengzhiyu/Desktop/source/icecream
+12 error node -v v0.10.26
+13 error npm -v 1.4.6
+14 error file /Users/zhengzhiyu/Desktop/source/icecream/package.json
+15 error code EJSONPARSE
+16 verbose exit [ 1, true ]
