@@ -38,6 +38,31 @@ icecream.createServer = function(options){
     //create server
     this.server = connect();
     this.server.use(connect.query());
+
+    this.server.use(function(req, res, next) {
+      req.rawBody = '';
+      req.on('data', function(chunk) { 
+        req.rawBody += chunk;
+      });
+      next();
+    });
+
+    var getRawBody = require('raw-body');
+    var typer      = require('media-typer');
+
+    this.server.use(function (req, res, next) {
+      getRawBody(req, {
+        length: req.headers['content-length'],
+        limit: '2mb',
+        encoding: typer.parse(req.headers['content-type']).parameters.charset
+      }, function (err, string) {
+        if (err)
+          return next(err);
+        req.text = string;
+        next();
+      });
+    });
+
     this.server.use(connect.bodyParser());
     
     if(options && options.key && options.cert){
