@@ -1,0 +1,255 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/opt/local/bin/node',
+1 verbose cli   '/opt/local/bin/npm',
+1 verbose cli   'publish',
+1 verbose cli   '--force' ]
+2 info using npm@1.4.6
+3 info using node@v0.10.26
+4 warn using --force I sure hope you know what you are doing.
+5 verbose publish [ '.' ]
+6 verbose cache add [ '.', null ]
+7 verbose cache add name=undefined spec="." args=[".",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: '.',
+8 verbose parsed url   path: '.',
+8 verbose parsed url   href: '.' }
+9 silly lockFile 3a52ce78- .
+10 verbose lock . /Users/zhengzhiyu/.npm/3a52ce78-.lock
+11 verbose tar pack [ '/var/folders/h0/nhg7p_yn18g04wl9wnvyc0qm0000gp/T/npm-5573--aL3buc4/1432207291325-0.6894019378814846/tmp.tgz',
+11 verbose tar pack   '.' ]
+12 verbose tarball /var/folders/h0/nhg7p_yn18g04wl9wnvyc0qm0000gp/T/npm-5573--aL3buc4/1432207291325-0.6894019378814846/tmp.tgz
+13 verbose folder .
+14 info prepublish icecream@0.8.1
+15 silly lockFile 1f1177db-tar tar://.
+16 verbose lock tar://. /Users/zhengzhiyu/.npm/1f1177db-tar.lock
+17 silly lockFile 2c24b9e4-91325-0-6894019378814846-tmp-tgz tar:///var/folders/h0/nhg7p_yn18g04wl9wnvyc0qm0000gp/T/npm-5573--aL3buc4/1432207291325-0.6894019378814846/tmp.tgz
+18 verbose lock tar:///var/folders/h0/nhg7p_yn18g04wl9wnvyc0qm0000gp/T/npm-5573--aL3buc4/1432207291325-0.6894019378814846/tmp.tgz /Users/zhengzhiyu/.npm/2c24b9e4-91325-0-6894019378814846-tmp-tgz.lock
+19 silly lockFile 1f1177db-tar tar://.
+20 silly lockFile 1f1177db-tar tar://.
+21 silly lockFile 2c24b9e4-91325-0-6894019378814846-tmp-tgz tar:///var/folders/h0/nhg7p_yn18g04wl9wnvyc0qm0000gp/T/npm-5573--aL3buc4/1432207291325-0.6894019378814846/tmp.tgz
+22 silly lockFile 2c24b9e4-91325-0-6894019378814846-tmp-tgz tar:///var/folders/h0/nhg7p_yn18g04wl9wnvyc0qm0000gp/T/npm-5573--aL3buc4/1432207291325-0.6894019378814846/tmp.tgz
+23 verbose tar unpack /var/folders/h0/nhg7p_yn18g04wl9wnvyc0qm0000gp/T/npm-5573--aL3buc4/1432207291325-0.6894019378814846/tmp.tgz
+24 silly lockFile d8f7a298-91325-0-6894019378814846-package tar:///var/folders/h0/nhg7p_yn18g04wl9wnvyc0qm0000gp/T/npm-5573--aL3buc4/1432207291325-0.6894019378814846/package
+25 verbose lock tar:///var/folders/h0/nhg7p_yn18g04wl9wnvyc0qm0000gp/T/npm-5573--aL3buc4/1432207291325-0.6894019378814846/package /Users/zhengzhiyu/.npm/d8f7a298-91325-0-6894019378814846-package.lock
+26 silly lockFile 2c24b9e4-91325-0-6894019378814846-tmp-tgz tar:///var/folders/h0/nhg7p_yn18g04wl9wnvyc0qm0000gp/T/npm-5573--aL3buc4/1432207291325-0.6894019378814846/tmp.tgz
+27 verbose lock tar:///var/folders/h0/nhg7p_yn18g04wl9wnvyc0qm0000gp/T/npm-5573--aL3buc4/1432207291325-0.6894019378814846/tmp.tgz /Users/zhengzhiyu/.npm/2c24b9e4-91325-0-6894019378814846-tmp-tgz.lock
+28 silly gunzTarPerm modes [ '755', '644' ]
+29 silly gunzTarPerm extractEntry package.json
+30 silly gunzTarPerm extractEntry .npmignore
+31 silly gunzTarPerm extractEntry README.md
+32 silly gunzTarPerm extractEntry LICENSE
+33 silly gunzTarPerm extractEntry index.js
+34 silly gunzTarPerm extractEntry bin/icecream
+35 silly gunzTarPerm extractEntry icecream/controller.js
+36 silly gunzTarPerm extractEntry icecream/mimes.js
+37 silly gunzTarPerm extractEntry icecream/dispatcher.js
+38 silly gunzTarPerm extractEntry icecream/icecream.js
+39 silly gunzTarPerm extractEntry icecream/utils.js
+40 silly gunzTarPerm extractEntry icecream/index.js
+41 silly gunzTarPerm extractEntry icecream/helpers/common.js
+42 silly gunzTarPerm extractEntry icecream/helpers/log.js
+43 silly gunzTarPerm extractEntry icecream/languages/en_US.js
+44 silly gunzTarPerm extractEntry icecream/languages/zh_CN.js
+45 silly gunzTarPerm extractEntry icecream/libraries/validator.js
+46 silly gunzTarPerm extractEntry icecream/generators/app_generator.js
+47 silly gunzTarPerm extractEntry icecream/generators/generator.js
+48 silly gunzTarPerm extractEntry icecream/generators/index.js
+49 silly gunzTarPerm extractEntry icecream/generators/module_generator.js
+50 silly gunzTarPerm extractEntry icecream/generators/templates/default/controller.js
+51 silly gunzTarPerm extractEntry icecream/generators/templates/default/view.js
+52 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/package.json
+53 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/start.js
+54 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/app/controllers/page.js
+55 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/app/languages/en_US.js
+56 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/app/languages/zh_CN.js
+57 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/app/views/layout/empty.ejs
+58 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/app/views/layout/footer.ejs
+59 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/app/views/layout/header.ejs
+60 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/app/views/layout/layout.ejs
+61 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/app/views/page/get-started.ejs
+62 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/app/views/page/index.ejs
+63 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/public/css/bootstrap-responsive.css
+64 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/public/css/bootstrap.css
+65 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/public/css/highlight.css
+66 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/public/image/github.png
+67 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/public/image/logo.png
+68 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/public/js/bootstrap.js
+69 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/public/js/highlight.pack.js
+70 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/public/js/jquery.min.js
+71 silly gunzTarPerm extractEntry icecream/utils/colors.js
+72 silly gunzTarPerm extractEntry test/start.js
+73 silly gunzTarPerm extractEntry test/app/controllers/page.js
+74 silly gunzTarPerm extractEntry test/app/languages/en_US.js
+75 silly gunzTarPerm extractEntry test/app/languages/zh_CN.js
+76 silly gunzTarPerm extractEntry test/app/views/layout/empty.ejs
+77 silly gunzTarPerm extractEntry test/app/views/layout/footer.ejs
+78 silly gunzTarPerm extractEntry test/app/views/layout/header.ejs
+79 silly gunzTarPerm extractEntry test/app/views/layout/layout.ejs
+80 silly gunzTarPerm extractEntry test/app/views/page/get-started.ejs
+81 silly gunzTarPerm extractEntry test/app/views/page/index.ejs
+82 silly gunzTarPerm extractEntry test/public/css/bootstrap-responsive.css
+83 silly gunzTarPerm extractEntry test/public/css/bootstrap.css
+84 silly gunzTarPerm extractEntry test/public/css/highlight.css
+85 silly gunzTarPerm extractEntry test/public/image/github.png
+86 silly gunzTarPerm extractEntry test/public/image/logo.png
+87 silly gunzTarPerm extractEntry test/public/js/bootstrap.js
+88 silly gunzTarPerm extractEntry test/public/js/highlight.pack.js
+89 silly gunzTarPerm extractEntry test/public/js/jquery.min.js
+90 silly lockFile d8f7a298-91325-0-6894019378814846-package tar:///var/folders/h0/nhg7p_yn18g04wl9wnvyc0qm0000gp/T/npm-5573--aL3buc4/1432207291325-0.6894019378814846/package
+91 silly lockFile d8f7a298-91325-0-6894019378814846-package tar:///var/folders/h0/nhg7p_yn18g04wl9wnvyc0qm0000gp/T/npm-5573--aL3buc4/1432207291325-0.6894019378814846/package
+92 silly lockFile 2c24b9e4-91325-0-6894019378814846-tmp-tgz tar:///var/folders/h0/nhg7p_yn18g04wl9wnvyc0qm0000gp/T/npm-5573--aL3buc4/1432207291325-0.6894019378814846/tmp.tgz
+93 silly lockFile 2c24b9e4-91325-0-6894019378814846-tmp-tgz tar:///var/folders/h0/nhg7p_yn18g04wl9wnvyc0qm0000gp/T/npm-5573--aL3buc4/1432207291325-0.6894019378814846/tmp.tgz
+94 verbose tar pack [ '/Users/zhengzhiyu/.npm/icecream/0.8.1/package.tgz',
+94 verbose tar pack   '/var/folders/h0/nhg7p_yn18g04wl9wnvyc0qm0000gp/T/npm-5573--aL3buc4/1432207291325-0.6894019378814846/package' ]
+95 verbose tarball /Users/zhengzhiyu/.npm/icecream/0.8.1/package.tgz
+96 verbose folder /var/folders/h0/nhg7p_yn18g04wl9wnvyc0qm0000gp/T/npm-5573--aL3buc4/1432207291325-0.6894019378814846/package
+97 silly lockFile d8f7a298-91325-0-6894019378814846-package tar:///var/folders/h0/nhg7p_yn18g04wl9wnvyc0qm0000gp/T/npm-5573--aL3buc4/1432207291325-0.6894019378814846/package
+98 verbose lock tar:///var/folders/h0/nhg7p_yn18g04wl9wnvyc0qm0000gp/T/npm-5573--aL3buc4/1432207291325-0.6894019378814846/package /Users/zhengzhiyu/.npm/d8f7a298-91325-0-6894019378814846-package.lock
+99 silly lockFile 3043fb72-u-npm-icecream-0-8-1-package-tgz tar:///Users/zhengzhiyu/.npm/icecream/0.8.1/package.tgz
+100 verbose lock tar:///Users/zhengzhiyu/.npm/icecream/0.8.1/package.tgz /Users/zhengzhiyu/.npm/3043fb72-u-npm-icecream-0-8-1-package-tgz.lock
+101 silly lockFile d8f7a298-91325-0-6894019378814846-package tar:///var/folders/h0/nhg7p_yn18g04wl9wnvyc0qm0000gp/T/npm-5573--aL3buc4/1432207291325-0.6894019378814846/package
+102 silly lockFile d8f7a298-91325-0-6894019378814846-package tar:///var/folders/h0/nhg7p_yn18g04wl9wnvyc0qm0000gp/T/npm-5573--aL3buc4/1432207291325-0.6894019378814846/package
+103 silly lockFile 3043fb72-u-npm-icecream-0-8-1-package-tgz tar:///Users/zhengzhiyu/.npm/icecream/0.8.1/package.tgz
+104 silly lockFile 3043fb72-u-npm-icecream-0-8-1-package-tgz tar:///Users/zhengzhiyu/.npm/icecream/0.8.1/package.tgz
+105 silly lockFile aa9ac4e9-zhiyu-npm-icecream-0-8-1-package /Users/zhengzhiyu/.npm/icecream/0.8.1/package
+106 verbose lock /Users/zhengzhiyu/.npm/icecream/0.8.1/package /Users/zhengzhiyu/.npm/aa9ac4e9-zhiyu-npm-icecream-0-8-1-package.lock
+107 silly lockFile aa9ac4e9-zhiyu-npm-icecream-0-8-1-package /Users/zhengzhiyu/.npm/icecream/0.8.1/package
+108 silly lockFile aa9ac4e9-zhiyu-npm-icecream-0-8-1-package /Users/zhengzhiyu/.npm/icecream/0.8.1/package
+109 verbose tar unpack /Users/zhengzhiyu/.npm/icecream/0.8.1/package.tgz
+110 silly lockFile e7ae8e91-zhiyu-npm-icecream-0-8-1-package tar:///Users/zhengzhiyu/.npm/icecream/0.8.1/package
+111 verbose lock tar:///Users/zhengzhiyu/.npm/icecream/0.8.1/package /Users/zhengzhiyu/.npm/e7ae8e91-zhiyu-npm-icecream-0-8-1-package.lock
+112 silly lockFile 3043fb72-u-npm-icecream-0-8-1-package-tgz tar:///Users/zhengzhiyu/.npm/icecream/0.8.1/package.tgz
+113 verbose lock tar:///Users/zhengzhiyu/.npm/icecream/0.8.1/package.tgz /Users/zhengzhiyu/.npm/3043fb72-u-npm-icecream-0-8-1-package-tgz.lock
+114 silly gunzTarPerm modes [ '755', '644' ]
+115 silly gunzTarPerm extractEntry package.json
+116 silly gunzTarPerm extractEntry .npmignore
+117 silly gunzTarPerm extractEntry README.md
+118 silly gunzTarPerm extractEntry LICENSE
+119 silly gunzTarPerm extractEntry index.js
+120 silly gunzTarPerm extractEntry bin/icecream
+121 silly gunzTarPerm extractEntry icecream/controller.js
+122 silly gunzTarPerm extractEntry icecream/mimes.js
+123 silly gunzTarPerm extractEntry icecream/dispatcher.js
+124 silly gunzTarPerm extractEntry icecream/icecream.js
+125 silly gunzTarPerm extractEntry icecream/utils.js
+126 silly gunzTarPerm extractEntry icecream/index.js
+127 silly gunzTarPerm extractEntry icecream/helpers/common.js
+128 silly gunzTarPerm extractEntry icecream/helpers/log.js
+129 silly gunzTarPerm extractEntry icecream/languages/en_US.js
+130 silly gunzTarPerm extractEntry icecream/languages/zh_CN.js
+131 silly gunzTarPerm extractEntry icecream/libraries/validator.js
+132 silly gunzTarPerm extractEntry icecream/generators/app_generator.js
+133 silly gunzTarPerm extractEntry icecream/generators/generator.js
+134 silly gunzTarPerm extractEntry icecream/generators/index.js
+135 silly gunzTarPerm extractEntry icecream/generators/module_generator.js
+136 silly gunzTarPerm extractEntry icecream/generators/templates/default/controller.js
+137 silly gunzTarPerm extractEntry icecream/generators/templates/default/view.js
+138 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/package.json
+139 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/start.js
+140 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/app/controllers/page.js
+141 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/app/languages/en_US.js
+142 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/app/languages/zh_CN.js
+143 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/app/views/layout/empty.ejs
+144 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/app/views/layout/footer.ejs
+145 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/app/views/layout/header.ejs
+146 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/app/views/layout/layout.ejs
+147 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/app/views/page/get-started.ejs
+148 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/app/views/page/index.ejs
+149 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/public/css/bootstrap-responsive.css
+150 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/public/css/bootstrap.css
+151 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/public/css/highlight.css
+152 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/public/image/github.png
+153 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/public/image/logo.png
+154 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/public/js/bootstrap.js
+155 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/public/js/highlight.pack.js
+156 silly gunzTarPerm extractEntry icecream/generators/templates/default/app/public/js/jquery.min.js
+157 silly gunzTarPerm extractEntry icecream/utils/colors.js
+158 silly gunzTarPerm extractEntry test/start.js
+159 silly gunzTarPerm extractEntry test/app/controllers/page.js
+160 silly gunzTarPerm extractEntry test/app/languages/en_US.js
+161 silly gunzTarPerm extractEntry test/app/languages/zh_CN.js
+162 silly gunzTarPerm extractEntry test/app/views/layout/empty.ejs
+163 silly gunzTarPerm extractEntry test/app/views/layout/footer.ejs
+164 silly gunzTarPerm extractEntry test/app/views/layout/header.ejs
+165 silly gunzTarPerm extractEntry test/app/views/layout/layout.ejs
+166 silly gunzTarPerm extractEntry test/app/views/page/get-started.ejs
+167 silly gunzTarPerm extractEntry test/app/views/page/index.ejs
+168 silly gunzTarPerm extractEntry test/public/css/bootstrap-responsive.css
+169 silly gunzTarPerm extractEntry test/public/css/bootstrap.css
+170 silly gunzTarPerm extractEntry test/public/css/highlight.css
+171 silly gunzTarPerm extractEntry test/public/image/github.png
+172 silly gunzTarPerm extractEntry test/public/image/logo.png
+173 silly gunzTarPerm extractEntry test/public/js/bootstrap.js
+174 silly gunzTarPerm extractEntry test/public/js/highlight.pack.js
+175 silly gunzTarPerm extractEntry test/public/js/jquery.min.js
+176 silly lockFile e7ae8e91-zhiyu-npm-icecream-0-8-1-package tar:///Users/zhengzhiyu/.npm/icecream/0.8.1/package
+177 silly lockFile e7ae8e91-zhiyu-npm-icecream-0-8-1-package tar:///Users/zhengzhiyu/.npm/icecream/0.8.1/package
+178 silly lockFile 3043fb72-u-npm-icecream-0-8-1-package-tgz tar:///Users/zhengzhiyu/.npm/icecream/0.8.1/package.tgz
+179 silly lockFile 3043fb72-u-npm-icecream-0-8-1-package-tgz tar:///Users/zhengzhiyu/.npm/icecream/0.8.1/package.tgz
+180 verbose chmod /Users/zhengzhiyu/.npm/icecream/0.8.1/package.tgz 644
+181 verbose chown /Users/zhengzhiyu/.npm/icecream/0.8.1/package.tgz [ 502, 20 ]
+182 silly lockFile 3a52ce78- .
+183 silly lockFile 3a52ce78- .
+184 silly publish { name: 'icecream',
+184 silly publish   version: '0.8.1',
+184 silly publish   description: 'rapid web framework for nodejs',
+184 silly publish   homepage: 'http://github.com/zhiyu/icecream',
+184 silly publish   keywords: [ 'web', 'framework', 'mvc', 'icecream' ],
+184 silly publish   author:
+184 silly publish    { name: 'zhiyu zheng',
+184 silly publish      email: 'zhengzhiyu@yeah.net',
+184 silly publish      url: 'http://github.com/zhiyu' },
+184 silly publish   contributors: [],
+184 silly publish   repository: { type: 'git', url: 'git://github.com/zhiyu/icecream.git' },
+184 silly publish   dependencies:
+184 silly publish    { connect: '2.27.6',
+184 silly publish      'body-parser': '~1.9.3',
+184 silly publish      ejs: '0.8.5',
+184 silly publish      wrench: '1.5.4',
+184 silly publish      log4js: '0.6.9',
+184 silly publish      sanitizer: '0.1.1' },
+184 silly publish   devDependencies: {},
+184 silly publish   main: 'index',
+184 silly publish   bin: { icecream: './bin/icecream' },
+184 silly publish   engines: { node: '>= 0.5.0' },
+184 silly publish   readme: '####About####\n\n[icecream](http://github.com/zhiyu/icecream) is a rapid web framework based on [NodeJS](http://nodejs.org). It was designed with a very small footprint for those who need a simple, elegant and pragmatic toolkit to build high-performing, full-featured web applications.\n\nthe source code is hosted on [github.com](http://github.com/zhiyu/icecream) and licensed under the [MIT license](http://opensource.org/licenses/mit-license.php).\n\nany question about [icecream](http://github.com/zhiyu/icecream), please feel free to contact zhengzhiyu@yeah.net\n\n####Installation####\n  * Install nodejs and npm.\n  * Install icecream. \n      \n         npm install -g icecream \n    or\n         \n         sudo npm install -g icecream     \n\n####Your first application####\n  \n  * create the application\n  \n         icecream create helloword         \n         \n  * run the server\n         \n         cd helloword\n         npm install         \n         node start.js\n\n  * visit the application \n         \n     open [http://localhost:3000](http://localhost:3000)       \n\n',
+184 silly publish   readmeFilename: 'README.md',
+184 silly publish   bugs: { url: 'https://github.com/zhiyu/icecream/issues' },
+184 silly publish   _id: 'icecream@0.8.1',
+184 silly publish   dist: { shasum: 'fdc403aa7a7996d9320f8e32a5178a9537349b30' },
+184 silly publish   _from: '.' }
+185 verbose url raw icecream
+186 verbose url resolving [ 'http://registry.npmjs.org/', './icecream' ]
+187 verbose url resolved http://registry.npmjs.org/icecream
+188 info trying registry request attempt 1 at 19:21:31
+189 http PUT http://registry.npmjs.org/icecream
+190 http 403 http://registry.npmjs.org/icecream
+191 error publish Failed PUT 403
+192 error Error: "You cannot publish over the previously published version 0.8.1." : icecream
+192 error     at RegClient.<anonymous> (/opt/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:254:14)
+192 error     at Request._callback (/opt/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:192:65)
+192 error     at Request.self.callback (/opt/local/lib/node_modules/npm/node_modules/request/request.js:123:22)
+192 error     at Request.EventEmitter.emit (events.js:98:17)
+192 error     at Request.<anonymous> (/opt/local/lib/node_modules/npm/node_modules/request/request.js:893:14)
+192 error     at Request.EventEmitter.emit (events.js:117:20)
+192 error     at IncomingMessage.<anonymous> (/opt/local/lib/node_modules/npm/node_modules/request/request.js:844:12)
+192 error     at IncomingMessage.EventEmitter.emit (events.js:117:20)
+192 error     at _stream_readable.js:920:16
+192 error     at process._tickCallback (node.js:415:13)
+193 error If you need help, you may report this *entire* log,
+193 error including the npm and node versions, at:
+193 error     <http://github.com/npm/npm/issues>
+194 error System Darwin 14.1.0
+195 error command "/opt/local/bin/node" "/opt/local/bin/npm" "publish" "--force"
+196 error cwd /Users/zhengzhiyu/Desktop/source/icecream
+197 error node -v v0.10.26
+198 error npm -v 1.4.6
+199 verbose exit [ 1, true ]
