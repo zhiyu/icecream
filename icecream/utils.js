@@ -21,14 +21,19 @@ exports.merge = function(a,b){
     return a;
 }
 
-exports.loadFiles = function(dir, fn){
-	if (fs.existsSync(dir)) {
+exports.loadFiles = function(dirname, dir, fn){
+    if (fs.existsSync(dir)) {
         fs.readdirSync(dir).forEach(function(file) {
-            if(path.extname(file) == '.js'){
-                var obj = require(dir+file);
-                var fileName = path.basename(file, ".js");
-                fn(fileName,obj);
-            }            
+            var stat = fs.lstatSync(dir+"/"+file);  
+            if(stat.isDirectory() == true){  
+                exports.loadFiles((dirname==''?"":dirname+"/")+file, dir+"/"+file, fn);
+            }else{
+                if(path.extname(file) == '.js'){
+                    var obj = require(dir+"/"+file);
+                    var fileName = (dirname==''?"":dirname+"/")+path.basename(file, ".js");
+                    fn(fileName, obj);
+                }  
+            }         
         });
     }
 }
