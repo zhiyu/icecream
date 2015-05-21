@@ -207,7 +207,7 @@ icecream.loadLibraries = function(){
     ];
 
     dirs.forEach(function(dir){
-        utils.loadFiles(dir.path, function(file, obj){
+        utils.loadFiles("", dir.path, function(file, obj){
             self.setObject("libraries", file, obj);
             logger.info(dir.info +':'+ file);
         });
@@ -235,7 +235,7 @@ icecream.loadHelpers = function(){
     ];
     
     dirs.forEach(function(dir){
-        utils.loadFiles(dir.path, function(file, obj){
+        utils.loadFiles("", dir.path, function(file, obj){
             for(var i in obj){
                 global[i] = obj[i];
             }
@@ -265,7 +265,7 @@ icecream.loadLanguages = function(){
     ];
     
     dirs.forEach(function(dir){
-        utils.loadFiles(dir.path, function(file, obj){
+        utils.loadFiles("", dir.path, function(file, obj){
             self.setObject("languages", file, obj);
             logger.info(dir.info +':'+ file);
         });
