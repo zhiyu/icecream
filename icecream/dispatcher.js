@@ -21,7 +21,7 @@ var dispatcher = module.exports = {
 
 dispatcher.dispatch = function(req, res){
         
-    if(this.context.get("static") && this.context.getObject("statics", req.url) && path.existsSync(this.context.get('staticDir')+this.context.getObject("statics", req.url))){
+    if(this.context.get("static") && this.context.getObject("statics", req.url) && fs.existsSync(this.context.get('staticDir')+this.context.getObject("statics", req.url))){
         fs.readFile(this.context.get('staticDir')+this.context.getObject("statics", req.url), "binary", function(err, data) {
             if (err) {
                 console.log(err);
@@ -111,7 +111,7 @@ dispatcher.doResource = function(req,res){
     var content  = "";
     var contentType = "text/plain";
 
-    if(path.existsSync(pathname)){
+    if(fs.existsSync(pathname)){
 
         fs.stat(pathname, function (err, stat) {
 
@@ -151,7 +151,7 @@ dispatcher.getController = function(url){
     var relName     = this.getControllerFile(url);
     var absName     = this.context.get('appDir')+'/controllers' + relName;
     
-    if(!path.existsSync(absName)){
+    if(!fs.existsSync(absName)){
         return null;
     }
 
