@@ -1,6 +1,6 @@
 {
   "name": "icecream",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "description": "rapid web framework for nodejs",
   "homepage": "http://github.com/zhiyu/icecream",
   "keywords": [
@@ -21,12 +21,12 @@
     "url": "git://github.com/zhiyu/icecream.git"
   },
   "dependencies": {
-    "connect": "2.27.6",
-    "body-parser": "~1.9.3",
-    "ejs": "0.8.5",
-    "wrench": "1.5.4",
-    "log4js":"0.6.9",
-    "sanitizer":"0.1.1"
+    "connect": "2.30.2",
+    "body-parser": "1.13.3",
+    "ejs": "2.3.3",
+    "wrench": "1.5.8",
+    "log4js":"0.6.26",
+    "sanitizer":"0.1.2"
   },
   "devDependencies": {},
   "main": "index",

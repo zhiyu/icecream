@@ -43,7 +43,7 @@ icecream.createServer = function(options){
 
     this.server.use(bodyParser.json({ type: 'application/*+json' }));
     this.server.use(bodyParser.raw({ type: 'text/xml' }));
-    this.server.use(bodyParser.urlencoded());
+    this.server.use(bodyParser.urlencoded({ extended: false }));
    
     if(options && options.key && options.cert){
         var https = require('https');
