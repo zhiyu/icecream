@@ -1,37 +1,4 @@
 {
-  "_args": [
-    [
-      "icecream",
-      "/Users/fancy/Desktop"
-    ]
-  ],
-  "_from": "icecream@*",
-  "_id": "icecream@0.8.5",
-  "_inCache": true,
-  "_installable": true,
-  "_location": "/icecream",
-  "_npmUser": {
-    "email": "zhengzhiyu@yeah.net",
-    "name": "zhengzhiyu"
-  },
-  "_npmVersion": "1.4.6",
-  "_phantomChildren": {},
-  "_requested": {
-    "name": "icecream",
-    "raw": "icecream",
-    "rawSpec": "",
-    "scope": null,
-    "spec": "*",
-    "type": "range"
-  },
-  "_requiredBy": [
-    "#USER"
-  ],
-  "_resolved": "https://registry.npmjs.org/icecream/-/icecream-0.8.5.tgz",
-  "_shasum": "c1cc00223a14593e3b9d52169593d84c87a32a20",
-  "_shrinkwrap": null,
-  "_spec": "icecream",
-  "_where": "/Users/fancy/Desktop",
   "author": {
     "email": "zhengzhiyu@yeah.net",
     "name": "zhiyu zheng",
