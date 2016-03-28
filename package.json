@@ -1,39 +1,87 @@
 {
-  "name": "icecream",
-  "version": "0.8.4",
-  "description": "rapid web framework for nodejs",
-  "homepage": "http://github.com/zhiyu/icecream",
-  "keywords": [
-    "web",
-    "framework",
-    "mvc",
-    "icecream"
+  "_args": [
+    [
+      "icecream",
+      "/Users/fancy/Desktop"
+    ]
   ],
-  "author": {
-    "name": "zhiyu zheng",
+  "_from": "icecream@*",
+  "_id": "icecream@0.8.5",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/icecream",
+  "_npmUser": {
     "email": "zhengzhiyu@yeah.net",
+    "name": "zhengzhiyu"
+  },
+  "_npmVersion": "1.4.6",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "icecream",
+    "raw": "icecream",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "*",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/icecream/-/icecream-0.8.5.tgz",
+  "_shasum": "c1cc00223a14593e3b9d52169593d84c87a32a20",
+  "_shrinkwrap": null,
+  "_spec": "icecream",
+  "_where": "/Users/fancy/Desktop",
+  "author": {
+    "email": "zhengzhiyu@yeah.net",
+    "name": "zhiyu zheng",
     "url": "http://github.com/zhiyu"
   },
-  "contributors": [
+  "bin": {
+    "icecream": "./bin/icecream"
+  },
+  "bugs": {
+    "url": "https://github.com/zhiyu/icecream/issues"
+  },
+  "contributors": [],
+  "dependencies": {
+    "body-parser": "1.13.3",
+    "connect": "2.30.2",
+    "ejs": "2.3.3",
+    "log4js": "0.6.26",
+    "sanitizer": "0.1.2",
+    "wrench": "1.5.8"
+  },
+  "description": "rapid web framework for nodejs",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "c1cc00223a14593e3b9d52169593d84c87a32a20",
+    "tarball": "http://registry.npmjs.org/icecream/-/icecream-0.8.5.tgz"
+  },
+  "engines": {
+    "node": ">= 0.5.0"
+  },
+  "homepage": "http://github.com/zhiyu/icecream",
+  "keywords": [
+    "framework",
+    "icecream",
+    "mvc",
+    "web"
   ],
+  "main": "index",
+  "maintainers": [
+    {
+      "name": "zhengzhiyu",
+      "email": "zhengzhiyu@yeah.net"
+    }
+  ],
+  "name": "icecream",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
   "repository": {
     "type": "git",
     "url": "git://github.com/zhiyu/icecream.git"
   },
-  "dependencies": {
-    "connect": "2.30.2",
-    "body-parser": "1.13.3",
-    "ejs": "2.3.3",
-    "wrench": "1.5.8",
-    "log4js":"0.6.26",
-    "sanitizer":"0.1.2"
-  },
-  "devDependencies": {},
-  "main": "index",
-  "bin"        : {
-    "icecream": "./bin/icecream"
-  },
-  "engines": {
-    "node": ">= 0.5.0"
-  }
+  "version": "0.8.5"
 }

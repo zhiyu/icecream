@@ -4,7 +4,7 @@
  *
  * Hosted On Github :
  * http://github.com/zhiyu/icecream
- *   
+ *
  */
 
 var path = require('path');
@@ -26,15 +26,15 @@ var icecream = module.exports = {
  *
  * @method  createServer
  * @params  {Object}  options  options for icecream
- * @return  {Object}  connect server object 
+ * @return  {Object}  connect server object
  */
 icecream.createServer = function(options){
     //set global object
     global.icecream = this;
-    
+
     //init icecream
     this.init(options);
-    
+
     //create server
     this.server = connect();
     this.server.use(connect.query());
@@ -43,13 +43,14 @@ icecream.createServer = function(options){
 
     this.server.use(bodyParser.json({ type: 'application/*+json' }));
     this.server.use(bodyParser.raw({ type: 'text/xml' }));
-    this.server.use(bodyParser.urlencoded({ extended: false }));
-   
+    this.server.use(bodyParser.json({ type: '*/json' }));
+    this.server.use(bodyParser.urlencoded({ extended: true }));
+
     if(options && options.key && options.cert){
         var https = require('https');
         this.httpsServer = https.createServer(options, this.server);
     }
-    
+
     return this;
 }
 
@@ -64,7 +65,7 @@ icecream.init = function(options){
     //init global variables
     this.engines = {};
     this.config  = {};
-    this.caches  = {}; 
+    this.caches  = {};
     //default settings for icecream
 
     var root = path.dirname(path.dirname(path.dirname(path.dirname(__filename))));
@@ -81,7 +82,7 @@ icecream.init = function(options){
     this.set('suffix',  '');
     this.set('debug',  true);
     this.set('static', false);
-    
+
     //user settings for icecream
     for(var i in options){
         this.set(i, options[i]);
@@ -103,32 +104,32 @@ icecream.use = function(func){
     return this;
 }
 
-icecream.listen = function(port, host, backlog, callback){   
-    var self = this;  
+icecream.listen = function(port, host, backlog, callback){
+    var self = this;
     var dispatcher = require('./dispatcher');
-    
+
     this.server.use(function(req, res){
-        dispatcher.dispatch(req, res); 
+        dispatcher.dispatch(req, res);
     });
-    
+
     //set cluser
     if (this.get("cluster")==true && cluster.isMaster) {
         logger.info("cluster enabled...");
         cluster.on('exit', function(worker, code, signal) {
             cluster.fork();
-        }); 
+        });
         var cpus = require('os').cpus().length;
         for (var i = 0; i < cpus-1; i++) {
            cluster.fork();
         }
     } else {
         if(this.httpsServer){
-            this.httpsServer.listen(port, host, backlog, callback);   
+            this.httpsServer.listen(port, host, backlog, callback);
         }else{
             this.server.listen(port, host, backlog, callback);
         }
     }
-    
+
     return this;
 }
 
@@ -160,8 +161,8 @@ icecream.global = function(globalObject){
  * Get Object From Cache
  *
  * @method getObject
- * 
- * @param  {String}   cache 
+ *
+ * @param  {String}   cache
  * @param  {String}   key
  * @return {Object}
  */
@@ -175,8 +176,8 @@ icecream.getObject = function(cache, key){
  * Set Cache
  *
  * @method getObject
- * 
- * @param  {String}   cache 
+ *
+ * @param  {String}   cache
  * @param  {String}   key
  * @return {Object}
  */
@@ -187,7 +188,7 @@ icecream.setObject = function(cache, key, object){
 }
 
 /**
- * Load libraries 
+ * Load libraries
  *
  * @method loadLibraries
  *
@@ -215,7 +216,7 @@ icecream.loadLibraries = function(){
 }
 
 /**
- * Load helpers 
+ * Load helpers
  *
  * @method loadHelpers
  *
@@ -233,7 +234,7 @@ icecream.loadHelpers = function(){
         info : 'load app helpers'
       }
     ];
-    
+
     dirs.forEach(function(dir){
         utils.loadFiles("", dir.path, function(file, obj){
             for(var i in obj){
@@ -263,7 +264,7 @@ icecream.loadLanguages = function(){
         info : 'load app languages'
       }
     ];
-    
+
     dirs.forEach(function(dir){
         utils.loadFiles("", dir.path, function(file, obj){
             self.setObject("languages", file, obj);
@@ -285,7 +286,7 @@ icecream.loadRoutes = function(){
     if(fs.existsSync(route)){
         var routes = require(route);
         for(var i in routes){
-            self.setObject("routes", i, routes[i]);   
+            self.setObject("routes", i, routes[i]);
         }
 
         logger.info('load app routes:'+ route);
@@ -305,7 +306,7 @@ icecream.loadStatics = function(){
     if(fs.existsSync(stc)){
         var stcs = require(stc);
         for(var i in stcs){
-            self.setObject("statics", i, stcs[i]);   
+            self.setObject("statics", i, stcs[i]);
         }
 
         logger.info('load app statics:'+ stc);
