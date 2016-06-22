@@ -39,9 +39,9 @@ prototype.render = function(){
     }
 
     if(arguments.length > 1){
-        utils.merge(arguments[1], options);
+        utils.merge(options, arguments[1]);
     }else if(arguments.length == 1 && typeof arguments[0] != 'string'){
-        utils.merge(arguments[0], options);
+        utils.merge(options, arguments[0]);
     }
 
     utils.merge(options, this);
