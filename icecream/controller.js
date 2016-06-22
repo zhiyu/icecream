@@ -4,10 +4,10 @@
  *
  * Hosted On Github :
  * http://github.com/zhiyu/icecream
- *   
+ *
  */
 
- 
+
 var utils = require('./utils');
 var fs = require('fs');
 var sanitizer = require('sanitizer');
@@ -21,12 +21,16 @@ var Controller = module.exports = function(){
 
 var prototype = Controller.prototype;
 
-prototype.render = function(){    
+prototype.render = function(){
 
     var self = this;
     var body;
     var debug = this.context.get("debug");
-    var file, options;
+    var file;
+
+    var options = {
+      title:''
+    }
 
     if(arguments.length > 1 || (arguments.length == 1 && typeof arguments[0] == 'string')){
         file = arguments[0];
@@ -35,11 +39,9 @@ prototype.render = function(){
     }
 
     if(arguments.length > 1){
-        options = arguments[1];
-    }else if(arguments.length == 0 || (arguments.length == 1 && typeof arguments[0] == 'string')){
-        options = {};
-    }else{
-        options = arguments[0];
+        utils.merge(arguments[1], options);
+    }else if(arguments.length == 1 && typeof arguments[0] != 'string'){
+        utils.merge(arguments[0], options);
     }
 
     utils.merge(options, this);
@@ -57,29 +59,29 @@ prototype.render = function(){
             self.send(arg.toString());
         else
             self.send(content);
-        
+
         if(self.context.get("static")){
-            var stc  = self.context.getObject("statics", self.req.url); 
+            var stc  = self.context.getObject("statics", self.req.url);
             var file = self.context.get('staticDir')+stc;
-              
+
             if(stc){
                 fs.writeFile(file, content, function (err) {
-                   console.log(err); 
+                   console.log(err);
                 });
             }
         }
-        
+
     }
 
     var ext = this.context.get('defaultEngine');
     var engine = this.context.engines[ext];
-    
+
     file += '.' + ext;
     if(file.indexOf('/')==0)
         file = this.context.get('appDir')+'/views'+file;
     else
         file = this.context.get('appDir')+'/views'+this.viewDir+'/'+file;
-    
+
     //render body
     engine(file, options, callbackForPage);
 
@@ -89,7 +91,7 @@ prototype.render = function(){
     engine(layoutFile, options,callbackForLayout);
 }
 
-prototype.error = function(errorCode){    
+prototype.error = function(errorCode){
     var self = this;
     var body;
     var debug = this.context.get("debug");
@@ -156,7 +158,7 @@ prototype.flash = function(url, tourl, data, time){
     if(time == null || time == undefined){
         time = 3;
     }
-    
+
     data['flash_time'] = time;
 
     this.res.write("<meta http-equiv='refresh' content='"+time+"; url="+tourl+"'>");
@@ -195,7 +197,7 @@ prototype.session = function(key,val){
     if(!this.req.session){
         return null;
     }
-    
+
     if(val!==undefined){
         this.req.session[key] = val;
         this.req.session.save();
