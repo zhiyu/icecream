@@ -215,7 +215,6 @@ var Controller = module.exports = function(){
     };
 
     var variables = {
-        self   : this,
         action : function(name, func){
             self.actions['ACTION'][name] = func;
         },
@@ -237,9 +236,9 @@ var Controller = module.exports = function(){
     variables.post = self.post;
     variables.param = self.param;
     variables.session = self.session;
+    variables.self = this;
 
-    self. variables = variables;
-
+    self.variables = variables;
 
     if(self.context.shareObject){
         utils.merge(self, self.context.shareObject);
