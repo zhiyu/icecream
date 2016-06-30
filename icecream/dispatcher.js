@@ -162,7 +162,7 @@ dispatcher.getController = function(url){
         controller.controllerName = controllerName;
         controller.viewDir = path.dirname(relName) + "/" + controllerName;
         var content = fs.readFileSync(absName).toString();
-        new Function('context', 'require','with(context){'+ content + '}')(controller.actionLoaders,require);
+        new Function('context', 'require', 'with(context){'+ content + '}')(controller.variables, require);
         this.context.setObject("controllers", absName, controller);
     }else{
         controller = this.context.getObject("controllers", absName);
