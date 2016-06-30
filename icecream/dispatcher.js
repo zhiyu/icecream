@@ -60,7 +60,7 @@ dispatcher.doAction = function(req,res){
         url = route;
     }
 
-    var controller = this.getController(url);
+    var controller = this.getController(req, res, url);
     var action     = this.getAction(url);
 
     //if no controller
@@ -147,7 +147,7 @@ dispatcher.doResource = function(req,res){
     }
 }
 
-dispatcher.getController = function(url){
+dispatcher.getController = function(req, res, url){
     var controller  = null;
     var controllerName  = this.getControllerName(url);
     var relName     = this.getControllerFile(url);
@@ -158,7 +158,7 @@ dispatcher.getController = function(url){
     }
 
     if(this.shouldReloadController(absName)){
-        controller = new Controller();
+        controller = new Controller(req, res);
         controller.controllerName = controllerName;
         controller.viewDir = path.dirname(relName) + "/" + controllerName;
         var content = fs.readFileSync(absName).toString();

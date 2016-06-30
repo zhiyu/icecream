@@ -12,10 +12,16 @@ var utils = require('./utils');
 var fs = require('fs');
 var sanitizer = require('sanitizer');
 
-var Controller = module.exports = function(){
+var Controller = module.exports = function(req, res){
     var self = this;
+
+    self.req = req;
+    self.res = res;
     self.context = icecream;
 
+    if(self.context.shareObject){
+        utils.merge(self, self.context.shareObject);
+    }
 
     self.getAction = function(method, action){
         return self.actions[method][action];
@@ -236,11 +242,12 @@ var Controller = module.exports = function(){
     variables.post = self.post;
     variables.param = self.param;
     variables.session = self.session;
+
+    variables.req = self.req;
+    variables.res = self.res;
     variables.self = this;
 
     self.variables = variables;
 
-    if(self.context.shareObject){
-        utils.merge(self, self.context.shareObject);
-    }
+
 };
