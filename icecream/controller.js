@@ -13,13 +13,42 @@ var fs = require('fs');
 var sanitizer = require('sanitizer');
 
 var Controller = module.exports = function(){
-    this.context = icecream;
-    if(this.context.shareObject){
-        utils.merge(this, this.context.shareObject);
+    var self = this;
+    self.context = icecream;
+    self.actions = {
+      GET:{},
+      POST:{},
+      HEAD:{},
+      TRACE:{},
+      PUT:{},
+      DELETE:{},
+      OPTIONS:{},
+      CONNECT:{},
+      "ACTION":{}
+    };
+    self.actionLoaders = {
+        self   : this,
+        action : function(name, func){
+            self.actions['ACTION'][name] = func;
+        },
+        beforeFilter : function(func){
+            self.actions.beforeFilter = func;
+        },
+        afterFilter : function(func){
+            self.actions.afterFilter = func;
+        }
+    }
+
+    if(self.context.shareObject){
+        utils.merge(self, self.context.shareObject);
     }
 };
 
 var prototype = Controller.prototype;
+
+prototype.getAction = function(method, action){
+    return this.actions[method][action];
+}
 
 prototype.render = function(){
 
@@ -204,16 +233,4 @@ prototype.session = function(key,val){
     }else{
         return this.req.session[key];
     }
-}
-
-prototype.action = function(name, func){
-    this[name] = func;
-}
-
-prototype.beforeFilter = function(func){
-    this.beforeFilter = func;
-}
-
-prototype.afterFilter = function(func){
-    this.afterFilter = func;
 }

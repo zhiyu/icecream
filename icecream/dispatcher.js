@@ -4,7 +4,7 @@
  *
  * Hosted On Github :
  * http://github.com/zhiyu/icecream
- *   
+ *
  */
 
 
@@ -20,7 +20,7 @@ var dispatcher = module.exports = {
 }
 
 dispatcher.dispatch = function(req, res){
-        
+
     if(this.context.get("static") && this.context.getObject("statics", req.url) && fs.existsSync(this.context.get('staticDir')+this.context.getObject("statics", req.url))){
         fs.readFile(this.context.get('staticDir')+this.context.getObject("statics", req.url), "binary", function(err, data) {
             if (err) {
@@ -30,7 +30,7 @@ dispatcher.dispatch = function(req, res){
             }
             res.end();
         });
-    }else{ 
+    }else{
         if(this.isAction(req)){
             this.doAction(req,res);
         }else{
@@ -45,7 +45,6 @@ dispatcher.getExt = function(req){
 }
 
 dispatcher.doAction = function(req,res){
-    res.setHeader("Content-Type", "text/html; charset=" + this.context.get("encoding"));
     var errMessage = null;
 
     //get controller and action name
@@ -56,14 +55,14 @@ dispatcher.doAction = function(req,res){
         url = url.substring(vpath.length);
     }
 
-    var route      = this.context.getObject("routes", url); 
+    var route      = this.context.getObject("routes", url);
     if(route){
         url = route;
     }
 
     var controller = this.getController(url);
     var action     = this.getAction(url);
-    
+
     //if no controller
     if(controller == null){
         errMessage = 'controller not exist!';
@@ -71,7 +70,7 @@ dispatcher.doAction = function(req,res){
         res.end();
         return;
     }
-    
+
     //set variables
     controller.context = this.context;
     controller.req     = req;
@@ -79,17 +78,20 @@ dispatcher.doAction = function(req,res){
     controller.layout  = 'layout';
     controller.action  = action;
 
-    if(controller[action]){
+    res.setHeader("Content-Type", "text/html; charset=" + this.context.get("encoding"));
+
+    var act = controller.getAction('ACTION', action);
+    if(act){
         //beforeFileter
-        if(controller['beforeFilter'])
-          controller['beforeFilter']();
+        if(controller.actions.beforeFilter)
+          controller.actions.beforeFilter.call(controller);
 
         //action
-          controller[action].call(controller);
+        act.call(controller);
 
         //afterFileter
-        if(controller['afterFilter'])
-            controller['afterFilter']();
+        if(controller.actions.afterFilter)
+            controller.actions.afterFilter.call(controller);
     }else{
         errMessage = 'action "'+ action + '" not exist!';
         res.write(errMessage);
@@ -99,7 +101,7 @@ dispatcher.doAction = function(req,res){
 
 dispatcher.doResource = function(req,res){
     var url      = req._parsedUrl.pathname;
-    
+
     var vpath = this.context.get('vpath');
     if(vpath!='' && url.indexOf(vpath) == 0){
         url = url.substring(vpath.length);
@@ -116,7 +118,7 @@ dispatcher.doResource = function(req,res){
         fs.stat(pathname, function (err, stat) {
 
             var lastModified = stat.mtime.toUTCString();
-            
+
             if (req.headers['if-modified-since'] && lastModified == req.headers['if-modified-since']) {
                 res.writeHead(304, "Not Modified");
                 res.end();
@@ -129,7 +131,7 @@ dispatcher.doResource = function(req,res){
                         content = data;
                         contentType = mime[ext] || contentType;
                     }
-                    
+
                     res.writeHead(status, {'Last-Modified':lastModified,'Content-Type': contentType });
                     res.write(content, "binary");
                     res.end();
@@ -150,7 +152,7 @@ dispatcher.getController = function(url){
     var controllerName  = this.getControllerName(url);
     var relName     = this.getControllerFile(url);
     var absName     = this.context.get('appDir')+'/controllers' + relName;
-    
+
     if(!fs.existsSync(absName)){
         return null;
     }
@@ -160,7 +162,7 @@ dispatcher.getController = function(url){
         controller.controllerName = controllerName;
         controller.viewDir = path.dirname(relName) + "/" + controllerName;
         var content = fs.readFileSync(absName).toString();
-        new Function('context', 'require','with(context){'+ content + '}')(controller,require);
+        new Function('context', 'require','with(context){'+ content + '}')(controller.actionLoaders,require);
         this.context.setObject("controllers", absName, controller);
     }else{
         controller = this.context.getObject("controllers", absName);
