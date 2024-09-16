@@ -1,4 +1,4 @@
-####About####
+###About###
 
 [icecream](http://github.com/zhiyu/icecream) is a rapid web framework. It was designed with a very small footprint for those who need a simple, elegant and pragmatic toolkit to build high-performing, full-featured web applications.
 
