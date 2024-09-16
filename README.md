@@ -1,10 +1,8 @@
-==About==
-
 [icecream](http://github.com/zhiyu/icecream) is a rapid web framework. It was designed with a very small footprint for those who need a simple, elegant and pragmatic toolkit to build high-performing, full-featured web applications.
 
 any question about [icecream](http://github.com/zhiyu/icecream), please feel free to contact zhengzhiyu@yeah.net
 
-####Installation####
+Installation
   * Install nodejs and npm.
   * Install icecream. 
       
@@ -13,7 +11,7 @@ any question about [icecream](http://github.com/zhiyu/icecream), please feel fre
          
          sudo npm install -g icecream     
 
-####Your first application####
+Your first application
   
   * create the application
   
